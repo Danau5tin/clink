@@ -9,13 +9,15 @@ void main() async {
   setUpSL();
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+  final envRet = sl.get<EnvVarsRetriever>();
+  await envRet.init();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitDown,
     DeviceOrientation.portraitUp,
   ]);
   await SentryFlutter.init(
     (options) {
-      options.dsn = sl.get<EnvVarsRetriever>().getEnvVar('SENTRY_DSN');
+      options.dsn = envRet.getEnvVar('SENTRY_DSN');
     },
     appRunner: () => runApp(const MyApp()),
   );
