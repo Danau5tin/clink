@@ -1,0 +1,27 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  exclude:
+    - "**/*.freezed.dart"
+
+linter:
+  rules:
+    - prefer_single_quotes
+    - empty_statements
+    - unnecessary_statements
+    - always_declare_return_types
+    - always_put_control_body_on_new_line
+    - avoid_positional_boolean_parameters
+    - lines_longer_than_80_chars
+    - missing_whitespace_between_adjacent_strings
+    - prefer_final_fields
+    - prefer_final_locals
+    - prefer_contains
+    - prefer_is_empty
+    - prefer_is_not_empty
+    - prefer_is_not_operator
+    - prefer_null_aware_method_calls
+    - provide_deprecation_message
+    - require_trailing_commas
+    - sized_box_for_whitespace
+    - slash_for_doc_comments
