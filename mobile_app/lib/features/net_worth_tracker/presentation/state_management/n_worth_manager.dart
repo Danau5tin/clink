@@ -1,8 +1,13 @@
 import 'package:clink_mobile_app/core/crashlytics/crashlytics_reporter.dart';
+import 'package:clink_mobile_app/core/feature_registration/service_locator.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/net_worth_data.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/domain/repositories/net_worth_repo.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/presentation/state_management/n_worth_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+final nWorthManagerProv = StateNotifierProvider<NWorthManager, NWorthState>(
+  (ref) => sl.get<NWorthManager>(),
+);
 
 class NWorthManager extends StateNotifier<NWorthState> {
   final NetWorthRepo netWorthRepo;
