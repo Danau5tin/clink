@@ -32,5 +32,4 @@ class SentryReporter implements CrashlyticsReporter {
     });
   }
 
-  void _setSentryUser(String? userId, String? username, String? email) {}
 }
