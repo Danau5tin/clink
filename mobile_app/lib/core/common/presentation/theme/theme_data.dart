@@ -36,7 +36,8 @@ ElevatedButtonThemeData get _buildElevatedButtonThemeData {
         RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       ),
       elevation: MaterialStateProperty.all(2),
-      textStyle: MaterialStateProperty.all(_buildTextTheme(textTheme).bodyText1)
+      textStyle:
+          MaterialStateProperty.all(_buildTextTheme(textTheme).bodyText1),
     ),
   );
 }
