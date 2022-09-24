@@ -1,6 +1,10 @@
 name: CI
-on:
 
+defaults:
+  run:
+    working-directory: mobile_app
+
+on:
   push:
     branches: [ "main" ]
   pull_request:
