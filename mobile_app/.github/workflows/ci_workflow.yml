@@ -1,5 +1,8 @@
-name: CI_workflow
+name: CI
+
+
 on:
+
   push:
     branches: [ "main" ]
   pull_request:
@@ -27,7 +30,7 @@ jobs:
           cache-key: flutter
           cache-path: ${{ runner.tool_cache }}/flutter
 
-      - run: echo "${{secrets.WEBSITE_ENV_STAGE }}" > .env
+      - run: echo "${{secrets.ENV_COPY }}" > .env
       - run: flutter pub get
 
       - id: analyze
