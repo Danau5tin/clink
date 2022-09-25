@@ -10,4 +10,6 @@ class HistoricalNWorthData {
   }
 
   NetWorthEntry get currentNWorth => _entries.last;
+
+  List<NetWorthEntry> get entries => [..._entries];
 }

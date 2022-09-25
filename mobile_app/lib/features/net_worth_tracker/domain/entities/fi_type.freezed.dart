@@ -19,21 +19,21 @@ mixin _$FiType {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() account,
-    required TResult Function() physicalAsset,
+    required TResult Function() physAsset,
     required TResult Function() liability,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? account,
-    TResult Function()? physicalAsset,
+    TResult Function()? physAsset,
     TResult Function()? liability,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? account,
-    TResult Function()? physicalAsset,
+    TResult Function()? physAsset,
     TResult Function()? liability,
     required TResult orElse(),
   }) =>
@@ -41,21 +41,21 @@ mixin _$FiType {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Account value) account,
-    required TResult Function(PhysicalAsset value) physicalAsset,
+    required TResult Function(PhysicalAsset value) physAsset,
     required TResult Function(Liability value) liability,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(Account value)? account,
-    TResult Function(PhysicalAsset value)? physicalAsset,
+    TResult Function(PhysicalAsset value)? physAsset,
     TResult Function(Liability value)? liability,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Account value)? account,
-    TResult Function(PhysicalAsset value)? physicalAsset,
+    TResult Function(PhysicalAsset value)? physAsset,
     TResult Function(Liability value)? liability,
     required TResult orElse(),
   }) =>
@@ -116,7 +116,7 @@ class _$Account implements Account {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() account,
-    required TResult Function() physicalAsset,
+    required TResult Function() physAsset,
     required TResult Function() liability,
   }) {
     return account();
@@ -126,7 +126,7 @@ class _$Account implements Account {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? account,
-    TResult Function()? physicalAsset,
+    TResult Function()? physAsset,
     TResult Function()? liability,
   }) {
     return account?.call();
@@ -136,7 +136,7 @@ class _$Account implements Account {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? account,
-    TResult Function()? physicalAsset,
+    TResult Function()? physAsset,
     TResult Function()? liability,
     required TResult orElse(),
   }) {
@@ -150,7 +150,7 @@ class _$Account implements Account {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Account value) account,
-    required TResult Function(PhysicalAsset value) physicalAsset,
+    required TResult Function(PhysicalAsset value) physAsset,
     required TResult Function(Liability value) liability,
   }) {
     return account(this);
@@ -160,7 +160,7 @@ class _$Account implements Account {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(Account value)? account,
-    TResult Function(PhysicalAsset value)? physicalAsset,
+    TResult Function(PhysicalAsset value)? physAsset,
     TResult Function(Liability value)? liability,
   }) {
     return account?.call(this);
@@ -170,7 +170,7 @@ class _$Account implements Account {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Account value)? account,
-    TResult Function(PhysicalAsset value)? physicalAsset,
+    TResult Function(PhysicalAsset value)? physAsset,
     TResult Function(Liability value)? liability,
     required TResult orElse(),
   }) {
@@ -210,7 +210,7 @@ class _$PhysicalAsset implements PhysicalAsset {
 
   @override
   String toString() {
-    return 'FiType.physicalAsset()';
+    return 'FiType.physAsset()';
   }
 
   @override
@@ -226,32 +226,32 @@ class _$PhysicalAsset implements PhysicalAsset {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() account,
-    required TResult Function() physicalAsset,
+    required TResult Function() physAsset,
     required TResult Function() liability,
   }) {
-    return physicalAsset();
+    return physAsset();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? account,
-    TResult Function()? physicalAsset,
+    TResult Function()? physAsset,
     TResult Function()? liability,
   }) {
-    return physicalAsset?.call();
+    return physAsset?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? account,
-    TResult Function()? physicalAsset,
+    TResult Function()? physAsset,
     TResult Function()? liability,
     required TResult orElse(),
   }) {
-    if (physicalAsset != null) {
-      return physicalAsset();
+    if (physAsset != null) {
+      return physAsset();
     }
     return orElse();
   }
@@ -260,32 +260,32 @@ class _$PhysicalAsset implements PhysicalAsset {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Account value) account,
-    required TResult Function(PhysicalAsset value) physicalAsset,
+    required TResult Function(PhysicalAsset value) physAsset,
     required TResult Function(Liability value) liability,
   }) {
-    return physicalAsset(this);
+    return physAsset(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(Account value)? account,
-    TResult Function(PhysicalAsset value)? physicalAsset,
+    TResult Function(PhysicalAsset value)? physAsset,
     TResult Function(Liability value)? liability,
   }) {
-    return physicalAsset?.call(this);
+    return physAsset?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Account value)? account,
-    TResult Function(PhysicalAsset value)? physicalAsset,
+    TResult Function(PhysicalAsset value)? physAsset,
     TResult Function(Liability value)? liability,
     required TResult orElse(),
   }) {
-    if (physicalAsset != null) {
-      return physicalAsset(this);
+    if (physAsset != null) {
+      return physAsset(this);
     }
     return orElse();
   }
@@ -336,7 +336,7 @@ class _$Liability implements Liability {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() account,
-    required TResult Function() physicalAsset,
+    required TResult Function() physAsset,
     required TResult Function() liability,
   }) {
     return liability();
@@ -346,7 +346,7 @@ class _$Liability implements Liability {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? account,
-    TResult Function()? physicalAsset,
+    TResult Function()? physAsset,
     TResult Function()? liability,
   }) {
     return liability?.call();
@@ -356,7 +356,7 @@ class _$Liability implements Liability {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? account,
-    TResult Function()? physicalAsset,
+    TResult Function()? physAsset,
     TResult Function()? liability,
     required TResult orElse(),
   }) {
@@ -370,7 +370,7 @@ class _$Liability implements Liability {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Account value) account,
-    required TResult Function(PhysicalAsset value) physicalAsset,
+    required TResult Function(PhysicalAsset value) physAsset,
     required TResult Function(Liability value) liability,
   }) {
     return liability(this);
@@ -380,7 +380,7 @@ class _$Liability implements Liability {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(Account value)? account,
-    TResult Function(PhysicalAsset value)? physicalAsset,
+    TResult Function(PhysicalAsset value)? physAsset,
     TResult Function(Liability value)? liability,
   }) {
     return liability?.call(this);
@@ -390,7 +390,7 @@ class _$Liability implements Liability {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Account value)? account,
-    TResult Function(PhysicalAsset value)? physicalAsset,
+    TResult Function(PhysicalAsset value)? physAsset,
     TResult Function(Liability value)? liability,
     required TResult orElse(),
   }) {

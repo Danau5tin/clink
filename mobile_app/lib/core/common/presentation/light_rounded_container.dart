@@ -5,17 +5,19 @@ const _txtColor = CColors.greyText;
 
 class LightRoundedContainer extends StatelessWidget {
   final Widget child;
+  final EdgeInsets? padding;
 
   const LightRoundedContainer({
     required this.child,
+    this.padding,
     Key? key,
   }) : super(key: key);
 
-  static Text builtTopLeftTitle(BuildContext context, String title) => Text(
+  static Text builtTopTitle(BuildContext context, String title) => Text(
         title,
-        style: Theme.of(context).textTheme.bodyText2!.copyWith(
+        style: Theme.of(context).textTheme.bodyText1!.copyWith(
               color: _txtColor,
-              fontWeight: FontWeight.w500,
+              fontSize: 14,
             ),
       );
 
@@ -26,24 +28,19 @@ class LightRoundedContainer extends StatelessWidget {
     Widget? topRightWidget,
   }) {
     return LightRoundedContainer(
-      child: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            topRightWidget != null
-                ? Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      builtTopLeftTitle(context, title),
-                      topRightWidget
-                    ],
-                  )
-                : builtTopLeftTitle(context, title),
-            const Divider(color: _txtColor, thickness: 0.9),
-            child,
-          ],
-        ),
+      padding: const EdgeInsets.all(12.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          topRightWidget != null
+              ? Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [builtTopTitle(context, title), topRightWidget],
+                )
+              : builtTopTitle(context, title),
+          const Divider(color: _txtColor, thickness: 0.9),
+          child,
+        ],
       ),
     );
   }
@@ -63,7 +60,12 @@ class LightRoundedContainer extends StatelessWidget {
         border: Border.all(color: Colors.grey.shade200, width: 2),
         color: Colors.white,
       ),
-      child: child,
+      child: padding == null
+          ? child
+          : Padding(
+              padding: padding!,
+              child: child,
+            ),
     );
   }
 }

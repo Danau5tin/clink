@@ -1,3 +1,6 @@
 {
-"update_financials": "Mettre à jour les états financiers"
+  "update_financials": "Update financials",
+  "accounts": "Accounts",
+  "physical_assets": "Physical assets",
+  "liabilities" : "Liabilities"
 }

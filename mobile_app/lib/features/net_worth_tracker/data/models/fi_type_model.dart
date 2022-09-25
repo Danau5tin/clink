@@ -6,7 +6,7 @@ class FITypeModel {
       case 1:
         return const FiType.account();
       case 2:
-        return const FiType.physicalAsset();
+        return const FiType.physAsset();
       case 3:
         return const FiType.liability();
       default:

@@ -52,7 +52,8 @@ class NetWorthRepoLocalDb implements NetWorthRepo {
       SELECT *
       FROM ${FITemTable.tableName} fi
       CROSS JOIN ${HValueTable.tableName} hv ON 
-        fi.${FITemTable.idKey} = hv.${HValueTable.fItemKey};
+        fi.${FITemTable.idKey} = hv.${HValueTable.fItemKey}
+      ORDER BY hv.${HValueTable.dateRecordedKey} ASC;
     ''');
     final List<FinancialItem> holdings = [];
     for (var element in res) {

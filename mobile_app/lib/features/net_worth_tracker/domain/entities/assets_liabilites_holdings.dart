@@ -17,13 +17,7 @@ class AssetsLiabilitiesHoldings {
   List<FinancialItem> get getAllLiabilities =>
       financialItems.where((element) => element.type is Liability).toList();
 
-  double get valueOfAccounts => _valueOfItems(getAllAccounts);
-
-  double get valueOfPhysAssets => _valueOfItems(getAllPhysAssets);
-
-  double get valueOfLiabs => _valueOfItems(getAllLiabilities);
-
-  double _valueOfItems(List<FinancialItem> items) {
+  double valueOfItems(List<FinancialItem> items) {
     double count = 0.0;
     for (var i in items) {
       count += i.historicalValues.last.amount.value;

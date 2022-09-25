@@ -1,9 +1,11 @@
 import 'package:clink_mobile_app/core/common/data/repositories/sql_db/sql_database.dart';
 import 'package:clink_mobile_app/core/common/presentation/circular_progress_bar.dart';
 import 'package:clink_mobile_app/core/common/presentation/errors/something_went_wrong_screen.dart';
+import 'package:clink_mobile_app/core/common/presentation/theme/remove_scroll_glow.dart';
 import 'package:clink_mobile_app/core/common/presentation/theme/theme_data.dart';
 import 'package:clink_mobile_app/core/env/env_vars_retriever.dart';
 import 'package:clink_mobile_app/core/feature_registration/service_locator.dart';
+import 'package:clink_mobile_app/core/navigation/route_generator.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/presentation/screens/net_worth_tracker_screen.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/presentation/state_management/n_worth_manager.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -59,6 +61,8 @@ class MyApp extends StatelessWidget {
       locale: context.locale,
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
+      onGenerateRoute: sl<RouteGenerator>().generateRoute,
+      scrollBehavior: RemoveScrollGlow(),
       home: Scaffold(
         body: Consumer(
           builder: (context, ref, child) {
