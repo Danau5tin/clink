@@ -4,7 +4,7 @@ import 'package:easy_localization/easy_localization.dart' as ez;
 extension StringExt on String {
   /// [tr] fetches the translation, if not found it attempts to recreate the
   /// string with the key, which is arguably a better alternative than showing
-  /// the key to the user.
+  /// the key to the user.dart.
   String get tr {
     final res = ez.tr(this);
     return _processResult(this, res);

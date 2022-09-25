@@ -1,3 +1,7 @@
 {
-
+  "update_financials": "Mettre à jour les états financiers",
+  "accounts": "Comptes",
+  "physical_assets": "Actifs physiques",
+  "liabilities" : "Passif",
+  "assets": "Actifs"
 }

@@ -31,11 +31,11 @@ ElevatedButtonThemeData get _buildElevatedButtonThemeData {
   return ElevatedButtonThemeData(
     style: ButtonStyle(
       backgroundColor: MaterialStateProperty.all(_primaryColor),
-      padding: MaterialStateProperty.all(const EdgeInsets.all(12)),
+      padding: MaterialStateProperty.all(const EdgeInsets.all(16)),
       shape: MaterialStateProperty.all(
         RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       ),
-      elevation: MaterialStateProperty.all(2),
+      elevation: MaterialStateProperty.all(8),
       textStyle:
           MaterialStateProperty.all(_buildTextTheme(textTheme).bodyText1),
     ),

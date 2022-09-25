@@ -1,3 +1,7 @@
 {
-
+  "update_financials": "Update financials",
+  "accounts": "Accounts",
+  "physical_assets": "Physical assets",
+  "liabilities" : "Liabilities",
+  "assets": "Assets"
 }

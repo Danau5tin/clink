@@ -2,7 +2,7 @@
 import 'package:collection/collection.dart';
 import 'package:clink_mobile_app/core/common/presentation/errors/something_went_wrong_screen.dart';
 import 'package:clink_mobile_app/core/crashlytics/crashlytics_reporter.dart';
-import 'package:clink_mobile_app/core/feature_registration/feature_nav_handler.dart';
+import 'package:clink_mobile_app/core/feature_registration/abstract/feature_nav_handler.dart';
 import 'package:flutter/material.dart';
 
 abstract class RouteGenerator {
