@@ -17,5 +17,5 @@ class FinancialItem {
     required this.historicalValues,
   });
 
-  HistoricalValue get currentValue => historicalValues.last; // TODO: This will need checking when seed data has more than 1 value
+  HistoricalValue get currentValue => historicalValues.last;
 }

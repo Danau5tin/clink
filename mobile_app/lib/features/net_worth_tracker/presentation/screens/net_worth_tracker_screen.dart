@@ -22,14 +22,6 @@ class NetWorthTrackerScreen extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  /*
-      TODO:
-       - Stop hardcoding the growth chip (use dynamic colors)
-       - X axis for the chart
-       - Remove hardcoded currency
-       - Tests for the nWorthManager
-   */
-
   @override
   Widget build(BuildContext context) {
     final mq = MediaQuery.of(context);
@@ -50,7 +42,7 @@ class NetWorthTrackerScreen extends StatelessWidget {
                 height: mq.size.height * 0.29,
                 child: NWorthChart(historicalNWorth: historicalNWorthData),
               ),
-              DynamicHSizedBox.s(),
+              _buildDynamicHSizedBox,
               _wrapPadding(
                 ElevatedButton(
                   onPressed: () {},

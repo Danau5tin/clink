@@ -6,12 +6,11 @@ import 'package:clink_mobile_app/features/net_worth_tracker/presentation/widgets
 import 'package:flutter/material.dart';
 
 class CurrentNWorthDisplay extends StatelessWidget {
-
   final HistoricalNWorthData historicalNWorth;
   final NumberFormatter numberFormatter = sl.get<NumberFormatter>();
 
-   CurrentNWorthDisplay({
-     required this.historicalNWorth,
+  CurrentNWorthDisplay({
+    required this.historicalNWorth,
     Key? key,
   }) : super(key: key);
 
@@ -22,17 +21,17 @@ class CurrentNWorthDisplay extends StatelessWidget {
       children: [
         _buildValueText(context),
         DynamicHSizedBox.xs(),
-        const GrowthChip()
+        GrowthChip(historicalNWorth: historicalNWorth)
       ],
     );
   }
 
   Text _buildValueText(BuildContext context) {
     return Text(
-        numberFormatter.toSimpleCurrency(
-          historicalNWorth.currentNWorth.totalNWorth.value,
-        ),
-        style: Theme.of(context).textTheme.headline5,
-      );
+      numberFormatter.toSimpleCurrency(
+        historicalNWorth.currentNWorth.totalNWorth.value,
+      ),
+      style: Theme.of(context).textTheme.headline5,
+    );
   }
 }

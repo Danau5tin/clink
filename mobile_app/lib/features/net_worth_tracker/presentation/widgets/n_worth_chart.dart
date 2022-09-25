@@ -22,8 +22,9 @@ class NWorthChart extends StatelessWidget {
   Widget build(BuildContext context) {
     return SfCartesianChart(
       plotAreaBorderWidth: 0,
-      primaryXAxis: NumericAxis(isVisible: false),
+      primaryXAxis: DateTimeAxis(isVisible: false),
       primaryYAxis: NumericAxis(isVisible: false),
+      enableAxisAnimation: true,
       trackballBehavior: TrackballBehavior(
         activationMode: ActivationMode.singleTap,
         enable: true,
@@ -31,11 +32,10 @@ class NWorthChart extends StatelessWidget {
           nwEntry: historicalNWorth.entries[trackballDetails.pointIndex!],
         ),
       ),
-      series: <LineSeries<NetWorthEntry, double>>[
-        LineSeries<NetWorthEntry, double>(
+      series: <LineSeries<NetWorthEntry, DateTime>>[
+        LineSeries<NetWorthEntry, DateTime>(
           dataSource: historicalNWorth.entries,
-          xValueMapper: (NetWorthEntry entry, _) =>
-              entry.dateTime.millisecondsSinceEpoch.toDouble(),
+          xValueMapper: (NetWorthEntry entry, _) => entry.dateTime,
           yValueMapper: (NetWorthEntry entry, _) => entry.totalNWorth.value,
         )
       ],
@@ -63,24 +63,30 @@ class NWToolTipContainer extends StatelessWidget {
             style: Theme.of(context).textTheme.bodyText1,
           ),
           _buildDynamicHBox,
-          _buildRow(context, 'assets'.tr, nwEntry.assetsValue),
-          _buildDynamicHBox,
-          _buildRow(context, 'liabilities'.tr, nwEntry.liabilitiesValue),
-          _buildDynamicHBox,
           DynamicAmountText(amount: nwEntry.totalNWorth),
+          _buildDynamicHBox,
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              _buildRow(context, 'assets'.tr, nwEntry.assetsValue),
+              DynamicWSizedBox.m(),
+              _buildRow(context, 'liabilities'.tr, nwEntry.liabilitiesValue),
+            ],
+          ),
         ],
       ),
     );
   }
 
-  Widget get _buildDynamicHBox => DynamicHSizedBox.xs();
+  Widget get _buildDynamicHBox => DynamicHSizedBox.s();
 
   Widget _buildRow(BuildContext context, String title, Amount amount) {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(title),
-        DynamicWSizedBox.s(),
+        DynamicWSizedBox.xs(),
         DynamicAmountText(
           amount: amount,
           textStyle: Theme.of(context).textTheme.bodyText2,
