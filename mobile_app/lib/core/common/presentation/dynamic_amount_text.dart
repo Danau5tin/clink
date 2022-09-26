@@ -7,24 +7,32 @@ class DynamicAmountText extends StatelessWidget {
   final NumberFormatter numberFormatter = sl.get<NumberFormatter>();
 
   final Amount amount;
+  final String? extraText;
   final TextStyle? textStyle;
+  final bool greyOut;
 
   DynamicAmountText({
     required this.amount,
+    this.extraText,
     this.textStyle,
+    this.greyOut = false,
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Text(
-      numberFormatter.toSimpleCurrency(
+      '${numberFormatter.toSimpleCurrency(
         amount.value,
         currencyCode: amount.currencyCode,
-      ),
+      )}${extraText == null ? '' : ' $extraText'}',
       style: (textStyle ?? Theme.of(context).textTheme.bodyText1!).copyWith(
-            color: amount.value >= 0 ? Colors.green : Colors.red,
-          ),
+        color: greyOut
+            ? Colors.grey
+            : amount.value >= 0
+                ? Colors.green
+                : Colors.red,
+      ),
     );
   }
 }

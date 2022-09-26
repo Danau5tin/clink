@@ -1,12 +1,13 @@
 import 'package:clink_mobile_app/core/common/presentation/dynamic_sized_box.dart';
 import 'package:clink_mobile_app/core/translations/translation_provider.dart';
-import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/assets_liabilites_holdings.dart';
+import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/holdings.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/fi_type.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/historical_net_worth.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/navigation/net_worth_tracker_nav_handler.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/presentation/widgets/current_n_worth_display.dart';
-import 'package:clink_mobile_app/features/net_worth_tracker/presentation/widgets/financial_item_summary_container.dart';
+import 'package:clink_mobile_app/features/net_worth_tracker/presentation/widgets/f_item_summary.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/presentation/widgets/n_worth_chart.dart';
+import 'package:clink_mobile_app/features/net_worth_tracker/subfeatures/update_n_worth/presentation/screens/update_financials_screen.dart';
 import 'package:flutter/material.dart';
 
 class NetWorthTrackerScreen extends StatelessWidget {
@@ -14,7 +15,7 @@ class NetWorthTrackerScreen extends StatelessWidget {
       '${NetWorthTrackerNavHandler.startingPath}/dash';
 
   final HistoricalNWorthData historicalNWorthData;
-  final AssetsLiabilitiesHoldings holdings;
+  final Holdings holdings;
 
   const NetWorthTrackerScreen({
     required this.historicalNWorthData,
@@ -43,23 +44,31 @@ class NetWorthTrackerScreen extends StatelessWidget {
                 child: NWorthChart(historicalNWorth: historicalNWorthData),
               ),
               _buildDynamicHSizedBox,
-              _wrapPadding(
-                ElevatedButton(
-                  onPressed: () {},
-                  child: Text('update_financials'.tr),
-                ),
-              ),
+              _wrapPadding(_buildCTA(context)),
               _buildDynamicHSizedBox,
-              _wrapPadding(FItemSummary(fItemType: const FiType.account())),
+              _buildSummary(const FiType.account()),
               _buildDynamicHSizedBox,
-              _wrapPadding(FItemSummary(fItemType: const FiType.physAsset())),
+              _buildSummary(const FiType.physAsset()),
               _buildDynamicHSizedBox,
-              _wrapPadding(FItemSummary(fItemType: const FiType.liability())),
+              _buildSummary(const FiType.liability()),
               _buildDynamicHSizedBox,
             ],
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildSummary(FiType type) =>
+      _wrapPadding(FItemSummary(fItemType: type, holdings: holdings));
+
+  ElevatedButton _buildCTA(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () => Navigator.pushNamed(
+        context,
+        UpdateFinancialsScreen.viewPath,
+      ),
+      child: Text('update_financials'.tr),
     );
   }
 

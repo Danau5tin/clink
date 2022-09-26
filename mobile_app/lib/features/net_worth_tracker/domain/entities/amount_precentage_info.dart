@@ -1,10 +1,10 @@
 import 'package:clink_mobile_app/core/common/domain/entities/amount.dart';
 
-class LossGainInfo {
+class AmountPercentageInfo {
   final Amount amount;
   final double percentageChange;
 
-  LossGainInfo({
+  AmountPercentageInfo({
     required this.amount,
     required this.percentageChange,
   });

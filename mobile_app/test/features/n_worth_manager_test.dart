@@ -1,6 +1,6 @@
 import 'package:clink_mobile_app/core/crashlytics/crashlytics_reporter.dart';
 import 'package:clink_mobile_app/core/network/data_state/data_state.dart';
-import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/assets_liabilites_holdings.dart';
+import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/holdings.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/historical_net_worth.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/net_worth_data.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/domain/repositories/net_worth_repo.dart';
@@ -15,7 +15,7 @@ void main() {
   late NetWorthRepo netWorthRepo;
   late CrashlyticsReporter crashlyticsReporter;
   late HistoricalNWorthData historicalNWorthData;
-  late AssetsLiabilitiesHoldings assetsLiabilitiesHoldings;
+  late Holdings assetsLiabilitiesHoldings;
   late NetWorthData netWorthData;
 
   late NWorthManager nWorthManager;

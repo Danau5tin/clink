@@ -1,4 +1,4 @@
-import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/assets_liabilites_holdings.dart';
+import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/holdings.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/historical_net_worth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -12,6 +12,6 @@ class NWorthState with _$NWorthState {
 
   const factory NWorthState.loaded({
     required HistoricalNWorthData historicalNetWorthData,
-    required AssetsLiabilitiesHoldings holdings,
+    required Holdings holdings,
   }) = Loaded;
 }

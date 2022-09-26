@@ -1,5 +1,5 @@
 import 'package:clink_mobile_app/core/common/domain/entities/amount.dart';
-import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/loss_gain_info.dart';
+import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/amount_precentage_info.dart';
 
 import 'net_worth_entry.dart';
 
@@ -16,10 +16,10 @@ class HistoricalNWorthData {
 
   List<NetWorthEntry> get entries => [..._entries];
 
-  LossGainInfo get getLossGainInfo {
+  AmountPercentageInfo get getLossGainInfo {
     final valueChange =
         currentNWorth.totalNWorth.value - _entries.first.totalNWorth.value;
-    return LossGainInfo(
+    return AmountPercentageInfo(
       amount: Amount(
         currencyCode: currentNWorth.totalNWorth.currencyCode,
         value: valueChange,

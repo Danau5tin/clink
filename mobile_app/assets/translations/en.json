@@ -3,5 +3,13 @@
   "accounts": "Accounts",
   "physical_assets": "Physical assets",
   "liabilities" : "Liabilities",
-  "assets": "Assets"
+  "assets": "Assets",
+  "tap_an_item_then_tap_save": "Tap an item to make changes then tap save to finish.",
+  "sorry_something_w_w": "Sorry, something went wrong",
+  "go_back": "Go back",
+  "add_new_account": "Add new account",
+  "add_new_asset": "Add new asset",
+  "add_new_liability": "Add new liability",
+  "save": "Save",
+  "summary": "Summary"
 }

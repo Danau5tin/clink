@@ -3,5 +3,13 @@
   "accounts": "Comptes",
   "physical_assets": "Actifs physiques",
   "liabilities" : "Passif",
-  "assets": "Actifs"
+  "assets": "Actifs",
+  "tap_an_item_then_tap_save": "Appuyez sur un élément pour apporter des modifications, puis appuyez sur Enregistrer pour terminer.",
+  "sorry_something_w_w": "Désolé, quelque chose s'est mal passé",
+  "go_back" : "Retourner",
+  "add_new_account": "Ajouter un nouveau compte",
+  "add_new_asset": "Ajouter un nouvel actif",
+  "add_new_liability": "Ajouter un nouvel passif",
+  "save": "Enregistrer",
+  "summary": "Résumé"
 }

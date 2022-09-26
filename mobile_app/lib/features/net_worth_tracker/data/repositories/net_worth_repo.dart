@@ -4,7 +4,7 @@ import 'package:clink_mobile_app/core/network/data_state/data_state.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/data/models/financial_item_model.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/data/models/historical_value_model.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/data/models/net_worth_entry_model.dart';
-import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/assets_liabilites_holdings.dart';
+import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/holdings.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/financial_item.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/historical_net_worth.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/net_worth_data.dart';
@@ -47,7 +47,7 @@ class NetWorthRepoLocalDb implements NetWorthRepo {
     return HistoricalNWorthData(entries: entries);
   }
 
-  Future<AssetsLiabilitiesHoldings> _fetchAssetsLiabilities() async {
+  Future<Holdings> _fetchAssetsLiabilities() async {
     final res = await dbWrap.db.rawQuery('''
       SELECT *
       FROM ${FITemTable.tableName} fi
@@ -68,6 +68,6 @@ class NetWorthRepoLocalDb implements NetWorthRepo {
         existingFItem.historicalValues.add(hVal);
       }
     }
-    return AssetsLiabilitiesHoldings(financialItems: holdings);
+    return Holdings(financialItems: holdings);
   }
 }
