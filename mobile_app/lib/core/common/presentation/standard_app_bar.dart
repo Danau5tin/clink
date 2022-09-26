@@ -10,7 +10,10 @@ class StandardAppBar extends AppBar {
           centerTitle: true,
           leading: GestureDetector(
             onTap: () => Navigator.pop(context),
-            child: const Icon(Icons.close),
+            child: const Icon(
+              Icons.close,
+              color: Colors.black,
+            ),
           ),
         );
 }

@@ -11,5 +11,16 @@
   "add_new_asset": "Ajouter un nouvel actif",
   "add_new_liability": "Ajouter un nouvel passif",
   "save": "Enregistrer",
-  "summary": "Résumé"
+  "summary": "Résumé",
+  "new_account": "Nouveau compte",
+  "new_asset": "Nouvel actif",
+  "new_liability": "Nouvelle passif",
+  "update_account": "Mettre à jour l'compte",
+  "update_asset": "Mettre à jour l'actif",
+  "update_liability": "Mettre à jour la passif",
+  "account_name": "Nom de compte",
+  "asset_name": "Nom de l'actif",
+  "liability_name": "Nom de la passif",
+  "current_balance": "Solde actuel",
+  "new_balance": "Nouvel solde"
 }

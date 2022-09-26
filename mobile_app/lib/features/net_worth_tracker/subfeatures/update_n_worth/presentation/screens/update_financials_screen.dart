@@ -6,9 +6,11 @@ import 'package:clink_mobile_app/core/common/presentation/theme/colors.dart';
 import 'package:clink_mobile_app/core/common/presentation/utils/cta_info.dart';
 import 'package:clink_mobile_app/core/translations/translation_provider.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/fi_type.dart';
+import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/financial_item.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/holdings.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/navigation/net_worth_tracker_nav_handler.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/presentation/widgets/f_item_summary.dart';
+import 'package:clink_mobile_app/features/net_worth_tracker/subfeatures/add_update_holding/presentation/screens/add_update_holding_screen.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/subfeatures/update_n_worth/presentation/state_management/update_financials_manager.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/subfeatures/update_n_worth/presentation/widgets/summary_container.dart';
 import 'package:flutter/material.dart';
@@ -59,7 +61,7 @@ class UpdateFinancialsScreen extends ConsumerWidget {
       children: [
         _buildExplText(context),
         _buildDynamicHSizedBox,
-        ..._buildContainers(originalHoldings, updatedHoldings),
+        ..._buildContainers(context, originalHoldings, updatedHoldings),
         _buildDynamicHSizedBox,
         SummaryContainer(
           originalHoldings: originalHoldings,
@@ -78,40 +80,59 @@ class UpdateFinancialsScreen extends ConsumerWidget {
   }
 
   List<Widget> _buildContainers(
+    BuildContext context,
     Holdings originalHoldings,
     Holdings updatedHoldings,
   ) {
+    const account = FiType.account();
+    const asset = FiType.physAsset();
+    const liab = FiType.liability();
     return [
       FItemSummary(
-        fItemType: const FiType.account(),
+        fItemType: account,
         holdings: updatedHoldings,
         comparisonHoldings: originalHoldings,
+        onTap: (fItem) => _navigateToNewUpdate(context, account, fItem),
         ctaInfo: CTAInfo(
           text: 'add_new_account'.tr,
-          onTap: () {},
+          onTap: () => _navigateToNewUpdate(context, account),
         ),
       ),
       _buildDynamicHSizedBox,
       FItemSummary(
-        fItemType: const FiType.physAsset(),
+        fItemType: asset,
         holdings: updatedHoldings,
         comparisonHoldings: originalHoldings,
+        onTap: (fItem) => _navigateToNewUpdate(context, asset, fItem),
         ctaInfo: CTAInfo(
           text: 'add_new_asset'.tr,
-          onTap: () {},
+          onTap: () => _navigateToNewUpdate(context, asset),
         ),
       ),
       _buildDynamicHSizedBox,
       FItemSummary(
-        fItemType: const FiType.liability(),
+        fItemType: liab,
         holdings: updatedHoldings,
         comparisonHoldings: originalHoldings,
+        onTap: (fItem) => _navigateToNewUpdate(context, liab, fItem),
         ctaInfo: CTAInfo(
           text: 'add_new_liability'.tr,
-          onTap: () {},
+          onTap: () => _navigateToNewUpdate(context, liab),
         ),
       )
     ];
+  }
+
+  Future<void> _navigateToNewUpdate(
+    BuildContext context,
+    FiType type, [
+    FinancialItem? item,
+  ]) async {
+    await Navigator.pushNamed(
+      context,
+      AddUpdateHoldingScreen.viewPath,
+      arguments: AddUpdateHoldingScreenArgs(type: type, itemToBeUpdated: item),
+    );
   }
 
   DynamicHSizedBox get _buildDynamicHSizedBox => DynamicHSizedBox.l();

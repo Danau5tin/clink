@@ -11,5 +11,16 @@
   "add_new_asset": "Add new asset",
   "add_new_liability": "Add new liability",
   "save": "Save",
-  "summary": "Summary"
+  "summary": "Summary",
+  "new_account": "New account",
+  "new_asset": "New asset",
+  "new_liability": "New liability",
+  "update_account": "Update account",
+  "update_asset": "Update asset",
+  "update_liability": "Update liability",
+  "account_name": "Account name",
+  "asset_name": "Asset name",
+  "liability_name": "Liability name",
+  "current_balance": "Current balance",
+  "new_balance": "New balance"
 }

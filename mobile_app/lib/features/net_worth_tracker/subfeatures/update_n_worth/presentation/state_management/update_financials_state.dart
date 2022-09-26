@@ -9,7 +9,7 @@ class UpdateFinancialsState with _$UpdateFinancialsState {
     required Holdings originalHoldings,
     required Holdings updatedHoldings,
     @Default(false) saving,
-  }) = initial;
+  }) = Initial;
 
 
   const factory UpdateFinancialsState.success() = Success;

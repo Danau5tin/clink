@@ -1,4 +1,5 @@
 import 'package:clink_mobile_app/core/common/data/repositories/sql_db/sql_database.dart';
+import 'package:clink_mobile_app/core/common/domain/misc/uuid_gen.dart';
 import 'package:clink_mobile_app/core/common/presentation/utils/number_formatter.dart';
 import 'package:clink_mobile_app/core/crashlytics/crashlytics_reporter.dart';
 import 'package:clink_mobile_app/core/crashlytics/sentry_reporter.dart';
@@ -23,6 +24,10 @@ class CoreSlReg extends FeatureSlReg {
 
     instance.registerLazySingleton<NumberFormatter>(
       () => NumberFormatterImpl(),
+    );
+
+    instance.registerLazySingleton<UUIDGen>(
+      () => UUidGenImpl(),
     );
   }
 }

@@ -46,21 +46,21 @@ mixin _$UpdateFinancialsState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(initial value) initial,
+    required TResult Function(Initial value) initial,
     required TResult Function(Success value) success,
     required TResult Function(Error value) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(initial value)? initial,
+    TResult Function(Initial value)? initial,
     TResult Function(Success value)? success,
     TResult Function(Error value)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(initial value)? initial,
+    TResult Function(Initial value)? initial,
     TResult Function(Success value)? success,
     TResult Function(Error value)? error,
     required TResult orElse(),
@@ -86,22 +86,22 @@ class _$UpdateFinancialsStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$$initialCopyWith<$Res> {
-  factory _$$initialCopyWith(_$initial value, $Res Function(_$initial) then) =
-      __$$initialCopyWithImpl<$Res>;
+abstract class _$$InitialCopyWith<$Res> {
+  factory _$$InitialCopyWith(_$Initial value, $Res Function(_$Initial) then) =
+      __$$InitialCopyWithImpl<$Res>;
   $Res call(
       {Holdings originalHoldings, Holdings updatedHoldings, dynamic saving});
 }
 
 /// @nodoc
-class __$$initialCopyWithImpl<$Res>
+class __$$InitialCopyWithImpl<$Res>
     extends _$UpdateFinancialsStateCopyWithImpl<$Res>
-    implements _$$initialCopyWith<$Res> {
-  __$$initialCopyWithImpl(_$initial _value, $Res Function(_$initial) _then)
-      : super(_value, (v) => _then(v as _$initial));
+    implements _$$InitialCopyWith<$Res> {
+  __$$InitialCopyWithImpl(_$Initial _value, $Res Function(_$Initial) _then)
+      : super(_value, (v) => _then(v as _$Initial));
 
   @override
-  _$initial get _value => super._value as _$initial;
+  _$Initial get _value => super._value as _$Initial;
 
   @override
   $Res call({
@@ -109,7 +109,7 @@ class __$$initialCopyWithImpl<$Res>
     Object? updatedHoldings = freezed,
     Object? saving = freezed,
   }) {
-    return _then(_$initial(
+    return _then(_$Initial(
       originalHoldings: originalHoldings == freezed
           ? _value.originalHoldings
           : originalHoldings // ignore: cast_nullable_to_non_nullable
@@ -125,8 +125,8 @@ class __$$initialCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$initial implements initial {
-  const _$initial(
+class _$Initial implements Initial {
+  const _$Initial(
       {required this.originalHoldings,
       required this.updatedHoldings,
       this.saving = false});
@@ -148,7 +148,7 @@ class _$initial implements initial {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$initial &&
+            other is _$Initial &&
             const DeepCollectionEquality()
                 .equals(other.originalHoldings, originalHoldings) &&
             const DeepCollectionEquality()
@@ -165,8 +165,8 @@ class _$initial implements initial {
 
   @JsonKey(ignore: true)
   @override
-  _$$initialCopyWith<_$initial> get copyWith =>
-      __$$initialCopyWithImpl<_$initial>(this, _$identity);
+  _$$InitialCopyWith<_$Initial> get copyWith =>
+      __$$InitialCopyWithImpl<_$Initial>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -211,7 +211,7 @@ class _$initial implements initial {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(initial value) initial,
+    required TResult Function(Initial value) initial,
     required TResult Function(Success value) success,
     required TResult Function(Error value) error,
   }) {
@@ -221,7 +221,7 @@ class _$initial implements initial {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(initial value)? initial,
+    TResult Function(Initial value)? initial,
     TResult Function(Success value)? success,
     TResult Function(Error value)? error,
   }) {
@@ -231,7 +231,7 @@ class _$initial implements initial {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(initial value)? initial,
+    TResult Function(Initial value)? initial,
     TResult Function(Success value)? success,
     TResult Function(Error value)? error,
     required TResult orElse(),
@@ -243,17 +243,17 @@ class _$initial implements initial {
   }
 }
 
-abstract class initial implements UpdateFinancialsState {
-  const factory initial(
+abstract class Initial implements UpdateFinancialsState {
+  const factory Initial(
       {required final Holdings originalHoldings,
       required final Holdings updatedHoldings,
-      final dynamic saving}) = _$initial;
+      final dynamic saving}) = _$Initial;
 
   Holdings get originalHoldings;
   Holdings get updatedHoldings;
   dynamic get saving;
   @JsonKey(ignore: true)
-  _$$initialCopyWith<_$initial> get copyWith =>
+  _$$InitialCopyWith<_$Initial> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -336,7 +336,7 @@ class _$Success implements Success {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(initial value) initial,
+    required TResult Function(Initial value) initial,
     required TResult Function(Success value) success,
     required TResult Function(Error value) error,
   }) {
@@ -346,7 +346,7 @@ class _$Success implements Success {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(initial value)? initial,
+    TResult Function(Initial value)? initial,
     TResult Function(Success value)? success,
     TResult Function(Error value)? error,
   }) {
@@ -356,7 +356,7 @@ class _$Success implements Success {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(initial value)? initial,
+    TResult Function(Initial value)? initial,
     TResult Function(Success value)? success,
     TResult Function(Error value)? error,
     required TResult orElse(),
@@ -451,7 +451,7 @@ class _$Error implements Error {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(initial value) initial,
+    required TResult Function(Initial value) initial,
     required TResult Function(Success value) success,
     required TResult Function(Error value) error,
   }) {
@@ -461,7 +461,7 @@ class _$Error implements Error {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(initial value)? initial,
+    TResult Function(Initial value)? initial,
     TResult Function(Success value)? success,
     TResult Function(Error value)? error,
   }) {
@@ -471,7 +471,7 @@ class _$Error implements Error {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(initial value)? initial,
+    TResult Function(Initial value)? initial,
     TResult Function(Success value)? success,
     TResult Function(Error value)? error,
     required TResult orElse(),

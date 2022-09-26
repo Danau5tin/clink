@@ -22,7 +22,7 @@ class RouteGeneratorImpl implements RouteGenerator {
       if (widget == null) {
         crashlyticsReporter.reportMessage(
           'Tried navigating to ${settings.name} with ${settings.arguments}. '
-          'However we could not find the correct screen',
+          'However we could not find the correct screens',
         );
         return _somethingWentWrong(settings);
       }

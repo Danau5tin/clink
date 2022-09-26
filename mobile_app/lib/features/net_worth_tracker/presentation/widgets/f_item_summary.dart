@@ -15,12 +15,14 @@ class FItemSummary extends StatelessWidget {
   final Holdings holdings;
   final Holdings? comparisonHoldings;
   final CTAInfo? ctaInfo;
+  final Function(FinancialItem)? onTap;
 
   FItemSummary({
     required this.fItemType,
     required this.holdings,
     this.comparisonHoldings,
     this.ctaInfo,
+    this.onTap,
     Key? key,
   }) : super(key: key);
 
@@ -44,13 +46,7 @@ class FItemSummary extends StatelessWidget {
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemCount: items.length,
-      itemBuilder: (context, index) => FinancialItemListTile(
-        fItemType: fItemType,
-        item: items[index],
-        comparisonAmount: comparisonHoldings == null
-            ? null
-            : comparisonHoldings!.getById(items[index].id)?.currentValue.amount,
-      ),
+      itemBuilder: (context, index) => _buildTile(items, index),
       separatorBuilder: (context, index) => const SizedBox(height: 16),
     );
     return LightRoundedContainer.withTopRow(
@@ -78,5 +74,21 @@ class FItemSummary extends StatelessWidget {
               ),
       ),
     );
+  }
+
+  StatelessWidget _buildTile(List<FinancialItem> items, int index) {
+    final tile = FinancialItemListTile(
+      fItemType: fItemType,
+      item: items[index],
+      comparisonAmount: comparisonHoldings == null
+          ? null
+          : comparisonHoldings!.getById(items[index].id)?.currentValue.amount,
+    );
+    return onTap == null
+        ? tile
+        : GestureDetector(
+            onTap: () => onTap!(items[index]),
+            child: tile,
+          );
   }
 }

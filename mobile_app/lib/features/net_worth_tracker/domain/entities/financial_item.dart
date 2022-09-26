@@ -18,4 +18,14 @@ class FinancialItem {
   });
 
   HistoricalValue get currentValue => historicalValues.last;
+
+  FinancialItem copyWith({String? name}) {
+    return FinancialItem(
+      id: id,
+      name: name ?? this.name,
+      currencyCode: currencyCode,
+      type: type,
+      historicalValues: historicalValues,
+    );
+  }
 }
