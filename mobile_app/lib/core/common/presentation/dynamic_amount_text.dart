@@ -9,13 +9,23 @@ class DynamicAmountText extends StatelessWidget {
   final Amount amount;
   final String? extraText;
   final TextStyle? textStyle;
-  final bool greyOut;
+  final Color? overrideColor;
+
+  static Color? getColorFromComparison(double originalVal,double updatedVal) {
+    if (originalVal == updatedVal) {
+      return Colors.grey;
+    }
+    if (originalVal > updatedVal) {
+      return Colors.red;
+    }
+    return Colors.green;
+  }
 
   DynamicAmountText({
     required this.amount,
     this.extraText,
     this.textStyle,
-    this.greyOut = false,
+    this.overrideColor,
     Key? key,
   }) : super(key: key);
 
@@ -27,11 +37,7 @@ class DynamicAmountText extends StatelessWidget {
         currencyCode: amount.currencyCode,
       )}${extraText == null ? '' : ' $extraText'}',
       style: (textStyle ?? Theme.of(context).textTheme.bodyText1!).copyWith(
-        color: greyOut
-            ? Colors.grey
-            : amount.value >= 0
-                ? Colors.green
-                : Colors.red,
+        color: overrideColor ?? (amount.value >= 0 ? Colors.green : Colors.red),
       ),
     );
   }

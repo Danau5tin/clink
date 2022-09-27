@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SummaryContainer extends StatelessWidget {
-
   final Holdings originalHoldings;
   final Holdings updatedHoldings;
 
@@ -30,7 +29,9 @@ class SummaryContainer extends StatelessWidget {
           currencyCode: 'GBP',
           value: updatedHoldings.totalValue,
         ), // TODO: Stop hardcoding
-        greyOut: updatedHoldings.totalValue == originalHoldings.totalValue,
+        overrideColor: updatedHoldings.totalValue == originalHoldings.totalValue
+            ? Colors.grey
+            : null,
         textStyle: Theme.of(context).textTheme.bodyText1,
       ),
       child: Column(
@@ -45,12 +46,11 @@ class SummaryContainer extends StatelessWidget {
     );
   }
 
-
   Widget _buildSummaryRow(FiType fiType) {
     return Consumer(
       builder: (context, ref, child) {
         final info =
-        ref.read(updateFinsManProv.notifier).getUpdatedValueFor(fiType);
+            ref.read(updateFinsManProv.notifier).getUpdatedValueFor(fiType);
         final changesMade = info.percentageChange != 0.0;
         return Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -61,11 +61,18 @@ class SummaryContainer extends StatelessWidget {
             ),
             DynamicAmountText(
               amount: info.amount,
-              greyOut: !changesMade,
+              overrideColor: !changesMade
+                  ? Colors.grey
+                  : fiType.maybeWhen(
+                      liability: () =>
+                          info.percentageChange > 0 ? Colors.red : Colors.green,
+                      orElse: () =>
+                          info.percentageChange > 0 ? Colors.green : Colors.red,
+                    ),
               textStyle: Theme.of(context).textTheme.bodyText2,
               extraText: changesMade
-                  ? '(${info.amount.value >= 0 ? '+' : ''}'
-                  '${info.percentageChange.toStringAsFixed(2)}%)'
+                  ? '(${info.percentageChange >= 0 ? '+' : ''}'
+                      '${info.percentageChange.toStringAsFixed(2)}%)'
                   : null,
             )
           ],

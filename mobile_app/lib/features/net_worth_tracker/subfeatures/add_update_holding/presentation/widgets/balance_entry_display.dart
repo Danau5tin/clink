@@ -5,11 +5,15 @@ import 'package:flutter/material.dart';
 
 class BalanceEntryDisplay extends StatelessWidget {
   final String entry;
-  final bool isUpdate;
+  final String title;
+  final Color? entryColor;
+  final String? prefix;
 
   const BalanceEntryDisplay({
     required this.entry,
-    required this.isUpdate,
+    required this.title,
+    this.entryColor,
+    this.prefix,
     Key? key,
   }) : super(key: key);
 
@@ -18,18 +22,18 @@ class BalanceEntryDisplay extends StatelessWidget {
     return Column(
       children: [
         Text(
-          isUpdate ? 'current_balance'.tr : 'new_balance'.tr,
+          title,
           style: Theme.of(context).textTheme.bodyText2!.copyWith(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
               ),
         ),
         Text(
-          entry,
+          prefix == null ? entry : '$prefix$entry',
           maxLines: 2,
           overflow: TextOverflow.fade,
           style: Theme.of(context).textTheme.headline2!.copyWith(
-                color: Theme.of(context).primaryColor,
+                color: entryColor ?? Theme.of(context).primaryColor,
               ),
         ),
         LightRoundedContainer(

@@ -70,9 +70,12 @@ class UpdateFinancialsScreen extends ConsumerWidget {
         _buildDynamicHSizedBox,
         saving
             ? const CircularProgressBar()
-            : ElevatedButton(
-                onPressed: () {},
-                child: Text('save'.tr),
+            : Consumer(
+                builder: (context, ref, child) => ElevatedButton(
+                  onPressed:
+                      ref.read(updateFinsManProv.notifier).saveAllUpdates,
+                  child: Text('save'.tr),
+                ),
               ),
         _buildDynamicHSizedBox,
       ],
@@ -91,7 +94,6 @@ class UpdateFinancialsScreen extends ConsumerWidget {
       FItemSummary(
         fItemType: account,
         holdings: updatedHoldings,
-        comparisonHoldings: originalHoldings,
         onTap: (fItem) => _navigateToNewUpdate(context, account, fItem),
         ctaInfo: CTAInfo(
           text: 'add_new_account'.tr,
@@ -102,7 +104,6 @@ class UpdateFinancialsScreen extends ConsumerWidget {
       FItemSummary(
         fItemType: asset,
         holdings: updatedHoldings,
-        comparisonHoldings: originalHoldings,
         onTap: (fItem) => _navigateToNewUpdate(context, asset, fItem),
         ctaInfo: CTAInfo(
           text: 'add_new_asset'.tr,
@@ -113,7 +114,6 @@ class UpdateFinancialsScreen extends ConsumerWidget {
       FItemSummary(
         fItemType: liab,
         holdings: updatedHoldings,
-        comparisonHoldings: originalHoldings,
         onTap: (fItem) => _navigateToNewUpdate(context, liab, fItem),
         ctaInfo: CTAInfo(
           text: 'add_new_liability'.tr,

@@ -13,14 +13,12 @@ class FItemSummary extends StatelessWidget {
   final NumberFormatter numberFormatter = sl.get<NumberFormatter>();
   final FiType fItemType;
   final Holdings holdings;
-  final Holdings? comparisonHoldings;
   final CTAInfo? ctaInfo;
   final Function(FinancialItem)? onTap;
 
   FItemSummary({
     required this.fItemType,
     required this.holdings,
-    this.comparisonHoldings,
     this.ctaInfo,
     this.onTap,
     Key? key,
@@ -80,9 +78,6 @@ class FItemSummary extends StatelessWidget {
     final tile = FinancialItemListTile(
       fItemType: fItemType,
       item: items[index],
-      comparisonAmount: comparisonHoldings == null
-          ? null
-          : comparisonHoldings!.getById(items[index].id)?.currentValue,
     );
     return onTap == null
         ? tile

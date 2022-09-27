@@ -12,14 +12,10 @@ class FinancialItemListTile extends StatelessWidget {
 
   final FiType fItemType;
   final FinancialItem item;
-  final Amount? comparisonAmount;
-
-  bool get _shouldCompare => comparisonAmount != null;
 
   FinancialItemListTile({
     required this.fItemType,
     required this.item,
-    this.comparisonAmount,
     Key? key,
   }) : super(key: key);
 
@@ -31,36 +27,9 @@ class FinancialItemListTile extends StatelessWidget {
         DynamicWSizedBox.s(),
         _buildTitle(context),
         const Spacer(),
-        _buildAmount(context, item.currentValue),
+        DynamicAmountText(amount: item.currentValue),
       ],
     );
-  }
-
-  Widget _buildAmount(BuildContext context, Amount amount) {
-    if (!_shouldCompare) {
-      return DynamicAmountText(amount: amount);
-    }
-    if (comparisonAmount!.value == amount.value) {
-      return DynamicAmountText(
-        amount: amount,
-        greyOut: true,
-      );
-    } else {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          DynamicAmountText(amount: amount),
-          DynamicHSizedBox.xxs(),
-          DynamicAmountText(
-            amount: comparisonAmount!,
-            greyOut: true,
-            textStyle: Theme.of(context).textTheme.bodyText2!.copyWith(
-                  fontSize: 10,
-                ),
-          ),
-        ],
-      );
-    }
   }
 
   // TODO: Remove hardcoded images

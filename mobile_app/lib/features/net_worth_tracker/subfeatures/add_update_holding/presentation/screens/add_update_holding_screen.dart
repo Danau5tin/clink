@@ -69,7 +69,17 @@ class _AddUpdateHoldingScreenState
                 const Spacer(),
                 BalanceEntryDisplay(
                   entry: keypadEntry,
-                  isUpdate: itemToBeUpdated == null,
+                  title: itemToBeUpdated == null
+                      ? 'current_balance'.tr
+                      : 'new_balance'.tr,
+                  entryColor: type.maybeWhen(
+                    liability: () => Colors.red,
+                    orElse: () => null,
+                  ),
+                  prefix: type.maybeWhen(
+                    liability: () => '-',
+                    orElse: () => null,
+                  ),
                 ),
                 const Spacer(),
                 Expanded(
@@ -107,7 +117,7 @@ class _AddUpdateHoldingScreenState
           );
     } else {
       ref.read(updateFinsManProv.notifier).updateItem(
-            itemToBeUpdated!.id,
+            itemToBeUpdated!,
             _controller.text,
             double.parse(keypadEntry),
           );
