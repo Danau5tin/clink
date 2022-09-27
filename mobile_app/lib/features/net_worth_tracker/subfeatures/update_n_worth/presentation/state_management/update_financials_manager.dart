@@ -4,7 +4,6 @@ import 'package:clink_mobile_app/core/feature_registration/service_locator.dart'
 import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/amount_precentage_info.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/fi_type.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/financial_item.dart';
-import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/historical_value.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/holdings.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/presentation/state_management/n_worth_manager.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/subfeatures/update_n_worth/presentation/state_management/update_financials_state.dart';
@@ -70,10 +69,19 @@ class UpdateFinancialsManager extends StateNotifier<UpdateFinancialsState> {
     state.maybeWhen(
       initial: (originalHoldings, updatedHoldings, saving) {
         final existing = updatedHoldings.getById(id);
-        final updated = existing!.copyWith(name: name);
-        if (updated.currentValue.amount.value != value) {
-          // TODO: Continue here
-        }
+        final updated = existing!.copyWith(
+          name: name,
+          currentValue: Amount(
+            currencyCode: existing.currentValue.currencyCode,
+            value: value,
+          ),
+        );
+        final newList = [...updatedHoldings.financialItems];
+        newList.removeWhere((element) => element.id == existing.id);
+        newList.add(updated);
+        state = (state as Initial).copyWith(
+          updatedHoldings: Holdings(financialItems: newList),
+        );
       },
       orElse: () {},
     );
@@ -87,16 +95,9 @@ class UpdateFinancialsManager extends StateNotifier<UpdateFinancialsState> {
           FinancialItem(
             id: uuidGen.generate(),
             name: name,
-            currencyCode: 'GBP',
             // TODO: Stop hardcoding currency
             type: type,
-            historicalValues: [
-              HistoricalValue(
-                id: uuidGen.generate(),
-                amount: Amount(value: value, currencyCode: 'GBP'),
-                dateTime: DateTime.now(),
-              )
-            ],
+            currentValue: Amount(currencyCode: 'GBP', value: value),
           ),
         ];
         state = (state as Initial).copyWith(

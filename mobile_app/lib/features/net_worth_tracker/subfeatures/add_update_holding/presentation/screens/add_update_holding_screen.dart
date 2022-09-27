@@ -12,7 +12,7 @@ import 'package:clink_mobile_app/features/net_worth_tracker/subfeatures/update_n
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class AddUpdateHoldingScreen extends StatefulWidget {
+class AddUpdateHoldingScreen extends ConsumerStatefulWidget {
   static const viewPath =
       '${NetWorthTrackerNavHandler.startingPath}/addUpdateHolding';
 
@@ -24,10 +24,12 @@ class AddUpdateHoldingScreen extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<AddUpdateHoldingScreen> createState() => _AddUpdateHoldingScreenState();
+  ConsumerState<AddUpdateHoldingScreen> createState() =>
+      _AddUpdateHoldingScreenState();
 }
 
-class _AddUpdateHoldingScreenState extends State<AddUpdateHoldingScreen> {
+class _AddUpdateHoldingScreenState
+    extends ConsumerState<AddUpdateHoldingScreen> {
   late final TextEditingController _controller;
 
   FiType get type => widget.args.type;
@@ -38,6 +40,11 @@ class _AddUpdateHoldingScreenState extends State<AddUpdateHoldingScreen> {
   void initState() {
     super.initState();
     _controller = TextEditingController(text: itemToBeUpdated?.name);
+    if (itemToBeUpdated != null) {
+      ref
+          .read(keypadHandlerProv.notifier)
+          .inputDouble(itemToBeUpdated!.currentValue.value);
+    }
   }
 
   @override
@@ -72,23 +79,15 @@ class _AddUpdateHoldingScreenState extends State<AddUpdateHoldingScreen> {
                   ),
                 ),
                 ElevatedButton(
-                  onPressed: () {
-                    if (itemToBeUpdated == null) {
-                      ref.read(updateFinsManProv.notifier).addNewItem(
-                        _controller.text,
-                        double.parse(keypadEntry),
-                        type,
-                      );
-                    } else {
-                      ref.read(updateFinsManProv.notifier).
-                    }
-                  },
+                  onPressed: () => _onCTATap(ref, keypadEntry),
                   child: Text(
-                    type.when(
-                      account: () => 'add_new_account'.tr,
-                      physAsset: () => 'add_new_asset'.tr,
-                      liability: () => 'add_new_liability'.tr,
-                    ),
+                    itemToBeUpdated == null
+                        ? type.when(
+                            account: () => 'add_new_account'.tr,
+                            physAsset: () => 'add_new_asset'.tr,
+                            liability: () => 'add_new_liability'.tr,
+                          )
+                        : _getUpdateTxt,
                   ),
                 )
               ],
@@ -99,20 +98,41 @@ class _AddUpdateHoldingScreenState extends State<AddUpdateHoldingScreen> {
     );
   }
 
+  void _onCTATap(WidgetRef ref, String keypadEntry) {
+    if (itemToBeUpdated == null) {
+      ref.read(updateFinsManProv.notifier).addNewItem(
+            _controller.text,
+            double.parse(keypadEntry),
+            type,
+          );
+    } else {
+      ref.read(updateFinsManProv.notifier).updateItem(
+            itemToBeUpdated!.id,
+            _controller.text,
+            double.parse(keypadEntry),
+          );
+    }
+    Navigator.pop(context);
+  }
+
   StandardAppBar _buildAppbar(BuildContext context) {
     return StandardAppBar(
       context: context,
       title: itemToBeUpdated != null
-          ? type.when(
-              account: () => 'update_account'.tr,
-              physAsset: () => 'update_asset'.tr,
-              liability: () => 'update_liability'.tr,
-            )
+          ? _getUpdateTxt
           : type.when(
               account: () => 'new_account'.tr,
               physAsset: () => 'new_asset'.tr,
               liability: () => 'new_liability'.tr,
             ),
+    );
+  }
+
+  String get _getUpdateTxt {
+    return type.when(
+      account: () => 'update_account'.tr,
+      physAsset: () => 'update_asset'.tr,
+      liability: () => 'update_liability'.tr,
     );
   }
 

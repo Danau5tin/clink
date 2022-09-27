@@ -82,7 +82,7 @@ class FItemSummary extends StatelessWidget {
       item: items[index],
       comparisonAmount: comparisonHoldings == null
           ? null
-          : comparisonHoldings!.getById(items[index].id)?.currentValue.amount,
+          : comparisonHoldings!.getById(items[index].id)?.currentValue,
     );
     return onTap == null
         ? tile

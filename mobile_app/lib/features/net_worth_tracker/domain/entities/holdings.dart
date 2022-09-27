@@ -28,7 +28,7 @@ class Holdings {
   double valueOfItems(List<FinancialItem> items) {
     double count = 0.0;
     for (var i in items) {
-      count += i.historicalValues.last.amount.value;
+      count += i.currentValue.value;
     }
     return count;
   }

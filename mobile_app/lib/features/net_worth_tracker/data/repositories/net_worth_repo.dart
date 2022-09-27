@@ -2,16 +2,11 @@ import 'package:clink_mobile_app/core/common/data/repositories/sql_db/sql_databa
 import 'package:clink_mobile_app/core/common/data/repositories/sql_db/table_helpers.dart';
 import 'package:clink_mobile_app/core/network/data_state/data_state.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/data/models/financial_item_model.dart';
-import 'package:clink_mobile_app/features/net_worth_tracker/data/models/historical_value_model.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/data/models/net_worth_entry_model.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/holdings.dart';
-import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/financial_item.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/historical_net_worth.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/net_worth_data.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/domain/repositories/net_worth_repo.dart';
-
-// ignore:depend_on_referenced_packages
-import 'package:collection/collection.dart';
 
 class NetWorthRepoLocalDb implements NetWorthRepo {
   final SqlDbWrapper dbWrap;
@@ -48,26 +43,22 @@ class NetWorthRepoLocalDb implements NetWorthRepo {
   }
 
   Future<Holdings> _fetchAssetsLiabilities() async {
-    final res = await dbWrap.db.rawQuery('''
-      SELECT *
-      FROM ${FITemTable.tableName} fi
-      CROSS JOIN ${HValueTable.tableName} hv ON 
-        fi.${FITemTable.idKey} = hv.${HValueTable.fItemKey}
-      ORDER BY hv.${HValueTable.dateRecordedKey} ASC;
-    ''');
-    final List<FinancialItem> holdings = [];
-    for (var element in res) {
-      final fItem = FinancialItemModel.fromSqlDbMap(element);
-      final hVal =
-          HistoricalValueModel.fromSqlDbMap(element, fItem.currencyCode);
-      final existingFItem = holdings.firstWhereOrNull((h) => h.id == fItem.id);
-      if (existingFItem == null) {
-        fItem.historicalValues.add(hVal);
-        holdings.add(fItem);
-      } else {
-        existingFItem.historicalValues.add(hVal);
-      }
-    }
+    const qry = '''
+      SELECT * FROM ${FITemTable.tableName} fi
+      JOIN (
+        SELECT 
+          ${HValueTable.valueKey}, 
+          ${HValueTable.fItemKey}, 
+          MAX(${HValueTable.dateRecordedKey}) AS ${HValueTable.dateRecordedKey}
+        FROM ${HValueTable.tableName} GROUP BY ${HValueTable.fItemKey}
+        ) AS lookup
+      ON lookup.${HValueTable.fItemKey} = fi.${FITemTable.idKey};
+    ''';
+
+    final res = await dbWrap.db.rawQuery(qry);
+
+    final holdings =
+        res.map((e) => FinancialItemModel.fromSqlDbMap(e)).toList();
     return Holdings(financialItems: holdings);
   }
 }

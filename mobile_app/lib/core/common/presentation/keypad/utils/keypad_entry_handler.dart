@@ -1,4 +1,5 @@
 import 'package:clink_mobile_app/core/common/presentation/keypad/keypad_entry.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final keypadHandlerProv =
@@ -9,8 +10,17 @@ final keypadHandlerProv =
 class KeypadEntryHandler extends StateNotifier<String> {
   KeypadEntryHandler({String? startingVal}) : super(startingVal ?? '0');
 
+  void inputDouble(double input) {
+    for (var c in input.toStringAsFixed(2).characters) {
+      if (c == '-') {
+        continue;
+      }
+      processNewInput(KeypadEntry.fromString(c));
+    }
+  }
+
   void processNewInput(KeypadEntry entry) {
-    state =  entry.when(
+    state = entry.when(
       digit: (digit) => _handleDigit(digit),
       decimal: () => _handleDecimal(),
       backspace: () => _handleBackSpace(),

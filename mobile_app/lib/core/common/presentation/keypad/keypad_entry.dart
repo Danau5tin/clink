@@ -9,4 +9,11 @@ class KeypadEntry with _$KeypadEntry {
   const factory KeypadEntry.decimal() = Decimal;
 
   const factory KeypadEntry.backspace() = Backspace;
+
+  factory KeypadEntry.fromString(String val) {
+    if (val == '.' || val == ',') {
+      return const KeypadEntry.decimal();
+    }
+    return KeypadEntry.digit(int.parse(val));
+  }
 }
