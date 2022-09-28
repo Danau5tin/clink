@@ -39,8 +39,7 @@ class CurrencyOptionTile extends StatelessWidget {
             Text(currencyCode, style: _textTheme(context)),
             const Spacer(),
             Text(
-              NumberFormat.simpleCurrency(name: currencyCode).currencySymbol ??
-                  '',
+              NumberFormat.simpleCurrency(name: currencyCode).currencySymbol,
               style: _textTheme(context),
             )
           ],

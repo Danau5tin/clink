@@ -2,7 +2,6 @@ import 'package:clink_mobile_app/core/common/domain/misc/user_info_manager.dart'
 import 'package:clink_mobile_app/core/common/presentation/dynamic_sized_box.dart';
 import 'package:clink_mobile_app/core/common/presentation/light_rounded_container.dart';
 import 'package:clink_mobile_app/core/common/presentation/standard_app_bar.dart';
-import 'package:clink_mobile_app/core/common/presentation/theme/colors.dart';
 import 'package:clink_mobile_app/core/translations/translation_provider.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/fi_type.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/subfeatures/add_update_holding/presentation/screens/add_update_holding_screen.dart';
@@ -116,7 +115,10 @@ class _CurrencySelectScreenState extends State<CurrencySelectScreen> {
           largeTitle: true,
         ),
         onTapOverride: (name, amount) {
-          // TODO: Create an original NWEntry and Account in db, finish onboarding and nav to NWorthTrackerScreen
+          /*
+           TODO: Create an original NWEntry and Account in db,
+              finish onboarding and nav to NWorthTrackerScreen
+           */
         },
       ),
     );

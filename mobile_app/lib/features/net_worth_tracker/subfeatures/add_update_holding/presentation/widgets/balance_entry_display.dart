@@ -22,8 +22,10 @@ class BalanceEntryDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final formattedEntry = _numberFormatter.toSimpleCurrency(double.parse(entry),
-        currencyCode: '',);
+    final formattedEntry = _numberFormatter.toSimpleCurrency(
+      double.parse(entry),
+      currencyCode: '',
+    );
     return Column(
       children: [
         Text(
@@ -34,9 +36,7 @@ class BalanceEntryDisplay extends StatelessWidget {
               ),
         ),
         Text(
-          prefix == null
-              ? formattedEntry
-              : '$prefix$formattedEntry',
+          prefix == null ? formattedEntry : '$prefix$formattedEntry',
           maxLines: 2,
           overflow: TextOverflow.fade,
           style: Theme.of(context).textTheme.headline1!.copyWith(
