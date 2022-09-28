@@ -25,5 +25,10 @@
   "new_balance": "Nouvel solde",
   "get_started": "Commencer",
   "manage_and_update_your_finances": "Gérez et mettez à jour vos finances en un seul endroit",
-  "easily_track_your_progress": "Suivez facilement vos progrès dans le temps"
+  "easily_track_your_progress": "Suivez facilement vos progrès dans le temps",
+  "choose_your_currency": "Choisissez votre devise",
+  "continue": "Continuer",
+  "tip_choose_your_daily_life_currency": "Conseil : Vous devez appuyer sur la devise que vous utilisez dans votre vie quotidienne.",
+  "add_an_account": "Ajouter un compte",
+  "input_name_and_balance_of_a_bank_account": "Conseil : saisissez le nom et le solde d'un compte bancaire à suivre."
 }

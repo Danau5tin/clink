@@ -41,8 +41,8 @@ class UserManager extends StateNotifier<User?> {
 
   Future<void> createNewUser(String baseCurrency) async {
     final user = User(id: uuidGen.generate(), baseCurrencyCode: baseCurrency);
-    kValLocalStorage.saveString(_userIdKey, user.id);
-    kValLocalStorage.saveString(_baseCurrKey, user.baseCurrencyCode);
     state = user;
+    await kValLocalStorage.saveString(_userIdKey, user.id);
+    await kValLocalStorage.saveString(_baseCurrKey, user.baseCurrencyCode);
   }
 }

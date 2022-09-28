@@ -1,9 +1,10 @@
+import 'package:clink_mobile_app/features/onboarding/subfeatures/carousel/presentation/widgets/carousel_utils/carousel_item.dart';
+import 'package:clink_mobile_app/features/onboarding/subfeatures/carousel/presentation/widgets/mock_onboarding_items_column.dart';
+import 'package:clink_mobile_app/features/onboarding/subfeatures/currency_select/presentation/screens/currency_select_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:clink_mobile_app/core/common/presentation/dynamic_sized_box.dart';
 import 'package:clink_mobile_app/core/translations/translation_provider.dart';
-import 'package:clink_mobile_app/features/onboarding/presentation/widgets/carousel_utils/carousel_item.dart';
-import 'package:clink_mobile_app/features/onboarding/presentation/widgets/mock_onboarding_items_column.dart';
 import 'package:easy_localization/easy_localization.dart'
     hide StringTranslateExtension;
 
@@ -23,12 +24,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final usersCurrency =
+    final usersPredictedCurrency =
         NumberFormat.simpleCurrency(locale: context.locale.languageCode)
                 .currencyName ??
             _defaultCurrency;
 
-    final carouselItems = _buildDisplayWidgets(usersCurrency);
+    final carouselItems = _buildDisplayWidgets(usersPredictedCurrency);
     return Scaffold(
       body: Padding(
         padding: _buildVertPadding,
@@ -45,9 +46,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             Padding(
               padding: _buildHorizPadding,
               child: ElevatedButton(
-                onPressed: () {
-                  // TODO: Continue with onboarding
-                },
+                onPressed: () => Navigator.pushNamed(
+                  context,
+                  CurrencySelectScreen.viewPath,
+                    arguments: usersPredictedCurrency,
+                ),
                 child: Text('get_started'.tr),
               ),
             ),

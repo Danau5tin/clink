@@ -1,7 +1,8 @@
 import 'package:clink_mobile_app/core/common/domain/repositories/key_value_local_storage.dart';
 import 'package:clink_mobile_app/core/feature_registration/service_locator.dart';
-import 'package:clink_mobile_app/features/onboarding/presentation/state_management/onboarding_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'onboarding_state.dart';
 
 final onboardingManProv =
     StateNotifierProvider<OnboardingManager, OnboardingState>(
@@ -27,4 +28,6 @@ class OnboardingManager extends StateNotifier<OnboardingState> {
         : const OnboardingState.notOnboarded();
     return alreadyOnboarded;
   }
+
+
 }

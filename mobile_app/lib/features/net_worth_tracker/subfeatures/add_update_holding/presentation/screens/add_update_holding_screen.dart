@@ -1,3 +1,4 @@
+import 'package:clink_mobile_app/core/common/presentation/dynamic_sized_box.dart';
 import 'package:clink_mobile_app/core/common/presentation/keypad/keypad.dart';
 import 'package:clink_mobile_app/core/common/presentation/keypad/utils/keypad_entry_handler.dart';
 import 'package:clink_mobile_app/core/common/presentation/light_rounded_container.dart';
@@ -32,18 +33,25 @@ class _AddUpdateHoldingScreenState
     extends ConsumerState<AddUpdateHoldingScreen> {
   late final TextEditingController _controller;
 
-  FiType get type => widget.args.type;
+  FiType get _type => widget.args.type;
 
-  FinancialItem? get itemToBeUpdated => widget.args.itemToBeUpdated;
+  FinancialItem? get _itemToBeUpdated => widget.args.itemToBeUpdated;
+
+  StandardAppBar? get _replacementAppBar => widget.args.replacementAppBar;
+
+  String? get _tipText => widget.args.tipText;
+
+  Function(String name, double amount)? get _onTapOverride =>
+      widget.args.onTapOverride;
 
   @override
   void initState() {
     super.initState();
-    _controller = TextEditingController(text: itemToBeUpdated?.name);
-    if (itemToBeUpdated != null) {
+    _controller = TextEditingController(text: _itemToBeUpdated?.name);
+    if (_itemToBeUpdated != null) {
       ref
           .read(keypadHandlerProv.notifier)
-          .inputDouble(itemToBeUpdated!.currentValue.value);
+          .inputDouble(_itemToBeUpdated!.currentValue.value);
     }
   }
 
@@ -56,7 +64,7 @@ class _AddUpdateHoldingScreenState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppbar(context),
+      appBar: _replacementAppBar ?? _buildAppbar(context),
       body: Consumer(
         builder: (context, ref, child) {
           final keypadEntry = ref.watch(keypadHandlerProv);
@@ -65,18 +73,26 @@ class _AddUpdateHoldingScreenState
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                if (_tipText != null) ...[
+                  Text(
+                    _tipText!,
+                    style: Theme.of(context).textTheme.caption,
+                    textAlign: TextAlign.center,
+                  ),
+                  DynamicHSizedBox.xl(),
+                ],
                 _buildNameInput,
                 const Spacer(),
                 BalanceEntryDisplay(
                   entry: keypadEntry,
-                  title: itemToBeUpdated == null
+                  title: _itemToBeUpdated == null
                       ? 'current_balance'.tr
                       : 'new_balance'.tr,
-                  entryColor: type.maybeWhen(
+                  entryColor: _type.maybeWhen(
                     liability: () => Colors.red,
                     orElse: () => null,
                   ),
-                  prefix: type.maybeWhen(
+                  prefix: _type.maybeWhen(
                     liability: () => '-',
                     orElse: () => null,
                   ),
@@ -91,8 +107,8 @@ class _AddUpdateHoldingScreenState
                 ElevatedButton(
                   onPressed: () => _onCTATap(ref, keypadEntry),
                   child: Text(
-                    itemToBeUpdated == null
-                        ? type.when(
+                    _itemToBeUpdated == null
+                        ? _type.when(
                             account: () => 'add_new_account'.tr,
                             physAsset: () => 'add_new_asset'.tr,
                             liability: () => 'add_new_liability'.tr,
@@ -109,17 +125,20 @@ class _AddUpdateHoldingScreenState
   }
 
   void _onCTATap(WidgetRef ref, String keypadEntry) {
-    if (itemToBeUpdated == null) {
-      ref.read(updateFinsManProv.notifier).addNewItem(
-            _controller.text,
-            double.parse(keypadEntry),
-            type,
-          );
+    final name = _controller.text;
+    final value = double.parse(keypadEntry);
+
+    if (_onTapOverride != null) {
+      _onTapOverride!.call(name, value);
+      return;
+    }
+    if (_itemToBeUpdated == null) {
+      ref.read(updateFinsManProv.notifier).addNewItem(name, value, _type);
     } else {
       ref.read(updateFinsManProv.notifier).updateItem(
-            itemToBeUpdated!,
-            _controller.text,
-            double.parse(keypadEntry),
+            _itemToBeUpdated!,
+            name,
+            value,
           );
     }
     Navigator.pop(context);
@@ -128,9 +147,9 @@ class _AddUpdateHoldingScreenState
   StandardAppBar _buildAppbar(BuildContext context) {
     return StandardAppBar(
       context: context,
-      title: itemToBeUpdated != null
+      title: _itemToBeUpdated != null
           ? _getUpdateTxt
-          : type.when(
+          : _type.when(
               account: () => 'new_account'.tr,
               physAsset: () => 'new_asset'.tr,
               liability: () => 'new_liability'.tr,
@@ -139,7 +158,7 @@ class _AddUpdateHoldingScreenState
   }
 
   String get _getUpdateTxt {
-    return type.when(
+    return _type.when(
       account: () => 'update_account'.tr,
       physAsset: () => 'update_asset'.tr,
       liability: () => 'update_liability'.tr,
@@ -154,7 +173,7 @@ class _AddUpdateHoldingScreenState
         decoration: InputDecoration(
           border: InputBorder.none,
           label: Text(
-            type.when(
+            _type.when(
               account: () => 'account_name'.tr,
               physAsset: () => 'asset_name'.tr,
               liability: () => 'liability_name'.tr,
@@ -173,9 +192,15 @@ class _AddUpdateHoldingScreenState
 class AddUpdateHoldingScreenArgs {
   final FiType type;
   final FinancialItem? itemToBeUpdated;
+  final StandardAppBar? replacementAppBar;
+  final String? tipText;
+  final Function(String name, double amount)? onTapOverride;
 
   AddUpdateHoldingScreenArgs({
     required this.type,
     this.itemToBeUpdated,
+    this.replacementAppBar,
+    this.tipText,
+    this.onTapOverride,
   });
 }

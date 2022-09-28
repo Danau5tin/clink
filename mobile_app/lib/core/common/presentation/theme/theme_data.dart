@@ -1,3 +1,4 @@
+import 'package:clink_mobile_app/core/common/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -44,8 +45,16 @@ ElevatedButtonThemeData get _buildElevatedButtonThemeData {
 
 TextTheme _buildTextTheme(TextTheme textTheme) {
   return textTheme.copyWith(
-    headline1: textTheme.headline1!.copyWith(color: _standardTextColor),
-    headline2: textTheme.headline2!.copyWith(color: _standardTextColor),
+    headline1: textTheme.headline1!.copyWith(
+      color: _standardTextColor,
+      fontSize: 32,
+      fontWeight: FontWeight.bold,
+    ),
+    headline2: textTheme.headline2!.copyWith(
+      color: _standardTextColor,
+      fontSize: 28,
+      fontWeight: FontWeight.bold,
+    ),
     headline3: textTheme.headline3!.copyWith(color: _standardTextColor),
     headline4: textTheme.headline4!.copyWith(color: _standardTextColor),
     headline5: textTheme.headline5!.copyWith(
@@ -56,6 +65,10 @@ TextTheme _buildTextTheme(TextTheme textTheme) {
     bodyText1: textTheme.bodyText1!.copyWith(
       fontSize: 16,
       fontWeight: FontWeight.bold,
+    ),
+    caption: const TextStyle(
+      color: CColors.greyText,
+      fontSize: 16,
     ),
   );
 }

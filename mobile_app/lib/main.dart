@@ -9,8 +9,8 @@ import 'package:clink_mobile_app/core/feature_registration/service_locator.dart'
 import 'package:clink_mobile_app/core/navigation/route_generator.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/presentation/screens/net_worth_tracker_screen.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/presentation/state_management/n_worth_manager.dart';
-import 'package:clink_mobile_app/features/onboarding/presentation/screens/onboarding_screen.dart';
-import 'package:clink_mobile_app/features/onboarding/presentation/state_management/onboarding_manager.dart';
+import 'package:clink_mobile_app/features/onboarding/subfeatures/carousel/presentation/screens/onboarding_screen.dart';
+import 'package:clink_mobile_app/features/onboarding/subfeatures/carousel/presentation/state_management/onboarding_manager.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

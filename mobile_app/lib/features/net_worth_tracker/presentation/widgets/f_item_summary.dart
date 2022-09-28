@@ -7,7 +7,6 @@ import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/hold
 import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/fi_type.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/financial_item.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/presentation/widgets/financial_item_list_tile.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class FItemSummary extends StatelessWidget {
