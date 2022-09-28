@@ -20,4 +20,15 @@ class KeyValueLocalStorageImpl implements KeyValueLocalStorage {
   Future<void> saveString(String key, String value) async {
     await _box.put(key, value);
   }
+
+  @override
+  bool? getBool(String key) {
+    final res = _box.get(key);
+    return res is bool? ? res : null;
+  }
+
+  @override
+  Future<void> saveBool(String key, bool value) async {
+    await _box.put(key, value);
+  }
 }

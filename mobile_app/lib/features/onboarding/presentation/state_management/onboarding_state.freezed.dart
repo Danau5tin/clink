@@ -18,39 +18,45 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$OnboardingState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() checking,
     required TResult Function() notOnboarded,
-    required TResult Function() alreadyOnboarded,
+    required TResult Function() onboarded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? checking,
     TResult Function()? notOnboarded,
-    TResult Function()? alreadyOnboarded,
+    TResult Function()? onboarded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? checking,
     TResult Function()? notOnboarded,
-    TResult Function()? alreadyOnboarded,
+    TResult Function()? onboarded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(Checking value) checking,
     required TResult Function(NotOnboarded value) notOnboarded,
-    required TResult Function(AlreadyOnboarded value) alreadyOnboarded,
+    required TResult Function(Onboarded value) onboarded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(Checking value)? checking,
     TResult Function(NotOnboarded value)? notOnboarded,
-    TResult Function(AlreadyOnboarded value)? alreadyOnboarded,
+    TResult Function(Onboarded value)? onboarded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(Checking value)? checking,
     TResult Function(NotOnboarded value)? notOnboarded,
-    TResult Function(AlreadyOnboarded value)? alreadyOnboarded,
+    TResult Function(Onboarded value)? onboarded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -71,6 +77,115 @@ class _$OnboardingStateCopyWithImpl<$Res>
   final OnboardingState _value;
   // ignore: unused_field
   final $Res Function(OnboardingState) _then;
+}
+
+/// @nodoc
+abstract class _$$CheckingCopyWith<$Res> {
+  factory _$$CheckingCopyWith(
+          _$Checking value, $Res Function(_$Checking) then) =
+      __$$CheckingCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$CheckingCopyWithImpl<$Res> extends _$OnboardingStateCopyWithImpl<$Res>
+    implements _$$CheckingCopyWith<$Res> {
+  __$$CheckingCopyWithImpl(_$Checking _value, $Res Function(_$Checking) _then)
+      : super(_value, (v) => _then(v as _$Checking));
+
+  @override
+  _$Checking get _value => super._value as _$Checking;
+}
+
+/// @nodoc
+
+class _$Checking implements Checking {
+  const _$Checking();
+
+  @override
+  String toString() {
+    return 'OnboardingState.checking()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$Checking);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() checking,
+    required TResult Function() notOnboarded,
+    required TResult Function() onboarded,
+  }) {
+    return checking();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? checking,
+    TResult Function()? notOnboarded,
+    TResult Function()? onboarded,
+  }) {
+    return checking?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? checking,
+    TResult Function()? notOnboarded,
+    TResult Function()? onboarded,
+    required TResult orElse(),
+  }) {
+    if (checking != null) {
+      return checking();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Checking value) checking,
+    required TResult Function(NotOnboarded value) notOnboarded,
+    required TResult Function(Onboarded value) onboarded,
+  }) {
+    return checking(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(Checking value)? checking,
+    TResult Function(NotOnboarded value)? notOnboarded,
+    TResult Function(Onboarded value)? onboarded,
+  }) {
+    return checking?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Checking value)? checking,
+    TResult Function(NotOnboarded value)? notOnboarded,
+    TResult Function(Onboarded value)? onboarded,
+    required TResult orElse(),
+  }) {
+    if (checking != null) {
+      return checking(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class Checking implements OnboardingState {
+  const factory Checking() = _$Checking;
 }
 
 /// @nodoc
@@ -114,8 +229,9 @@ class _$NotOnboarded implements NotOnboarded {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() checking,
     required TResult Function() notOnboarded,
-    required TResult Function() alreadyOnboarded,
+    required TResult Function() onboarded,
   }) {
     return notOnboarded();
   }
@@ -123,8 +239,9 @@ class _$NotOnboarded implements NotOnboarded {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? checking,
     TResult Function()? notOnboarded,
-    TResult Function()? alreadyOnboarded,
+    TResult Function()? onboarded,
   }) {
     return notOnboarded?.call();
   }
@@ -132,8 +249,9 @@ class _$NotOnboarded implements NotOnboarded {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? checking,
     TResult Function()? notOnboarded,
-    TResult Function()? alreadyOnboarded,
+    TResult Function()? onboarded,
     required TResult orElse(),
   }) {
     if (notOnboarded != null) {
@@ -145,8 +263,9 @@ class _$NotOnboarded implements NotOnboarded {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(Checking value) checking,
     required TResult Function(NotOnboarded value) notOnboarded,
-    required TResult Function(AlreadyOnboarded value) alreadyOnboarded,
+    required TResult Function(Onboarded value) onboarded,
   }) {
     return notOnboarded(this);
   }
@@ -154,8 +273,9 @@ class _$NotOnboarded implements NotOnboarded {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(Checking value)? checking,
     TResult Function(NotOnboarded value)? notOnboarded,
-    TResult Function(AlreadyOnboarded value)? alreadyOnboarded,
+    TResult Function(Onboarded value)? onboarded,
   }) {
     return notOnboarded?.call(this);
   }
@@ -163,8 +283,9 @@ class _$NotOnboarded implements NotOnboarded {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(Checking value)? checking,
     TResult Function(NotOnboarded value)? notOnboarded,
-    TResult Function(AlreadyOnboarded value)? alreadyOnboarded,
+    TResult Function(Onboarded value)? onboarded,
     required TResult orElse(),
   }) {
     if (notOnboarded != null) {
@@ -179,38 +300,38 @@ abstract class NotOnboarded implements OnboardingState {
 }
 
 /// @nodoc
-abstract class _$$AlreadyOnboardedCopyWith<$Res> {
-  factory _$$AlreadyOnboardedCopyWith(
-          _$AlreadyOnboarded value, $Res Function(_$AlreadyOnboarded) then) =
-      __$$AlreadyOnboardedCopyWithImpl<$Res>;
+abstract class _$$OnboardedCopyWith<$Res> {
+  factory _$$OnboardedCopyWith(
+          _$Onboarded value, $Res Function(_$Onboarded) then) =
+      __$$OnboardedCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$AlreadyOnboardedCopyWithImpl<$Res>
+class __$$OnboardedCopyWithImpl<$Res>
     extends _$OnboardingStateCopyWithImpl<$Res>
-    implements _$$AlreadyOnboardedCopyWith<$Res> {
-  __$$AlreadyOnboardedCopyWithImpl(
-      _$AlreadyOnboarded _value, $Res Function(_$AlreadyOnboarded) _then)
-      : super(_value, (v) => _then(v as _$AlreadyOnboarded));
+    implements _$$OnboardedCopyWith<$Res> {
+  __$$OnboardedCopyWithImpl(
+      _$Onboarded _value, $Res Function(_$Onboarded) _then)
+      : super(_value, (v) => _then(v as _$Onboarded));
 
   @override
-  _$AlreadyOnboarded get _value => super._value as _$AlreadyOnboarded;
+  _$Onboarded get _value => super._value as _$Onboarded;
 }
 
 /// @nodoc
 
-class _$AlreadyOnboarded implements AlreadyOnboarded {
-  const _$AlreadyOnboarded();
+class _$Onboarded implements Onboarded {
+  const _$Onboarded();
 
   @override
   String toString() {
-    return 'OnboardingState.alreadyOnboarded()';
+    return 'OnboardingState.onboarded()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$AlreadyOnboarded);
+        (other.runtimeType == runtimeType && other is _$Onboarded);
   }
 
   @override
@@ -219,30 +340,33 @@ class _$AlreadyOnboarded implements AlreadyOnboarded {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() checking,
     required TResult Function() notOnboarded,
-    required TResult Function() alreadyOnboarded,
+    required TResult Function() onboarded,
   }) {
-    return alreadyOnboarded();
+    return onboarded();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? checking,
     TResult Function()? notOnboarded,
-    TResult Function()? alreadyOnboarded,
+    TResult Function()? onboarded,
   }) {
-    return alreadyOnboarded?.call();
+    return onboarded?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? checking,
     TResult Function()? notOnboarded,
-    TResult Function()? alreadyOnboarded,
+    TResult Function()? onboarded,
     required TResult orElse(),
   }) {
-    if (alreadyOnboarded != null) {
-      return alreadyOnboarded();
+    if (onboarded != null) {
+      return onboarded();
     }
     return orElse();
   }
@@ -250,35 +374,38 @@ class _$AlreadyOnboarded implements AlreadyOnboarded {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(Checking value) checking,
     required TResult Function(NotOnboarded value) notOnboarded,
-    required TResult Function(AlreadyOnboarded value) alreadyOnboarded,
+    required TResult Function(Onboarded value) onboarded,
   }) {
-    return alreadyOnboarded(this);
+    return onboarded(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(Checking value)? checking,
     TResult Function(NotOnboarded value)? notOnboarded,
-    TResult Function(AlreadyOnboarded value)? alreadyOnboarded,
+    TResult Function(Onboarded value)? onboarded,
   }) {
-    return alreadyOnboarded?.call(this);
+    return onboarded?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(Checking value)? checking,
     TResult Function(NotOnboarded value)? notOnboarded,
-    TResult Function(AlreadyOnboarded value)? alreadyOnboarded,
+    TResult Function(Onboarded value)? onboarded,
     required TResult orElse(),
   }) {
-    if (alreadyOnboarded != null) {
-      return alreadyOnboarded(this);
+    if (onboarded != null) {
+      return onboarded(this);
     }
     return orElse();
   }
 }
 
-abstract class AlreadyOnboarded implements OnboardingState {
-  const factory AlreadyOnboarded() = _$AlreadyOnboarded;
+abstract class Onboarded implements OnboardingState {
+  const factory Onboarded() = _$Onboarded;
 }

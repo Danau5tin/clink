@@ -19,9 +19,10 @@ class NWorthManager extends StateNotifier<NWorthState> {
   NWorthManager({
     required this.netWorthRepo,
     required this.crashlyticsReporter,
-  }) : super(const NWorthState.loading());
+  }) : super(const NWorthState.empty());
 
   Future<void> fetchNWData() async {
+    state = const NWorthState.loading();
     final res = await netWorthRepo.fetchNWorthData();
     res.when(
       success: (d) => state = NWorthState.loaded(

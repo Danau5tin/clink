@@ -7,6 +7,7 @@ import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/hold
 import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/fi_type.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/financial_item.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/presentation/widgets/financial_item_list_tile.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class FItemSummary extends StatelessWidget {
@@ -15,12 +16,14 @@ class FItemSummary extends StatelessWidget {
   final Holdings holdings;
   final CTAInfo? ctaInfo;
   final Function(FinancialItem)? onTap;
+  final String? currencyCode;
 
   FItemSummary({
     required this.fItemType,
     required this.holdings,
     this.ctaInfo,
     this.onTap,
+    this.currencyCode,
     Key? key,
   }) : super(key: key);
 
@@ -41,6 +44,7 @@ class FItemSummary extends StatelessWidget {
     double value,
   ) {
     final lView = ListView.separated(
+      padding: EdgeInsets.zero,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemCount: items.length,
@@ -52,7 +56,10 @@ class FItemSummary extends StatelessWidget {
       title: fItemType.toString(),
       topRightWidget: LightRoundedContainer.builtTopTitle(
         context,
-        numberFormatter.toSimpleCurrency(value),
+        numberFormatter.toSimpleCurrency(
+          value,
+          currencyCode: currencyCode ?? 'GBP',
+        ), // TODO: Stop hardcoding currency
       ),
       child: Padding(
         padding: const EdgeInsets.only(top: 8),
@@ -75,10 +82,7 @@ class FItemSummary extends StatelessWidget {
   }
 
   StatelessWidget _buildTile(List<FinancialItem> items, int index) {
-    final tile = FinancialItemListTile(
-      fItemType: fItemType,
-      item: items[index],
-    );
+    final tile = FinancialItemListTile(item: items[index]);
     return onTap == null
         ? tile
         : GestureDetector(

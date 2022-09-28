@@ -22,5 +22,8 @@
   "asset_name": "Asset name",
   "liability_name": "Liability name",
   "current_balance": "Current balance",
-  "new_balance": "New balance"
+  "new_balance": "New balance",
+  "get_started": "Get started",
+  "manage_and_update_your_finances": "Manage and update your finances in one place",
+  "easily_track_your_progress": "Easily track your progress over time"
 }

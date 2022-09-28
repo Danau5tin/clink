@@ -5,6 +5,6 @@ import 'package:get_it/get_it.dart';
 class OnboardingSlReg extends FeatureSlReg {
   @override
   void registerObjects(GetIt instance) {
-    // TODO:
+
   }
 }

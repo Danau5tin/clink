@@ -9,11 +9,9 @@ import 'package:flutter/material.dart';
 class FinancialItemListTile extends StatelessWidget {
   final NumberFormatter numberFormatter = sl.get<NumberFormatter>();
 
-  final FiType fItemType;
   final FinancialItem item;
 
   FinancialItemListTile({
-    required this.fItemType,
     required this.item,
     Key? key,
   }) : super(key: key);
@@ -42,7 +40,7 @@ class FinancialItemListTile extends StatelessWidget {
         image: DecorationImage(
           fit: BoxFit.fill,
           image: AssetImage(
-            fItemType.when(
+            item.type.when(
               account: () => 'assets/images/revolut.png',
               physAsset: () => 'assets/images/computer.svg.png',
               liability: () => 'assets/images/loan.png',

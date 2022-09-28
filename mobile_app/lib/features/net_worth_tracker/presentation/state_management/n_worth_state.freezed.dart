@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$NWorthState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() empty,
     required TResult Function() loading,
     required TResult Function() error,
     required TResult Function(
@@ -27,6 +28,7 @@ mixin _$NWorthState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? empty,
     TResult Function()? loading,
     TResult Function()? error,
     TResult Function(
@@ -36,6 +38,7 @@ mixin _$NWorthState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? empty,
     TResult Function()? loading,
     TResult Function()? error,
     TResult Function(
@@ -46,6 +49,7 @@ mixin _$NWorthState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(Empty value) empty,
     required TResult Function(Loading value) loading,
     required TResult Function(Error value) error,
     required TResult Function(Loaded value) loaded,
@@ -53,6 +57,7 @@ mixin _$NWorthState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(Empty value)? empty,
     TResult Function(Loading value)? loading,
     TResult Function(Error value)? error,
     TResult Function(Loaded value)? loaded,
@@ -60,6 +65,7 @@ mixin _$NWorthState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(Empty value)? empty,
     TResult Function(Loading value)? loading,
     TResult Function(Error value)? error,
     TResult Function(Loaded value)? loaded,
@@ -82,6 +88,126 @@ class _$NWorthStateCopyWithImpl<$Res> implements $NWorthStateCopyWith<$Res> {
   final NWorthState _value;
   // ignore: unused_field
   final $Res Function(NWorthState) _then;
+}
+
+/// @nodoc
+abstract class _$$EmptyCopyWith<$Res> {
+  factory _$$EmptyCopyWith(_$Empty value, $Res Function(_$Empty) then) =
+      __$$EmptyCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$EmptyCopyWithImpl<$Res> extends _$NWorthStateCopyWithImpl<$Res>
+    implements _$$EmptyCopyWith<$Res> {
+  __$$EmptyCopyWithImpl(_$Empty _value, $Res Function(_$Empty) _then)
+      : super(_value, (v) => _then(v as _$Empty));
+
+  @override
+  _$Empty get _value => super._value as _$Empty;
+}
+
+/// @nodoc
+
+class _$Empty implements Empty {
+  const _$Empty();
+
+  @override
+  String toString() {
+    return 'NWorthState.empty()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$Empty);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() empty,
+    required TResult Function() loading,
+    required TResult Function() error,
+    required TResult Function(
+            HistoricalNWorthData historicalNetWorthData, Holdings holdings)
+        loaded,
+  }) {
+    return empty();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? empty,
+    TResult Function()? loading,
+    TResult Function()? error,
+    TResult Function(
+            HistoricalNWorthData historicalNetWorthData, Holdings holdings)?
+        loaded,
+  }) {
+    return empty?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? empty,
+    TResult Function()? loading,
+    TResult Function()? error,
+    TResult Function(
+            HistoricalNWorthData historicalNetWorthData, Holdings holdings)?
+        loaded,
+    required TResult orElse(),
+  }) {
+    if (empty != null) {
+      return empty();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Empty value) empty,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Error value) error,
+    required TResult Function(Loaded value) loaded,
+  }) {
+    return empty(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(Empty value)? empty,
+    TResult Function(Loading value)? loading,
+    TResult Function(Error value)? error,
+    TResult Function(Loaded value)? loaded,
+  }) {
+    return empty?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Empty value)? empty,
+    TResult Function(Loading value)? loading,
+    TResult Function(Error value)? error,
+    TResult Function(Loaded value)? loaded,
+    required TResult orElse(),
+  }) {
+    if (empty != null) {
+      return empty(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class Empty implements NWorthState {
+  const factory Empty() = _$Empty;
 }
 
 /// @nodoc
@@ -122,6 +248,7 @@ class _$Loading implements Loading {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() empty,
     required TResult Function() loading,
     required TResult Function() error,
     required TResult Function(
@@ -134,6 +261,7 @@ class _$Loading implements Loading {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? empty,
     TResult Function()? loading,
     TResult Function()? error,
     TResult Function(
@@ -146,6 +274,7 @@ class _$Loading implements Loading {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? empty,
     TResult Function()? loading,
     TResult Function()? error,
     TResult Function(
@@ -162,6 +291,7 @@ class _$Loading implements Loading {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(Empty value) empty,
     required TResult Function(Loading value) loading,
     required TResult Function(Error value) error,
     required TResult Function(Loaded value) loaded,
@@ -172,6 +302,7 @@ class _$Loading implements Loading {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(Empty value)? empty,
     TResult Function(Loading value)? loading,
     TResult Function(Error value)? error,
     TResult Function(Loaded value)? loaded,
@@ -182,6 +313,7 @@ class _$Loading implements Loading {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(Empty value)? empty,
     TResult Function(Loading value)? loading,
     TResult Function(Error value)? error,
     TResult Function(Loaded value)? loaded,
@@ -236,6 +368,7 @@ class _$Error implements Error {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() empty,
     required TResult Function() loading,
     required TResult Function() error,
     required TResult Function(
@@ -248,6 +381,7 @@ class _$Error implements Error {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? empty,
     TResult Function()? loading,
     TResult Function()? error,
     TResult Function(
@@ -260,6 +394,7 @@ class _$Error implements Error {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? empty,
     TResult Function()? loading,
     TResult Function()? error,
     TResult Function(
@@ -276,6 +411,7 @@ class _$Error implements Error {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(Empty value) empty,
     required TResult Function(Loading value) loading,
     required TResult Function(Error value) error,
     required TResult Function(Loaded value) loaded,
@@ -286,6 +422,7 @@ class _$Error implements Error {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(Empty value)? empty,
     TResult Function(Loading value)? loading,
     TResult Function(Error value)? error,
     TResult Function(Loaded value)? loaded,
@@ -296,6 +433,7 @@ class _$Error implements Error {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(Empty value)? empty,
     TResult Function(Loading value)? loading,
     TResult Function(Error value)? error,
     TResult Function(Loaded value)? loaded,
@@ -386,6 +524,7 @@ class _$Loaded implements Loaded {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() empty,
     required TResult Function() loading,
     required TResult Function() error,
     required TResult Function(
@@ -398,6 +537,7 @@ class _$Loaded implements Loaded {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? empty,
     TResult Function()? loading,
     TResult Function()? error,
     TResult Function(
@@ -410,6 +550,7 @@ class _$Loaded implements Loaded {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? empty,
     TResult Function()? loading,
     TResult Function()? error,
     TResult Function(
@@ -426,6 +567,7 @@ class _$Loaded implements Loaded {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(Empty value) empty,
     required TResult Function(Loading value) loading,
     required TResult Function(Error value) error,
     required TResult Function(Loaded value) loaded,
@@ -436,6 +578,7 @@ class _$Loaded implements Loaded {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(Empty value)? empty,
     TResult Function(Loading value)? loading,
     TResult Function(Error value)? error,
     TResult Function(Loaded value)? loaded,
@@ -446,6 +589,7 @@ class _$Loaded implements Loaded {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(Empty value)? empty,
     TResult Function(Loading value)? loading,
     TResult Function(Error value)? error,
     TResult Function(Loaded value)? loaded,
