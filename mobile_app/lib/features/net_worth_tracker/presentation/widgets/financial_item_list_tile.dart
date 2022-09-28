@@ -1,4 +1,3 @@
-import 'package:clink_mobile_app/core/common/domain/entities/amount.dart';
 import 'package:clink_mobile_app/core/common/presentation/dynamic_amount_text.dart';
 import 'package:clink_mobile_app/core/common/presentation/dynamic_sized_box.dart';
 import 'package:clink_mobile_app/core/common/presentation/utils/number_formatter.dart';

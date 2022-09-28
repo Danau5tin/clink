@@ -1,4 +1,3 @@
-import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/fi_type.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/financial_item.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 

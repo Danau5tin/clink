@@ -1,6 +1,5 @@
 import 'package:clink_mobile_app/core/common/presentation/light_rounded_container.dart';
 import 'package:clink_mobile_app/core/common/presentation/theme/colors.dart';
-import 'package:clink_mobile_app/core/translations/translation_provider.dart';
 import 'package:flutter/material.dart';
 
 class BalanceEntryDisplay extends StatelessWidget {
