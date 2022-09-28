@@ -5,10 +5,10 @@ import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/hist
 /// app startup so we just make 1 request from the repo
 class NetWorthData {
   final HistoricalNWorthData historicalNWorthData;
-  final Holdings assetsLiabilitiesHoldings;
+  final Holdings holdings;
 
   NetWorthData({
     required this.historicalNWorthData,
-    required this.assetsLiabilitiesHoldings,
+    required this.holdings,
   });
 }

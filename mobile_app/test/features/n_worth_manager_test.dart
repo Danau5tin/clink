@@ -29,7 +29,7 @@ void main() {
 
     when(() => netWorthData.historicalNWorthData)
         .thenReturn(historicalNWorthData);
-    when(() => netWorthData.assetsLiabilitiesHoldings)
+    when(() => netWorthData.holdings)
         .thenReturn(assetsLiabilitiesHoldings);
 
     nWorthManager = NWorthManager(

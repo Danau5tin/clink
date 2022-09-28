@@ -22,4 +22,22 @@ class FinancialItemModel extends FinancialItem {
       ),
     );
   }
+
+  factory FinancialItemModel.fromFItem(FinancialItem fItem) {
+    return FinancialItemModel(
+      id: fItem.id,
+      name: fItem.name,
+      currentValue: fItem.currentValue,
+      type: fItem.type,
+    );
+  }
+
+  Map<String, dynamic> toSqlMap() {
+    return {
+      FITemTable.idKey: id,
+      FITemTable.nameKey: name,
+      FITemTable.fItemTypeKey: FITypeModel.toSqlDb(type),
+      FITemTable.currencyKey: currentValue.currencyCode,
+    };
+  }
 }

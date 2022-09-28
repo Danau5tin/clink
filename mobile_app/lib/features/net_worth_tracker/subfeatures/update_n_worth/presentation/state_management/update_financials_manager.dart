@@ -7,6 +7,7 @@ import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/fi_t
 import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/financial_item.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/holdings.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/net_worth_entry.dart';
+import 'package:clink_mobile_app/features/net_worth_tracker/domain/repositories/net_worth_repo.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/presentation/state_management/n_worth_manager.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/subfeatures/update_n_worth/presentation/state_management/update_financials_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -14,6 +15,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 final updateFinsManProv = StateNotifierProvider.autoDispose<
     UpdateFinancialsManager, UpdateFinancialsState>(
   (ref) => UpdateFinancialsManager(
+    nWorthManager: ref.read(nWorthManagerProv.notifier),
+    netWorthRepo: sl.get<NetWorthRepo>(),
     holdings: ref.read(nWorthManagerProv).maybeWhen(
           loaded: (historicalNetWorthData, holdings) => holdings,
           orElse: () => Holdings(financialItems: []),
@@ -22,9 +25,13 @@ final updateFinsManProv = StateNotifierProvider.autoDispose<
 );
 
 class UpdateFinancialsManager extends StateNotifier<UpdateFinancialsState> {
+  final NWorthManager nWorthManager;
+  final NetWorthRepo netWorthRepo;
   final UUIDGen uuidGen = sl.get<UUIDGen>();
 
   UpdateFinancialsManager({
+    required this.nWorthManager,
+    required this.netWorthRepo,
     required Holdings holdings,
   }) : super(
           UpdateFinancialsState.initial(
@@ -81,8 +88,9 @@ class UpdateFinancialsManager extends StateNotifier<UpdateFinancialsState> {
           ),
         );
         final newList = [...updatedHoldings.financialItems];
-        newList.removeWhere((element) => element.id == itemToBeUpdated.id);
-        newList.add(updated);
+        final idxOfExisting = newList.indexOf(itemToBeUpdated);
+        newList.removeAt(idxOfExisting);
+        newList.insert(idxOfExisting, updated);
         state = (state as Initial).copyWith(
           updatedHoldings: Holdings(financialItems: newList),
         );
@@ -119,8 +127,8 @@ class UpdateFinancialsManager extends StateNotifier<UpdateFinancialsState> {
   }
 
   Future<void> saveAllUpdates() async {
-    state.maybeWhen(
-      initial: (originalHoldings, updatedHoldings, saving) {
+    await state.maybeWhen(
+      initial: (originalHoldings, updatedHoldings, saving) async {
         state = (state as Initial).copyWith(saving: true);
 
         final List<AddUpdateItemInstruction> instructs = [];
@@ -128,27 +136,15 @@ class UpdateFinancialsManager extends StateNotifier<UpdateFinancialsState> {
         double liabValue = 0.0;
 
         for (var item in updatedHoldings.financialItems) {
-          final existing = originalHoldings.getById(item.id);
-          if (existing == null) {
-            instructs.add(AddUpdateItemInstruction.add(item: item));
-            continue;
-          }
-          final nameChanged = existing.name != item.name;
-          final valueChanged =
-              existing.currentValue.value != item.currentValue.value;
-          if (nameChanged || valueChanged) {
-            final ins = AddUpdateItemInstruction.update(
-              idOfItem: item.id,
-              newName: nameChanged ? item.name : null,
-              newValue: valueChanged ? item.currentValue.value : null,
-            );
-            instructs.add(ins);
-          }
           item.type.when(
             account: () => assetValue += item.currentValue.value,
             physAsset: () => assetValue += item.currentValue.value,
             liability: () => liabValue += item.currentValue.value,
           );
+          final instr = _getInstructionIfRequired(originalHoldings, item);
+          if (instr != null) {
+            instructs.add(instr);
+          }
         }
         // TODO: Stop hardcoding currency
         final newEntry = NetWorthEntry(
@@ -157,14 +153,40 @@ class UpdateFinancialsManager extends StateNotifier<UpdateFinancialsState> {
           liabilitiesValue: Amount(currencyCode: 'GBP', value: liabValue),
           dateTime: DateTime.now(),
         );
-        final test = 6;
-        /*
-          TODO:
-            - Send these instructions and NWEntry to the repo
-            - Update the NWManager
-         */
+        final res = await netWorthRepo.updateFinancials(
+          netWorthEntry: newEntry,
+          instructions: instructs,
+        );
+        state = res.when(
+          success: (_) {
+            nWorthManager.notifyNewUpdate(newEntry, updatedHoldings);
+            return const UpdateFinancialsState.success();
+          },
+          failure: (_, __) => const UpdateFinancialsState.error(),
+        );
       },
-      orElse: () {},
+      orElse: () async {},
     );
+  }
+
+  AddUpdateItemInstruction? _getInstructionIfRequired(
+    Holdings originalHoldings,
+    FinancialItem updatedItem,
+  ) {
+    final existing = originalHoldings.getById(updatedItem.id);
+    if (existing == null) {
+      return AddUpdateItemInstruction.add(item: updatedItem);
+    }
+    final nameChanged = existing.name != updatedItem.name;
+    final valueChanged =
+        existing.currentValue.value != updatedItem.currentValue.value;
+    if (nameChanged || valueChanged) {
+      return AddUpdateItemInstruction.update(
+        idOfItem: updatedItem.id,
+        newName: nameChanged ? updatedItem.name : null,
+        newValue: valueChanged ? updatedItem.currentValue.value : null,
+      );
+    }
+    return null;
   }
 }

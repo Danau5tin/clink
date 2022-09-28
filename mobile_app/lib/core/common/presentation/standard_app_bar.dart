@@ -5,6 +5,7 @@ class StandardAppBar extends AppBar {
     super.key,
     required BuildContext context,
     String? title,
+    List<Widget>? actions,
   }) : super(
           title: title == null ? null : Text(title),
           centerTitle: true,
@@ -15,5 +16,6 @@ class StandardAppBar extends AppBar {
               color: Colors.black,
             ),
           ),
+          actions: actions,
         );
 }

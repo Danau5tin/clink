@@ -12,6 +12,7 @@ import 'package:clink_mobile_app/features/net_worth_tracker/navigation/net_worth
 import 'package:clink_mobile_app/features/net_worth_tracker/presentation/widgets/f_item_summary.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/subfeatures/add_update_holding/presentation/screens/add_update_holding_screen.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/subfeatures/update_n_worth/presentation/state_management/update_financials_manager.dart';
+import 'package:clink_mobile_app/features/net_worth_tracker/subfeatures/update_n_worth/presentation/state_management/update_financials_state.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/subfeatures/update_n_worth/presentation/widgets/summary_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -25,8 +26,18 @@ class UpdateFinancialsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    _listenForUpdates(ref, context);
     return Scaffold(
-      appBar: StandardAppBar(context: context, title: 'update_financials'.tr),
+      appBar: StandardAppBar(
+        context: context,
+        title: 'update_financials'.tr,
+        actions: [
+          TextButton(
+            onPressed: ref.read(updateFinsManProv.notifier).saveAllUpdates,
+            child: Text('save'.tr),
+          )
+        ],
+      ),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         clipBehavior: Clip.none,
@@ -39,6 +50,7 @@ class UpdateFinancialsScreen extends ConsumerWidget {
                   originalHoldings,
                   updatedHoldings,
                   saving,
+                  ref,
                 ),
                 success: () => const Center(
                   child: Icon(Icons.check, color: Colors.green),
@@ -55,6 +67,7 @@ class UpdateFinancialsScreen extends ConsumerWidget {
     Holdings originalHoldings,
     Holdings updatedHoldings,
     bool saving,
+    WidgetRef ref,
   ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -70,16 +83,24 @@ class UpdateFinancialsScreen extends ConsumerWidget {
         _buildDynamicHSizedBox,
         saving
             ? const CircularProgressBar()
-            : Consumer(
-                builder: (context, ref, child) => ElevatedButton(
-                  onPressed:
-                      ref.read(updateFinsManProv.notifier).saveAllUpdates,
-                  child: Text('save'.tr),
-                ),
+            : ElevatedButton(
+                onPressed: ref.read(updateFinsManProv.notifier).saveAllUpdates,
+                child: Text('save'.tr),
               ),
         _buildDynamicHSizedBox,
       ],
     );
+  }
+
+  void _listenForUpdates(WidgetRef ref, BuildContext context) {
+    ref.listen<UpdateFinancialsState>(updateFinsManProv, (previous, next) {
+      next.maybeWhen(
+        success: () {
+          Navigator.pop(context);
+        },
+        orElse: () {},
+      );
+    });
   }
 
   List<Widget> _buildContainers(

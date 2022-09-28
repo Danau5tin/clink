@@ -29,4 +29,22 @@ class NetWorthEntryModel extends NetWorthEntry {
       ),
     );
   }
+
+  Map<String, dynamic> toSqlMap() {
+    return {
+      NWorthEntryDBTable.idKey: id,
+      NWorthEntryDBTable.assetsValKey: assetsValue.value,
+      NWorthEntryDBTable.liabValKey: liabilitiesValue.value,
+      NWorthEntryDBTable.createdOnKey: dateTime.millisecondsSinceEpoch,
+    };
+  }
+
+  factory NetWorthEntryModel.fromNetWorthEntry(NetWorthEntry entry) {
+    return NetWorthEntryModel(
+      id: entry.id,
+      assetsValue: entry.assetsValue,
+      liabilitiesValue: entry.liabilitiesValue,
+      dateTime: entry.dateTime,
+    );
+  }
 }
