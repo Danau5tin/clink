@@ -20,14 +20,13 @@ class FinancialItemListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final itemVal = item.currentValue;
     return Row(
       children: [
         _buildImage,
         DynamicWSizedBox.s(),
         _buildTitle(context),
         const Spacer(),
-        DynamicAmountText(amount: itemVal.amount)
+        DynamicAmountText(amount: item.currentValue),
       ],
     );
   }

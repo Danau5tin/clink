@@ -6,10 +6,12 @@ const _txtColor = CColors.greyText;
 class LightRoundedContainer extends StatelessWidget {
   final Widget child;
   final EdgeInsets? padding;
+  final double? borderRadius;
 
   const LightRoundedContainer({
     required this.child,
     this.padding,
+    this.borderRadius,
     Key? key,
   }) : super(key: key);
 
@@ -49,7 +51,7 @@ class LightRoundedContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(borderRadius ?? 20),
         boxShadow: [
           BoxShadow(
             color: Colors.grey.shade200,

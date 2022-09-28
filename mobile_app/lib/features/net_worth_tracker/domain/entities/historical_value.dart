@@ -1,13 +1,11 @@
-import 'package:clink_mobile_app/core/common/domain/entities/amount.dart';
-
 class HistoricalValue {
   final String id;
-  final Amount amount;
+  final double value;
   final DateTime dateTime;
 
   HistoricalValue({
     required this.id,
-    required this.amount,
+    required this.value,
     required this.dateTime,
   });
 }

@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 const _primaryColor = Color(0xff3747c8);
 const _standardTextColor = Colors.black;
-final textTheme = GoogleFonts.rubikTextTheme();
+final textTheme = GoogleFonts.interTextTheme();
 
 ThemeData get appTheme {
   return ThemeData(

@@ -95,13 +95,8 @@ class __$$AccountCopyWithImpl<$Res> extends _$FiTypeCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$Account implements Account {
-  const _$Account();
-
-  @override
-  String toString() {
-    return 'FiType.account()';
-  }
+class _$Account extends Account {
+  const _$Account() : super._();
 
   @override
   bool operator ==(dynamic other) {
@@ -181,8 +176,9 @@ class _$Account implements Account {
   }
 }
 
-abstract class Account implements FiType {
+abstract class Account extends FiType {
   const factory Account() = _$Account;
+  const Account._() : super._();
 }
 
 /// @nodoc
@@ -205,13 +201,8 @@ class __$$PhysicalAssetCopyWithImpl<$Res> extends _$FiTypeCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$PhysicalAsset implements PhysicalAsset {
-  const _$PhysicalAsset();
-
-  @override
-  String toString() {
-    return 'FiType.physAsset()';
-  }
+class _$PhysicalAsset extends PhysicalAsset {
+  const _$PhysicalAsset() : super._();
 
   @override
   bool operator ==(dynamic other) {
@@ -291,8 +282,9 @@ class _$PhysicalAsset implements PhysicalAsset {
   }
 }
 
-abstract class PhysicalAsset implements FiType {
+abstract class PhysicalAsset extends FiType {
   const factory PhysicalAsset() = _$PhysicalAsset;
+  const PhysicalAsset._() : super._();
 }
 
 /// @nodoc
@@ -315,13 +307,8 @@ class __$$LiabilityCopyWithImpl<$Res> extends _$FiTypeCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$Liability implements Liability {
-  const _$Liability();
-
-  @override
-  String toString() {
-    return 'FiType.liability()';
-  }
+class _$Liability extends Liability {
+  const _$Liability() : super._();
 
   @override
   bool operator ==(dynamic other) {
@@ -401,6 +388,7 @@ class _$Liability implements Liability {
   }
 }
 
-abstract class Liability implements FiType {
+abstract class Liability extends FiType {
   const factory Liability() = _$Liability;
+  const Liability._() : super._();
 }

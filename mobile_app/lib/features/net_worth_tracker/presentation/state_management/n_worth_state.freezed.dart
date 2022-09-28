@@ -20,8 +20,8 @@ mixin _$NWorthState {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function() error,
-    required TResult Function(HistoricalNWorthData historicalNetWorthData,
-            AssetsLiabilitiesHoldings holdings)
+    required TResult Function(
+            HistoricalNWorthData historicalNetWorthData, Holdings holdings)
         loaded,
   }) =>
       throw _privateConstructorUsedError;
@@ -29,8 +29,8 @@ mixin _$NWorthState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function()? error,
-    TResult Function(HistoricalNWorthData historicalNetWorthData,
-            AssetsLiabilitiesHoldings holdings)?
+    TResult Function(
+            HistoricalNWorthData historicalNetWorthData, Holdings holdings)?
         loaded,
   }) =>
       throw _privateConstructorUsedError;
@@ -38,8 +38,8 @@ mixin _$NWorthState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function()? error,
-    TResult Function(HistoricalNWorthData historicalNetWorthData,
-            AssetsLiabilitiesHoldings holdings)?
+    TResult Function(
+            HistoricalNWorthData historicalNetWorthData, Holdings holdings)?
         loaded,
     required TResult orElse(),
   }) =>
@@ -124,8 +124,8 @@ class _$Loading implements Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function() error,
-    required TResult Function(HistoricalNWorthData historicalNetWorthData,
-            AssetsLiabilitiesHoldings holdings)
+    required TResult Function(
+            HistoricalNWorthData historicalNetWorthData, Holdings holdings)
         loaded,
   }) {
     return loading();
@@ -136,8 +136,8 @@ class _$Loading implements Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function()? error,
-    TResult Function(HistoricalNWorthData historicalNetWorthData,
-            AssetsLiabilitiesHoldings holdings)?
+    TResult Function(
+            HistoricalNWorthData historicalNetWorthData, Holdings holdings)?
         loaded,
   }) {
     return loading?.call();
@@ -148,8 +148,8 @@ class _$Loading implements Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function()? error,
-    TResult Function(HistoricalNWorthData historicalNetWorthData,
-            AssetsLiabilitiesHoldings holdings)?
+    TResult Function(
+            HistoricalNWorthData historicalNetWorthData, Holdings holdings)?
         loaded,
     required TResult orElse(),
   }) {
@@ -238,8 +238,8 @@ class _$Error implements Error {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function() error,
-    required TResult Function(HistoricalNWorthData historicalNetWorthData,
-            AssetsLiabilitiesHoldings holdings)
+    required TResult Function(
+            HistoricalNWorthData historicalNetWorthData, Holdings holdings)
         loaded,
   }) {
     return error();
@@ -250,8 +250,8 @@ class _$Error implements Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function()? error,
-    TResult Function(HistoricalNWorthData historicalNetWorthData,
-            AssetsLiabilitiesHoldings holdings)?
+    TResult Function(
+            HistoricalNWorthData historicalNetWorthData, Holdings holdings)?
         loaded,
   }) {
     return error?.call();
@@ -262,8 +262,8 @@ class _$Error implements Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function()? error,
-    TResult Function(HistoricalNWorthData historicalNetWorthData,
-            AssetsLiabilitiesHoldings holdings)?
+    TResult Function(
+            HistoricalNWorthData historicalNetWorthData, Holdings holdings)?
         loaded,
     required TResult orElse(),
   }) {
@@ -316,9 +316,7 @@ abstract class Error implements NWorthState {
 abstract class _$$LoadedCopyWith<$Res> {
   factory _$$LoadedCopyWith(_$Loaded value, $Res Function(_$Loaded) then) =
       __$$LoadedCopyWithImpl<$Res>;
-  $Res call(
-      {HistoricalNWorthData historicalNetWorthData,
-      AssetsLiabilitiesHoldings holdings});
+  $Res call({HistoricalNWorthData historicalNetWorthData, Holdings holdings});
 }
 
 /// @nodoc
@@ -343,7 +341,7 @@ class __$$LoadedCopyWithImpl<$Res> extends _$NWorthStateCopyWithImpl<$Res>
       holdings: holdings == freezed
           ? _value.holdings
           : holdings // ignore: cast_nullable_to_non_nullable
-              as AssetsLiabilitiesHoldings,
+              as Holdings,
     ));
   }
 }
@@ -357,7 +355,7 @@ class _$Loaded implements Loaded {
   @override
   final HistoricalNWorthData historicalNetWorthData;
   @override
-  final AssetsLiabilitiesHoldings holdings;
+  final Holdings holdings;
 
   @override
   String toString() {
@@ -390,8 +388,8 @@ class _$Loaded implements Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function() error,
-    required TResult Function(HistoricalNWorthData historicalNetWorthData,
-            AssetsLiabilitiesHoldings holdings)
+    required TResult Function(
+            HistoricalNWorthData historicalNetWorthData, Holdings holdings)
         loaded,
   }) {
     return loaded(historicalNetWorthData, holdings);
@@ -402,8 +400,8 @@ class _$Loaded implements Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function()? error,
-    TResult Function(HistoricalNWorthData historicalNetWorthData,
-            AssetsLiabilitiesHoldings holdings)?
+    TResult Function(
+            HistoricalNWorthData historicalNetWorthData, Holdings holdings)?
         loaded,
   }) {
     return loaded?.call(historicalNetWorthData, holdings);
@@ -414,8 +412,8 @@ class _$Loaded implements Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function()? error,
-    TResult Function(HistoricalNWorthData historicalNetWorthData,
-            AssetsLiabilitiesHoldings holdings)?
+    TResult Function(
+            HistoricalNWorthData historicalNetWorthData, Holdings holdings)?
         loaded,
     required TResult orElse(),
   }) {
@@ -463,10 +461,10 @@ class _$Loaded implements Loaded {
 abstract class Loaded implements NWorthState {
   const factory Loaded(
       {required final HistoricalNWorthData historicalNetWorthData,
-      required final AssetsLiabilitiesHoldings holdings}) = _$Loaded;
+      required final Holdings holdings}) = _$Loaded;
 
   HistoricalNWorthData get historicalNetWorthData;
-  AssetsLiabilitiesHoldings get holdings;
+  Holdings get holdings;
   @JsonKey(ignore: true)
   _$$LoadedCopyWith<_$Loaded> get copyWith =>
       throw _privateConstructorUsedError;
