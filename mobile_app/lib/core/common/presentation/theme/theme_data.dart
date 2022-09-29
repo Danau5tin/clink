@@ -2,7 +2,7 @@ import 'package:clink_mobile_app/core/common/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-const _primaryColor = Color(0xff3747c8);
+const _primaryColor = Color(0xff4255f0);
 const _standardTextColor = Colors.black;
 final textTheme = GoogleFonts.interTextTheme();
 
