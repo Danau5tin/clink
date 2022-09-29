@@ -15,7 +15,7 @@ class GrowthChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final info = historicalNWorth.getLossGainInfo;
-    final operator = info.amount.value >= 0 ? '+' : '-';
+    final operator = info.amount.value >= 0 ? '+' : '';
     final color =  info.amount.value >= 0 ? Colors.green : Colors.red;
     return Container(
       decoration: BoxDecoration(

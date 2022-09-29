@@ -1,4 +1,5 @@
 import 'package:clink_mobile_app/core/common/data/repositories/sql_db/sql_database.dart';
+import 'package:clink_mobile_app/core/common/domain/misc/user_info_manager.dart';
 import 'package:clink_mobile_app/core/common/domain/misc/uuid_gen.dart';
 import 'package:clink_mobile_app/core/crashlytics/crashlytics_reporter.dart';
 import 'package:clink_mobile_app/core/feature_registration/abstract/feature_sl_reg.dart';
@@ -15,6 +16,7 @@ class NetWorthTrackerSlReg extends FeatureSlReg {
       () => NetWorthRepoLocalDb(
         uuidGen: instance.get<UUIDGen>(),
         dbWrap: instance.get<SqlDbWrapper>(),
+        userManager: instance.get<UserManager>(),
       ),
     );
 

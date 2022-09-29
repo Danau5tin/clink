@@ -22,5 +22,14 @@
   "asset_name": "Asset name",
   "liability_name": "Liability name",
   "current_balance": "Current balance",
-  "new_balance": "New balance"
+  "new_balance": "New balance",
+  "get_started": "Get started",
+  "manage_and_update_your_finances": "Manage and update your finances in one place",
+  "easily_track_your_progress": "Easily track your progress over time",
+  "choose_your_currency": "Choose your currency",
+  "continue": "Continue",
+  "tip_choose_your_daily_life_currency": "Tip: You should tap the currency which you use in your daily life.",
+  "add_an_account": "Add an account",
+  "input_name_and_balance_of_a_bank_account": "Tip: Input the name and balance of a bank account to keep track of.",
+  "this_is_your_dashboard": "Tip: This is your dashboard, after you update your finances a chart will show your progress here."
 }

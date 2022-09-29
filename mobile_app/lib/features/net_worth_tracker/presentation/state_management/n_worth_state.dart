@@ -6,6 +6,8 @@ part 'n_worth_state.freezed.dart';
 
 @freezed
 class NWorthState with _$NWorthState {
+  const factory NWorthState.empty() = Empty;
+
   const factory NWorthState.loading() = Loading;
 
   const factory NWorthState.error() = Error;

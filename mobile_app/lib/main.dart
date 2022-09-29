@@ -1,4 +1,5 @@
 import 'package:clink_mobile_app/core/common/data/repositories/sql_db/sql_database.dart';
+import 'package:clink_mobile_app/core/common/domain/repositories/key_value_local_storage.dart';
 import 'package:clink_mobile_app/core/common/presentation/circular_progress_bar.dart';
 import 'package:clink_mobile_app/core/common/presentation/errors/something_went_wrong_screen.dart';
 import 'package:clink_mobile_app/core/common/presentation/theme/remove_scroll_glow.dart';
@@ -8,28 +9,41 @@ import 'package:clink_mobile_app/core/feature_registration/service_locator.dart'
 import 'package:clink_mobile_app/core/navigation/route_generator.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/presentation/screens/net_worth_tracker_screen.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/presentation/state_management/n_worth_manager.dart';
+import 'package:clink_mobile_app/features/onboarding/subfeatures/carousel/presentation/screens/onboarding_screen.dart';
+import 'package:clink_mobile_app/features/onboarding/subfeatures/carousel/presentation/state_management/onboarding_manager.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
+import 'core/common/domain/misc/user_info_manager.dart';
+
 void main() async {
   setUpSL();
   WidgetsFlutterBinding.ensureInitialized();
   final dbInit = sl.get<SqlDbWrapper>().init();
-  await EasyLocalization.ensureInitialized();
+  final kValStoreInit = sl.get<KeyValueLocalStorage>().init();
   final envRet = sl.get<EnvVarsRetriever>();
   final envInit = envRet.init();
+  final localInit = EasyLocalization.ensureInitialized();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitDown,
     DeviceOrientation.portraitUp,
   ]);
+
   await envInit;
   await dbInit;
+  await kValStoreInit;
+  await localInit;
 
   final container = ProviderContainer();
-  await container.read(nWorthManagerProv.notifier).fetchNWData();
+  final alreadyOnboarded =
+      container.read(onboardingManProv.notifier).checkIfAlreadyOnboarded();
+  if (alreadyOnboarded) {
+    container.read(userManProv.notifier).init();
+    container.read(nWorthManagerProv.notifier).fetchNWData();
+  }
 
   await SentryFlutter.init(
     (options) {
@@ -66,15 +80,21 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         body: Consumer(
           builder: (context, ref, child) {
-            final nWorthState = ref.watch(nWorthManagerProv);
-            return nWorthState.when(
-              loading: () => const CircularProgressBar(),
-              error: () => const SomethingWentWrongScreen(),
-              loaded: (nWorthData, holdings) => NetWorthTrackerScreen(
-                historicalNWorthData: nWorthData,
-                holdings: holdings,
-              ),
-            );
+            return ref.watch(onboardingManProv).when(
+                  checking: () => const CircularProgressBar(),
+                  notOnboarded: () => const OnboardingScreen(),
+                  onboarded: () {
+                    final nWorthState = ref.watch(nWorthManagerProv);
+                    return nWorthState.maybeWhen(
+                      orElse: () => const CircularProgressBar(),
+                      error: () => const SomethingWentWrongScreen(),
+                      loaded: (nWorthData, holdings) => NetWorthTrackerScreen(
+                        historicalNWorthData: nWorthData,
+                        holdings: holdings,
+                      ),
+                    );
+                  },
+                );
           },
         ),
       ),

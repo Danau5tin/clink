@@ -1,4 +1,5 @@
 import 'package:clink_mobile_app/core/common/domain/entities/amount.dart';
+import 'package:clink_mobile_app/core/common/domain/misc/user_info_manager.dart';
 import 'package:clink_mobile_app/core/common/domain/misc/uuid_gen.dart';
 import 'package:clink_mobile_app/core/feature_registration/service_locator.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/add_update_item_instruction.dart';
@@ -27,7 +28,8 @@ final updateFinsManProv = StateNotifierProvider.autoDispose<
 class UpdateFinancialsManager extends StateNotifier<UpdateFinancialsState> {
   final NWorthManager nWorthManager;
   final NetWorthRepo netWorthRepo;
-  final UUIDGen uuidGen = sl.get<UUIDGen>();
+  final UUIDGen _uuidGen = sl.get<UUIDGen>();
+  final UserManager _userManager = sl.get<UserManager>();
 
   UpdateFinancialsManager({
     required this.nWorthManager,
@@ -60,8 +62,10 @@ class UpdateFinancialsManager extends StateNotifier<UpdateFinancialsState> {
           ),
         );
         return AmountPercentageInfo(
-          // TODO: Stop hardcoding currency
-          amount: Amount(currencyCode: 'GBP', value: newAmount),
+          amount: Amount(
+            currencyCode: _userManager.usersBaseCurrency,
+            value: newAmount,
+          ),
           percentageChange: _calculatePercChange(newAmount, originalAmount),
         );
       },
@@ -105,12 +109,11 @@ class UpdateFinancialsManager extends StateNotifier<UpdateFinancialsState> {
         final List<FinancialItem> newList = [
           ...updatedHoldings.financialItems,
           FinancialItem(
-            id: uuidGen.generate(),
+            id: _uuidGen.generate(),
             name: name,
-            // TODO: Stop hardcoding currency
             type: type,
             currentValue: Amount(
-              currencyCode: 'GBP',
+              currencyCode: _userManager.usersBaseCurrency,
               value: type.maybeWhen(
                 liability: () => value * -1,
                 orElse: () => value,
@@ -146,11 +149,12 @@ class UpdateFinancialsManager extends StateNotifier<UpdateFinancialsState> {
             instructs.add(instr);
           }
         }
-        // TODO: Stop hardcoding currency
+        final baseCurrency = _userManager.usersBaseCurrency;
         final newEntry = NetWorthEntry(
-          id: uuidGen.generate(),
-          assetsValue: Amount(currencyCode: 'GBP', value: assetValue),
-          liabilitiesValue: Amount(currencyCode: 'GBP', value: liabValue),
+          id: _uuidGen.generate(),
+          assetsValue: Amount(currencyCode: baseCurrency, value: assetValue),
+          liabilitiesValue:
+              Amount(currencyCode: baseCurrency, value: liabValue),
           dateTime: DateTime.now(),
         );
         final res = await netWorthRepo.updateFinancials(

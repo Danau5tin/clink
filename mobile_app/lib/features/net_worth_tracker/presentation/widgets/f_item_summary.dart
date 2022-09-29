@@ -1,3 +1,4 @@
+import 'package:clink_mobile_app/core/common/domain/misc/user_info_manager.dart';
 import 'package:clink_mobile_app/core/common/presentation/dynamic_sized_box.dart';
 import 'package:clink_mobile_app/core/common/presentation/light_rounded_container.dart';
 import 'package:clink_mobile_app/core/common/presentation/utils/cta_info.dart';
@@ -10,17 +11,21 @@ import 'package:clink_mobile_app/features/net_worth_tracker/presentation/widgets
 import 'package:flutter/material.dart';
 
 class FItemSummary extends StatelessWidget {
-  final NumberFormatter numberFormatter = sl.get<NumberFormatter>();
+  final NumberFormatter _numberFormatter = sl.get<NumberFormatter>();
+  final UserManager _userManager = sl.get<UserManager>();
+
   final FiType fItemType;
   final Holdings holdings;
   final CTAInfo? ctaInfo;
   final Function(FinancialItem)? onTap;
+  final String? currencyCode;
 
   FItemSummary({
     required this.fItemType,
     required this.holdings,
     this.ctaInfo,
     this.onTap,
+    this.currencyCode,
     Key? key,
   }) : super(key: key);
 
@@ -41,6 +46,7 @@ class FItemSummary extends StatelessWidget {
     double value,
   ) {
     final lView = ListView.separated(
+      padding: EdgeInsets.zero,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemCount: items.length,
@@ -52,7 +58,10 @@ class FItemSummary extends StatelessWidget {
       title: fItemType.toString(),
       topRightWidget: LightRoundedContainer.builtTopTitle(
         context,
-        numberFormatter.toSimpleCurrency(value),
+        _numberFormatter.toSimpleCurrency(
+          value,
+          currencyCode: currencyCode ?? _userManager.usersBaseCurrency,
+        ),
       ),
       child: Padding(
         padding: const EdgeInsets.only(top: 8),
@@ -75,10 +84,7 @@ class FItemSummary extends StatelessWidget {
   }
 
   StatelessWidget _buildTile(List<FinancialItem> items, int index) {
-    final tile = FinancialItemListTile(
-      fItemType: fItemType,
-      item: items[index],
-    );
+    final tile = FinancialItemListTile(item: items[index]);
     return onTap == null
         ? tile
         : GestureDetector(

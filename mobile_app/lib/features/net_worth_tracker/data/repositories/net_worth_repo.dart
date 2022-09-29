@@ -1,5 +1,6 @@
 import 'package:clink_mobile_app/core/common/data/repositories/sql_db/sql_database.dart';
 import 'package:clink_mobile_app/core/common/data/repositories/sql_db/table_helpers.dart';
+import 'package:clink_mobile_app/core/common/domain/misc/user_info_manager.dart';
 import 'package:clink_mobile_app/core/common/domain/misc/uuid_gen.dart';
 import 'package:clink_mobile_app/core/network/data_state/data_state.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/data/models/financial_item_model.dart';
@@ -17,10 +18,12 @@ import 'package:sqflite/sqflite.dart';
 class NetWorthRepoLocalDb implements NetWorthRepo {
   final SqlDbWrapper dbWrap;
   final UUIDGen uuidGen;
+  final UserManager userManager;
 
   NetWorthRepoLocalDb({
     required this.dbWrap,
     required this.uuidGen,
+    required this.userManager,
   });
 
   @override
@@ -44,7 +47,7 @@ class NetWorthRepoLocalDb implements NetWorthRepo {
     final entries = res
         .map(
           (e) =>
-              NetWorthEntryModel.fromSqlDb(e, 'GBP'), // TODO: Remove hardcoding
+              NetWorthEntryModel.fromSqlDb(e, userManager.usersBaseCurrency),
         )
         .toList();
     return HistoricalNWorthData(entries: entries);

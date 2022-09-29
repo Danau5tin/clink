@@ -1,8 +1,11 @@
 import 'package:clink_mobile_app/core/common/domain/entities/amount.dart';
+import 'package:clink_mobile_app/core/common/domain/misc/user_info_manager.dart';
 import 'package:clink_mobile_app/core/common/presentation/dynamic_amount_text.dart';
 import 'package:clink_mobile_app/core/common/presentation/dynamic_sized_box.dart';
 import 'package:clink_mobile_app/core/common/presentation/light_rounded_container.dart';
+import 'package:clink_mobile_app/core/feature_registration/service_locator.dart';
 import 'package:clink_mobile_app/core/translations/translation_provider.dart';
+import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/amount_precentage_info.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/fi_type.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/holdings.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/subfeatures/update_n_worth/presentation/state_management/update_financials_manager.dart';
@@ -13,7 +16,9 @@ class SummaryContainer extends StatelessWidget {
   final Holdings originalHoldings;
   final Holdings updatedHoldings;
 
-  const SummaryContainer({
+  final UserManager _userManager = sl.get<UserManager>();
+
+  SummaryContainer({
     required this.originalHoldings,
     required this.updatedHoldings,
     Key? key,
@@ -26,9 +31,9 @@ class SummaryContainer extends StatelessWidget {
       title: 'summary'.tr,
       topRightWidget: DynamicAmountText(
         amount: Amount(
-          currencyCode: 'GBP',
+          currencyCode: _userManager.usersBaseCurrency,
           value: updatedHoldings.totalValue,
-        ), // TODO: Stop hardcoding
+        ),
         overrideColor: updatedHoldings.totalValue == originalHoldings.totalValue
             ? Colors.grey
             : null,
@@ -51,7 +56,8 @@ class SummaryContainer extends StatelessWidget {
       builder: (context, ref, child) {
         final info =
             ref.read(updateFinsManProv.notifier).getUpdatedValueFor(fiType);
-        final changesMade = info.percentageChange != 0.0;
+        final percChange = _getPercentageChange(info);
+        final changesMade = percChange != 0.0;
         return Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -65,19 +71,29 @@ class SummaryContainer extends StatelessWidget {
                   ? Colors.grey
                   : fiType.maybeWhen(
                       liability: () =>
-                          info.percentageChange > 0 ? Colors.red : Colors.green,
+                          percChange > 0 ? Colors.red : Colors.green,
                       orElse: () =>
-                          info.percentageChange > 0 ? Colors.green : Colors.red,
+                          percChange > 0 ? Colors.green : Colors.red,
                     ),
               textStyle: Theme.of(context).textTheme.bodyText2,
               extraText: changesMade
-                  ? '(${info.percentageChange >= 0 ? '+' : ''}'
-                      '${info.percentageChange.toStringAsFixed(2)}%)'
+                  ? '(${percChange >= 0 ? '+' : ''}'
+                  '${percChange.toStringAsFixed(2)}%)'
                   : null,
             )
           ],
         );
       },
     );
+  }
+
+  double _getPercentageChange(AmountPercentageInfo info) {
+    if (info.percentageChange.isInfinite) {
+      return 100.0;
+    }
+    if (info.percentageChange.isNaN) {
+      return 0.0;
+    }
+    return info.percentageChange;
   }
 }
