@@ -8,12 +8,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 const _userIdKey = 'userId';
 const _baseCurrKey = 'baseCurr';
 
+const _defaultCurrency = 'GBP';
+
 final userManProv = StateNotifierProvider<UserManager, User?>(
-  (ref) => UserManager(
-    uuidGen: sl.get<UUIDGen>(),
-    kValLocalStorage: sl.get<KeyValueLocalStorage>(),
-    crashlyticsReporter: sl.get<CrashlyticsReporter>(),
-  ),
+  (ref) => sl.get<UserManager>(),
 );
 
 class UserManager extends StateNotifier<User?> {
@@ -45,4 +43,8 @@ class UserManager extends StateNotifier<User?> {
     await kValLocalStorage.saveString(_userIdKey, user.id);
     await kValLocalStorage.saveString(_baseCurrKey, user.baseCurrencyCode);
   }
+
+  User? get user => state;
+
+  String get usersBaseCurrency => user?.baseCurrencyCode ?? _defaultCurrency;
 }

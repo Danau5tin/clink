@@ -1,3 +1,4 @@
+import 'package:clink_mobile_app/core/common/domain/misc/user_info_manager.dart';
 import 'package:clink_mobile_app/core/common/presentation/dynamic_sized_box.dart';
 import 'package:clink_mobile_app/core/common/presentation/light_rounded_container.dart';
 import 'package:clink_mobile_app/core/common/presentation/utils/cta_info.dart';
@@ -10,7 +11,9 @@ import 'package:clink_mobile_app/features/net_worth_tracker/presentation/widgets
 import 'package:flutter/material.dart';
 
 class FItemSummary extends StatelessWidget {
-  final NumberFormatter numberFormatter = sl.get<NumberFormatter>();
+  final NumberFormatter _numberFormatter = sl.get<NumberFormatter>();
+  final UserManager _userManager = sl.get<UserManager>();
+
   final FiType fItemType;
   final Holdings holdings;
   final CTAInfo? ctaInfo;
@@ -55,10 +58,10 @@ class FItemSummary extends StatelessWidget {
       title: fItemType.toString(),
       topRightWidget: LightRoundedContainer.builtTopTitle(
         context,
-        numberFormatter.toSimpleCurrency(
+        _numberFormatter.toSimpleCurrency(
           value,
-          currencyCode: currencyCode ?? 'GBP',
-        ), // TODO: Stop hardcoding currency
+          currencyCode: currencyCode ?? _userManager.usersBaseCurrency,
+        ),
       ),
       child: Padding(
         padding: const EdgeInsets.only(top: 8),

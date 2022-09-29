@@ -85,10 +85,8 @@ class MyApp extends StatelessWidget {
                   notOnboarded: () => const OnboardingScreen(),
                   onboarded: () {
                     final nWorthState = ref.watch(nWorthManagerProv);
-                    return nWorthState.when(
-                      empty: () => const Center(child: Text('Nothing here')),
-                      // TODO: Provide an empty state?
-                      loading: () => const CircularProgressBar(),
+                    return nWorthState.maybeWhen(
+                      orElse: () => const CircularProgressBar(),
                       error: () => const SomethingWentWrongScreen(),
                       loaded: (nWorthData, holdings) => NetWorthTrackerScreen(
                         historicalNWorthData: nWorthData,

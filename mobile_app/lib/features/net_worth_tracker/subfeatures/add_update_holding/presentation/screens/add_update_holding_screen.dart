@@ -4,6 +4,7 @@ import 'package:clink_mobile_app/core/common/presentation/keypad/utils/keypad_en
 import 'package:clink_mobile_app/core/common/presentation/light_rounded_container.dart';
 import 'package:clink_mobile_app/core/common/presentation/standard_app_bar.dart';
 import 'package:clink_mobile_app/core/common/presentation/theme/colors.dart';
+import 'package:clink_mobile_app/core/common/presentation/tip_text.dart';
 import 'package:clink_mobile_app/core/translations/translation_provider.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/fi_type.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/financial_item.dart';
@@ -74,11 +75,7 @@ class _AddUpdateHoldingScreenState
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 if (_tipText != null) ...[
-                  Text(
-                    _tipText!,
-                    style: Theme.of(context).textTheme.caption,
-                    textAlign: TextAlign.center,
-                  ),
+                  TipText(text: _tipText!),
                   DynamicHSizedBox.xl(),
                 ],
                 _buildNameInput,

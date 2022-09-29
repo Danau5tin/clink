@@ -2,10 +2,12 @@ import 'package:clink_mobile_app/core/common/domain/misc/user_info_manager.dart'
 import 'package:clink_mobile_app/core/common/presentation/dynamic_sized_box.dart';
 import 'package:clink_mobile_app/core/common/presentation/light_rounded_container.dart';
 import 'package:clink_mobile_app/core/common/presentation/standard_app_bar.dart';
+import 'package:clink_mobile_app/core/common/presentation/tip_text.dart';
 import 'package:clink_mobile_app/core/translations/translation_provider.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/fi_type.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/subfeatures/add_update_holding/presentation/screens/add_update_holding_screen.dart';
 import 'package:clink_mobile_app/features/onboarding/navigation/onboarding_nav_handler.dart';
+import 'package:clink_mobile_app/features/onboarding/subfeatures/carousel/presentation/state_management/onboarding_manager.dart';
 import 'package:clink_mobile_app/features/onboarding/subfeatures/currency_select/presentation/widgets/currency_option_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -52,7 +54,7 @@ class _CurrencySelectScreenState extends State<CurrencySelectScreen> {
                 children: [
                   Center(child: _buildTitle(context)),
                   DynamicHSizedBox.xl(),
-                  _buildTipText(context),
+                  TipText(text: 'tip_choose_your_daily_life_currency'.tr),
                   DynamicHSizedBox.xl(),
                   Expanded(child: _buildCurrencyLView),
                   DynamicHSizedBox.l(),
@@ -73,14 +75,6 @@ class _CurrencySelectScreenState extends State<CurrencySelectScreen> {
     return Text(
       'choose_your_currency'.tr,
       style: Theme.of(context).textTheme.headline1,
-    );
-  }
-
-  Text _buildTipText(BuildContext context) {
-    return Text(
-      'tip_choose_your_daily_life_currency'.tr,
-      style: Theme.of(context).textTheme.caption,
-      textAlign: TextAlign.center,
     );
   }
 
@@ -115,10 +109,11 @@ class _CurrencySelectScreenState extends State<CurrencySelectScreen> {
           largeTitle: true,
         ),
         onTapOverride: (name, amount) {
-          /*
-           TODO: Create an original NWEntry and Account in db,
-              finish onboarding and nav to NWorthTrackerScreen
-           */
+          ref.read(onboardingManProv.notifier).onboardWithNewAccount(
+                name,
+                amount,
+              );
+          Navigator.popUntil(context, (route) => route.isFirst);
         },
       ),
     );

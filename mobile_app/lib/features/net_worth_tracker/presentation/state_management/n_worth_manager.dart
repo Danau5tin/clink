@@ -47,6 +47,12 @@ class NWorthManager extends StateNotifier<NWorthState> {
           holdings: updatedHoldings,
         );
       },
+      empty: () {
+        state = NWorthState.loaded(
+          historicalNetWorthData: HistoricalNWorthData(entries: [newEntry]),
+          holdings: updatedHoldings,
+        );
+      },
       orElse: () => crashlyticsReporter
           .reportMessage('Trying to update state when state is $state'),
     );

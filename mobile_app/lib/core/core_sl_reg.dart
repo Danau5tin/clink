@@ -1,5 +1,6 @@
 import 'package:clink_mobile_app/core/common/data/repositories/key_value_local_storage/key_value_local_storage.dart';
 import 'package:clink_mobile_app/core/common/data/repositories/sql_db/sql_database.dart';
+import 'package:clink_mobile_app/core/common/domain/misc/user_info_manager.dart';
 import 'package:clink_mobile_app/core/common/domain/misc/uuid_gen.dart';
 import 'package:clink_mobile_app/core/common/domain/repositories/key_value_local_storage.dart';
 import 'package:clink_mobile_app/core/common/presentation/utils/number_formatter.dart';
@@ -25,7 +26,9 @@ class CoreSlReg extends FeatureSlReg {
     );
 
     instance.registerLazySingleton<NumberFormatter>(
-      () => NumberFormatterImpl(),
+      () => NumberFormatterImpl(
+        userManager: instance.get<UserManager>(),
+      ),
     );
 
     instance.registerLazySingleton<UUIDGen>(
@@ -34,6 +37,14 @@ class CoreSlReg extends FeatureSlReg {
 
     instance.registerLazySingleton<KeyValueLocalStorage>(
       () => KeyValueLocalStorageImpl(),
+    );
+
+    instance.registerLazySingleton<UserManager>(
+      () => UserManager(
+        uuidGen: instance.get<UUIDGen>(),
+        kValLocalStorage: instance.get<KeyValueLocalStorage>(),
+        crashlyticsReporter: instance.get<CrashlyticsReporter>(),
+      ),
     );
   }
 }

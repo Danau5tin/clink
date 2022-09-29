@@ -1,4 +1,5 @@
 import 'package:clink_mobile_app/core/common/presentation/dynamic_sized_box.dart';
+import 'package:clink_mobile_app/core/common/presentation/tip_text.dart';
 import 'package:clink_mobile_app/core/translations/translation_provider.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/holdings.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/fi_type.dart';
@@ -41,7 +42,14 @@ class NetWorthTrackerScreen extends StatelessWidget {
               DynamicHSizedBox.s(),
               SizedBox(
                 height: mq.size.height * 0.29,
-                child: NWorthChart(historicalNWorth: historicalNWorthData),
+                child: historicalNWorthData.entries.length == 1
+                    ? Center(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: TipText(text: 'this_is_your_dashboard'.tr),
+                        ),
+                      )
+                    : NWorthChart(historicalNWorth: historicalNWorthData),
               ),
               _buildDynamicHSizedBox,
               _wrapPadding(_buildCTA(context)),

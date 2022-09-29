@@ -19,12 +19,13 @@ class HistoricalNWorthData {
   AmountPercentageInfo get getLossGainInfo {
     final valueChange =
         currentNWorth.totalNWorth.value - _entries.first.totalNWorth.value;
+    final percChange = currentNWorth.totalNWorth.value / valueChange;
     return AmountPercentageInfo(
       amount: Amount(
         currencyCode: currentNWorth.totalNWorth.currencyCode,
         value: valueChange,
       ),
-      percentageChange: currentNWorth.totalNWorth.value / valueChange,
+      percentageChange: percChange.isInfinite ? 0.0 : percChange,
     );
   }
 }

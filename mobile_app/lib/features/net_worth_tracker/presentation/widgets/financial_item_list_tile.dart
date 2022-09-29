@@ -28,8 +28,6 @@ class FinancialItemListTile extends StatelessWidget {
     );
   }
 
-  // TODO: Remove hardcoded images
-
   Widget get _buildImage {
     return Container(
       height: 50,
@@ -40,8 +38,8 @@ class FinancialItemListTile extends StatelessWidget {
           fit: BoxFit.fill,
           image: AssetImage(
             item.type.when(
-              account: () => 'assets/images/revolut.png',
-              physAsset: () => 'assets/images/computer.svg.png',
+              account: () => 'assets/images/cash.png',
+              physAsset: () => 'assets/images/asset.png',
               liability: () => 'assets/images/loan.png',
             ),
           ),

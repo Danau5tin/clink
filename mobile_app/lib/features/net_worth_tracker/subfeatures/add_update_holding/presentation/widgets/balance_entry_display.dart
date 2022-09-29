@@ -1,3 +1,4 @@
+import 'package:clink_mobile_app/core/common/domain/misc/user_info_manager.dart';
 import 'package:clink_mobile_app/core/common/presentation/light_rounded_container.dart';
 import 'package:clink_mobile_app/core/common/presentation/theme/colors.dart';
 import 'package:clink_mobile_app/core/common/presentation/utils/number_formatter.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/material.dart';
 
 class BalanceEntryDisplay extends StatelessWidget {
   final NumberFormatter _numberFormatter = sl.get<NumberFormatter>();
+  final UserManager _userManager = sl.get<UserManager>();
 
   final String entry;
   final String title;
@@ -48,7 +50,7 @@ class BalanceEntryDisplay extends StatelessWidget {
           padding: const EdgeInsets.all(8),
           borderRadius: 16,
           child: Text(
-            'GBP',
+            _userManager.usersBaseCurrency,
             style: Theme.of(context)
                 .textTheme
                 .bodyText1!
