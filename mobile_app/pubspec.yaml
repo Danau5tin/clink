@@ -1,15 +1,17 @@
 name: clink_mobile_app
 description: Cross platform mobile app
 publish_to: 'none'
-version: 1.0.0+1
+version: 1.1.0+1
 
 environment:
   sdk: '>=2.17.1 <3.0.0'
 
 dependencies:
   carousel_slider: ^4.1.1
+  cloud_firestore: ^3.5.0
   cupertino_icons: ^1.0.5
   easy_localization: ^3.0.1
+  firebase_core: ^1.24.0
   flutter:
     sdk: flutter
   flutter_dotenv: ^5.0.2

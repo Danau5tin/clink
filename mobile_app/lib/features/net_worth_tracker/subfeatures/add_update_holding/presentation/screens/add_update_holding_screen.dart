@@ -33,6 +33,9 @@ class AddUpdateHoldingScreen extends ConsumerStatefulWidget {
 class _AddUpdateHoldingScreenState
     extends ConsumerState<AddUpdateHoldingScreen> {
   late final TextEditingController _controller;
+  late final FocusNode _focusNode;
+
+  bool _textFieldHasFocus = false;
 
   FiType get _type => widget.args.type;
 
@@ -49,6 +52,14 @@ class _AddUpdateHoldingScreenState
   void initState() {
     super.initState();
     _controller = TextEditingController(text: _itemToBeUpdated?.name);
+    _focusNode = FocusNode();
+
+    _focusNode.addListener(() {
+      setState(() {
+        _textFieldHasFocus = _focusNode.hasFocus;
+      });
+    });
+
     if (_itemToBeUpdated != null) {
       ref
           .read(keypadHandlerProv.notifier)
@@ -60,63 +71,69 @@ class _AddUpdateHoldingScreenState
   void dispose() {
     super.dispose();
     _controller.dispose();
+    _focusNode.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: _replacementAppBar ?? _buildAppbar(context),
-      body: Consumer(
-        builder: (context, ref, child) {
-          final keypadEntry = ref.watch(keypadHandlerProv);
-          return Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                if (_tipText != null) ...[
-                  TipText(text: _tipText!),
-                  DynamicHSizedBox.xl(),
+    return GestureDetector(
+      onTap: () => _focusNode.unfocus(),
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        appBar: _replacementAppBar ?? _buildAppbar(context),
+        body: Consumer(
+          builder: (context, ref, child) {
+            final keypadEntry = ref.watch(keypadHandlerProv);
+            return Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  if (_tipText != null) ...[
+                    TipText(text: _tipText!),
+                    DynamicHSizedBox.xl(),
+                  ],
+                  _buildNameInput,
+                  const Spacer(),
+                  BalanceEntryDisplay(
+                    entry: keypadEntry,
+                    title: _itemToBeUpdated == null
+                        ? 'current_balance'.tr
+                        : 'new_balance'.tr,
+                    entryColor: _type.maybeWhen(
+                      liability: () => Colors.red,
+                      orElse: () => null,
+                    ),
+                    prefix: _type.maybeWhen(
+                      liability: () => '-',
+                      orElse: () => null,
+                    ),
+                  ),
+                  const Spacer(),
+                  Expanded(
+                    flex: 6,
+                    child: Keypad(
+                      onTap:
+                          ref.read(keypadHandlerProv.notifier).processNewInput,
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () => _onCTATap(ref, keypadEntry),
+                    child: Text(
+                      _itemToBeUpdated == null
+                          ? _type.when(
+                              account: () => 'add_new_account'.tr,
+                              physAsset: () => 'add_new_asset'.tr,
+                              liability: () => 'add_new_liability'.tr,
+                            )
+                          : _getUpdateTxt,
+                    ),
+                  )
                 ],
-                _buildNameInput,
-                const Spacer(),
-                BalanceEntryDisplay(
-                  entry: keypadEntry,
-                  title: _itemToBeUpdated == null
-                      ? 'current_balance'.tr
-                      : 'new_balance'.tr,
-                  entryColor: _type.maybeWhen(
-                    liability: () => Colors.red,
-                    orElse: () => null,
-                  ),
-                  prefix: _type.maybeWhen(
-                    liability: () => '-',
-                    orElse: () => null,
-                  ),
-                ),
-                const Spacer(),
-                Expanded(
-                  flex: 6,
-                  child: Keypad(
-                    onTap: ref.read(keypadHandlerProv.notifier).processNewInput,
-                  ),
-                ),
-                ElevatedButton(
-                  onPressed: () => _onCTATap(ref, keypadEntry),
-                  child: Text(
-                    _itemToBeUpdated == null
-                        ? _type.when(
-                            account: () => 'add_new_account'.tr,
-                            physAsset: () => 'add_new_asset'.tr,
-                            liability: () => 'add_new_liability'.tr,
-                          )
-                        : _getUpdateTxt,
-                  ),
-                )
-              ],
-            ),
-          );
-        },
+              ),
+            );
+          },
+        ),
       ),
     );
   }
@@ -166,8 +183,28 @@ class _AddUpdateHoldingScreenState
     return LightRoundedContainer(
       padding: const EdgeInsets.symmetric(horizontal: 12),
       child: TextField(
+        focusNode: _focusNode,
         controller: _controller,
         decoration: InputDecoration(
+          suffixIcon: _textFieldHasFocus
+              ? Padding(
+                  padding: const EdgeInsets.only(top: 6, bottom: 6, left: 8),
+                  child: GestureDetector(
+                    onTap: () => _focusNode.unfocus(),
+                    child: Container(
+                      padding: EdgeInsets.zero,
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).primaryColor,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: const Icon(
+                        Icons.done,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                )
+              : null,
           border: InputBorder.none,
           label: Text(
             _type.when(

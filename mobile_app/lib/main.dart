@@ -12,12 +12,14 @@ import 'package:clink_mobile_app/features/net_worth_tracker/presentation/state_m
 import 'package:clink_mobile_app/features/onboarding/subfeatures/carousel/presentation/screens/onboarding_screen.dart';
 import 'package:clink_mobile_app/features/onboarding/subfeatures/carousel/presentation/state_management/onboarding_manager.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 import 'core/common/domain/misc/user_info_manager.dart';
+import 'firebase_options.dart';
 
 void main() async {
   setUpSL();
@@ -31,11 +33,15 @@ void main() async {
     DeviceOrientation.portraitDown,
     DeviceOrientation.portraitUp,
   ]);
+  final firebaseInit = Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   await envInit;
   await dbInit;
   await kValStoreInit;
   await localInit;
+  await firebaseInit;
 
   final container = ProviderContainer();
   final alreadyOnboarded =

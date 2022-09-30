@@ -1,5 +1,6 @@
 import 'package:clink_mobile_app/core/core_sl_reg.dart';
 import 'package:clink_mobile_app/core/feature_registration/navigation_sl_reg.dart';
+import 'package:clink_mobile_app/features/feedback/feedback_sl_reg.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/net_worth_tracker_sl_reg.dart';
 import 'package:get_it/get_it.dart';
 
@@ -11,6 +12,7 @@ final List<FeatureSlReg> _featuresToRegAtStartup = [
   CoreSlReg(),
   NavigationSlReg(),
   NetWorthTrackerSlReg(),
+  FeedbackSlReg(),
 ];
 
 void setUpSL() {
