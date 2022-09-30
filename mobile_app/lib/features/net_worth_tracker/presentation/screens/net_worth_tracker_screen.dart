@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:clink_mobile_app/core/common/presentation/dynamic_sized_box.dart';
 import 'package:clink_mobile_app/core/common/presentation/tip_text.dart';
 import 'package:clink_mobile_app/core/translations/translation_provider.dart';
@@ -89,7 +90,10 @@ class NetWorthTrackerScreen extends StatelessWidget {
         context,
         FeedbackScreen.viewPath,
       ),
-      child: Text('give_feedback_features'.tr),
+      child: AutoSizeText(
+        'give_feedback_features'.tr,
+        maxLines: 1,
+      ),
     );
   }
 
