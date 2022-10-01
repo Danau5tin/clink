@@ -17,10 +17,36 @@ class HistoricalNWorthData {
 
   List<NetWorthEntry> get entries => [..._entries];
 
-  AmountPercentageInfo get getLossGainInfo {
+  AmountPercentageInfo getLossGainInfoFrom(DateTime startDate) {
+    if (entries.isEmpty) {
+      return AmountPercentageInfo(
+        amount: Amount(
+          currencyCode: currentNWorth.totalNWorth.currencyCode,
+          value: 0.0,
+        ),
+        percentageChange: 0.0,
+      );
+    }
+
+    bool isFirst = false;
+    late NetWorthEntry comparableEntry;
+    if (startDate.isBefore(entries.first.dateTime)) {
+      comparableEntry = _entries.first;
+      isFirst = true;
+    } else {
+      for (var entry in _entries) {
+        if (!entry.dateTime.isBefore(startDate)) {
+          comparableEntry = entry;
+          break;
+        }
+      }
+    }
+
     final valueChange =
-        currentNWorth.totalNWorth.value - _entries.first.totalNWorth.value;
-    final percChange = (currentNWorth.totalNWorth.value / valueChange) * 100;
+        currentNWorth.totalNWorth.value - comparableEntry.totalNWorth.value;
+    final percChange = isFirst
+        ? 100.0
+        : (valueChange / comparableEntry.totalNWorth.value) * 100;
     return AmountPercentageInfo(
       amount: Amount(
         currencyCode: currentNWorth.totalNWorth.currencyCode,
@@ -51,7 +77,7 @@ class HistoricalNWorthData {
       );
       emptyEntries.add(emptyEntry);
       workingDate = workingDate.add(const Duration(days: 1));
-      emptyId ++;
+      emptyId++;
     }
 
     return [...emptyEntries, ...entries];

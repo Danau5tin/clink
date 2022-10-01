@@ -39,5 +39,9 @@
   "give_feedback_features": "Donner des commentaires/demandes de fonctionnalités",
   "email_optional": "Votre email (facultif)",
   "success_!": "Succès!",
-  "thank_you_we_will_take_a_look_shortly": "Vos commentaires sont vraiment appréciés chez Clink et toute notre équipe lira ce que vous avez envoyé dans les prochaines heures.\n\nComme les commentaires sont ce qui guide Clink dans son voyage, ce que vous avez écrit est extrêmement important pour nous, alors veuillez accepter notre énorme merci pour nous avoir fait part de vos réflexions, et si jamais vous avez d'autres idées, vous savez quoi faire !"
+  "thank_you_we_will_take_a_look_shortly": "Vos commentaires sont vraiment appréciés chez Clink et toute notre équipe lira ce que vous avez envoyé dans les prochaines heures.\n\nComme les commentaires sont ce qui guide Clink dans son voyage, ce que vous avez écrit est extrêmement important pour nous, alors veuillez accepter notre énorme merci pour nous avoir fait part de vos réflexions, et si jamais vous avez d'autres idées, vous savez quoi faire !",
+  "day": "Jour",
+  "year": "An",
+  "month": "Mois",
+  "week": "Semaine"
 }

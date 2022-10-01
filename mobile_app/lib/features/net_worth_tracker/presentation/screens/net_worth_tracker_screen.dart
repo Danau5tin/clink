@@ -9,7 +9,8 @@ import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/hist
 import 'package:clink_mobile_app/features/net_worth_tracker/navigation/net_worth_tracker_nav_handler.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/presentation/widgets/current_n_worth_display.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/presentation/widgets/f_item_summary.dart';
-import 'package:clink_mobile_app/features/net_worth_tracker/presentation/widgets/n_worth_chart.dart';
+import 'package:clink_mobile_app/features/net_worth_tracker/subfeatures/net_worth_chart/presentation/widgets/n_worth_chart.dart';
+import 'package:clink_mobile_app/features/net_worth_tracker/subfeatures/net_worth_chart/presentation/widgets/time_period_row.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/subfeatures/update_n_worth/presentation/screens/update_financials_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -53,6 +54,8 @@ class NetWorthTrackerScreen extends StatelessWidget {
                       )
                     : NWorthChart(historicalNWorth: historicalNWorthData),
               ),
+              _buildDynamicHSizedBox,
+              _wrapPadding(const TimePeriodRow()),
               _buildDynamicHSizedBox,
               _wrapPadding(_buildUpdateCTA(context)),
               _buildDynamicHSizedBox,

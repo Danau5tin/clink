@@ -39,5 +39,9 @@
   "give_feedback_features": "Give feedback/feature requests",
   "email_optional": "Your email (optional)",
   "success_!": "Success!",
-  "thank_you_we_will_take_a_look_shortly": "Your feedback is genuinely valued here at Clink and our entire team will be reading what you have sent within the next few hours.\n\nAs feedback is what guides Clink on it's journey, what you have written is incredibly important to us, so please accept our massive thank you for letting us know your thoughts, and if you ever get any more ideas, you know what to do!"
+  "thank_you_we_will_take_a_look_shortly": "Your feedback is genuinely valued here at Clink and our entire team will be reading what you have sent within the next few hours.\n\nAs feedback is what guides Clink on it's journey, what you have written is incredibly important to us, so please accept our massive thank you for letting us know your thoughts, and if you ever get any more ideas, you know what to do!",
+  "day": "Day",
+  "year": "Year",
+  "month": "Month",
+  "week": "Week"
 }

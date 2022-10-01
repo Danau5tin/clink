@@ -1,12 +1,14 @@
 import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/historical_net_worth.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/net_worth_entry.dart';
+import 'package:clink_mobile_app/features/net_worth_tracker/subfeatures/net_worth_chart/presentation/state_management/net_worth_chart_manager.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 import 'n_w_tooltip_container.dart';
 
-class NWorthChart extends StatelessWidget {
+class NWorthChart extends ConsumerWidget {
   final HistoricalNWorthData historicalNWorth;
 
   const NWorthChart({
@@ -15,15 +17,8 @@ class NWorthChart extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final startDate = DateTime(2022, 9, 20);
-    /*
-        TODO: Start date to be provided by a manager
-          - Create row with widgets (1D, 1W, 1M, etc..)
-          - Create manager which has a DateTime as its state
-          - Have this chart listen to the state for the startDate
-          - Have the GrowthChip listen to the state to dynamically adjust the % change
-     */
+  Widget build(BuildContext context, WidgetRef ref) {
+    final startDate = ref.watch(nWorthChartManProv).relevantDate;
     final entries =
         historicalNWorth.allEntriesWithEmptiesIfNeededFrom(startDate);
 
