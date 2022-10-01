@@ -12,7 +12,7 @@ class NetWorthTrackerNavHandler extends FeatureNavHandler {
   Widget? getScreenForPath(String remainingPath, args) {
     switch (remainingPath) {
       case 'update':
-        return const UpdateFinancialsScreen();
+        return UpdateFinancialsScreen();
       case 'addUpdateHolding' :{
         if (args is AddUpdateHoldingScreenArgs) {
           return AddUpdateHoldingScreen(args: args);

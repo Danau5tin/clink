@@ -1,3 +1,5 @@
+import 'package:clink_mobile_app/core/analytics_crashlytics/analytics_reporter.dart';
+import 'package:clink_mobile_app/core/feature_registration/service_locator.dart';
 import 'package:clink_mobile_app/features/onboarding/subfeatures/carousel/presentation/widgets/carousel_utils/carousel_item.dart';
 import 'package:clink_mobile_app/features/onboarding/subfeatures/carousel/presentation/widgets/mock_onboarding_items_column.dart';
 import 'package:clink_mobile_app/features/onboarding/subfeatures/currency_select/presentation/screens/currency_select_screen.dart';
@@ -46,11 +48,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             Padding(
               padding: _buildHorizPadding,
               child: ElevatedButton(
-                onPressed: () => Navigator.pushNamed(
-                  context,
-                  CurrencySelectScreen.viewPath,
+                onPressed: () {
+                  Navigator.pushNamed(
+                    context,
+                    CurrencySelectScreen.viewPath,
                     arguments: usersPredictedCurrency,
-                ),
+                  );
+                  sl.get<AnalyticsReporter>().trackEvent(
+                        'carousel_get_started_tapped',
+                      );
+                },
                 child: Text('get_started'.tr),
               ),
             ),

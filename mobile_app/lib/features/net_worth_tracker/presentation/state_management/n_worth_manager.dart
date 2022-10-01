@@ -1,4 +1,4 @@
-import 'package:clink_mobile_app/core/crashlytics/crashlytics_reporter.dart';
+import 'package:clink_mobile_app/core/analytics_crashlytics/crashlytics_reporter.dart';
 import 'package:clink_mobile_app/core/feature_registration/service_locator.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/historical_net_worth.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/holdings.dart';

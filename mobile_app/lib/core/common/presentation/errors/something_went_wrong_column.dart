@@ -1,3 +1,4 @@
+import 'package:clink_mobile_app/core/common/presentation/go_back_button.dart';
 import 'package:clink_mobile_app/core/translations/translation_provider.dart';
 import 'package:clink_mobile_app/core/common/presentation/dynamic_sized_box.dart';
 import 'package:flutter/cupertino.dart';
@@ -31,11 +32,7 @@ class SomethingWentWrongColumn extends StatelessWidget {
             ),
           ),
           DynamicHSizedBox.xxl(),
-          ElevatedButton.icon(
-            onPressed: () => Navigator.pop(context),
-            icon: const Icon(CupertinoIcons.arrow_turn_up_left),
-            label: Text('go_back'.tr),
-          )
+          const GoBackButton()
         ],
       ),
     );

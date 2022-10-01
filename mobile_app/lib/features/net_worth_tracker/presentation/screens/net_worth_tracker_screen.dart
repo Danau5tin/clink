@@ -1,13 +1,18 @@
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:clink_mobile_app/core/analytics_crashlytics/analytics_reporter.dart';
 import 'package:clink_mobile_app/core/common/presentation/dynamic_sized_box.dart';
 import 'package:clink_mobile_app/core/common/presentation/tip_text.dart';
+import 'package:clink_mobile_app/core/feature_registration/service_locator.dart';
 import 'package:clink_mobile_app/core/translations/translation_provider.dart';
+import 'package:clink_mobile_app/features/feedback/presentation/screens/feedback_screen.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/holdings.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/fi_type.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/historical_net_worth.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/navigation/net_worth_tracker_nav_handler.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/presentation/widgets/current_n_worth_display.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/presentation/widgets/f_item_summary.dart';
-import 'package:clink_mobile_app/features/net_worth_tracker/presentation/widgets/n_worth_chart.dart';
+import 'package:clink_mobile_app/features/net_worth_tracker/subfeatures/net_worth_chart/presentation/widgets/n_worth_chart.dart';
+import 'package:clink_mobile_app/features/net_worth_tracker/subfeatures/net_worth_chart/presentation/widgets/time_period_row.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/subfeatures/update_n_worth/presentation/screens/update_financials_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -15,10 +20,12 @@ class NetWorthTrackerScreen extends StatelessWidget {
   static const String viewPath =
       '${NetWorthTrackerNavHandler.startingPath}/dash';
 
+  final AnalyticsReporter _analyticsReporter = sl.get<AnalyticsReporter>();
+
   final HistoricalNWorthData historicalNWorthData;
   final Holdings holdings;
 
-  const NetWorthTrackerScreen({
+  NetWorthTrackerScreen({
     required this.historicalNWorthData,
     required this.holdings,
     Key? key,
@@ -52,7 +59,11 @@ class NetWorthTrackerScreen extends StatelessWidget {
                     : NWorthChart(historicalNWorth: historicalNWorthData),
               ),
               _buildDynamicHSizedBox,
-              _wrapPadding(_buildCTA(context)),
+              _wrapPadding(const TimePeriodRow()),
+              _buildDynamicHSizedBox,
+              _wrapPadding(_buildUpdateCTA(context)),
+              _buildDynamicHSizedBox,
+              _wrapPadding(_buildFeedbackCTA(context)),
               _buildDynamicHSizedBox,
               _buildSummary(const FiType.account()),
               _buildDynamicHSizedBox,
@@ -70,13 +81,32 @@ class NetWorthTrackerScreen extends StatelessWidget {
   Widget _buildSummary(FiType type) =>
       _wrapPadding(FItemSummary(fItemType: type, holdings: holdings));
 
-  ElevatedButton _buildCTA(BuildContext context) {
+  ElevatedButton _buildUpdateCTA(BuildContext context) {
     return ElevatedButton(
-      onPressed: () => Navigator.pushNamed(
-        context,
-        UpdateFinancialsScreen.viewPath,
-      ),
+      onPressed: () {
+        Navigator.pushNamed(
+          context,
+          UpdateFinancialsScreen.viewPath,
+        );
+        _analyticsReporter.trackEvent('update_financials_tapped');
+      },
       child: Text('update_financials'.tr),
+    );
+  }
+
+  ElevatedButton _buildFeedbackCTA(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () {
+        Navigator.pushNamed(
+          context,
+          FeedbackScreen.viewPath,
+        );
+        _analyticsReporter.trackEvent('give_feedback_tapped');
+      },
+      child: AutoSizeText(
+        'give_feedback_features'.tr,
+        maxLines: 1,
+      ),
     );
   }
 

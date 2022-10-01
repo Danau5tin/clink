@@ -31,5 +31,17 @@
   "tip_choose_your_daily_life_currency": "Tip: You should tap the currency which you use in your daily life.",
   "add_an_account": "Add an account",
   "input_name_and_balance_of_a_bank_account": "Tip: Input the name and balance of a bank account to keep track of.",
-  "this_is_your_dashboard": "Tip: This is your dashboard, after you update your finances a chart will show your progress here."
+  "this_is_your_dashboard": "Tip: This is your dashboard, after you update your finances a chart will show your progress here.",
+  "feedback_and_features": "Feedback and features",
+  "tell_us_how_to_be_valuable_to_you": "Tell us how this app can be more valuable to you and we will build what you need.",
+  "type_here": "Type here...",
+  "send_to_us": "Send to us",
+  "give_feedback_features": "Give feedback/feature requests",
+  "email_optional": "Your email (optional)",
+  "success_!": "Success!",
+  "thank_you_we_will_take_a_look_shortly": "Your feedback is genuinely valued here at Clink and our entire team will be reading what you have sent within the next few hours.\n\nAs feedback is what guides Clink on it's journey, what you have written is incredibly important to us, so please accept our massive thank you for letting us know your thoughts, and if you ever get any more ideas, you know what to do!",
+  "day": "Day",
+  "year": "Year",
+  "month": "Month",
+  "week": "Week"
 }

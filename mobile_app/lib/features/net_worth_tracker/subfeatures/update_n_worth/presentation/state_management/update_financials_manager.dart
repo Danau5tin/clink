@@ -1,3 +1,4 @@
+import 'package:clink_mobile_app/core/analytics_crashlytics/analytics_reporter.dart';
 import 'package:clink_mobile_app/core/common/domain/entities/amount.dart';
 import 'package:clink_mobile_app/core/common/domain/misc/user_info_manager.dart';
 import 'package:clink_mobile_app/core/common/domain/misc/uuid_gen.dart';
@@ -30,6 +31,7 @@ class UpdateFinancialsManager extends StateNotifier<UpdateFinancialsState> {
   final NetWorthRepo netWorthRepo;
   final UUIDGen _uuidGen = sl.get<UUIDGen>();
   final UserManager _userManager = sl.get<UserManager>();
+  final AnalyticsReporter _analytics = sl.get<AnalyticsReporter>();
 
   UpdateFinancialsManager({
     required this.nWorthManager,
@@ -129,7 +131,7 @@ class UpdateFinancialsManager extends StateNotifier<UpdateFinancialsState> {
     );
   }
 
-  Future<void> saveAllUpdates() async {
+  Future<void> saveAllUpdates({required String location}) async {
     await state.maybeWhen(
       initial: (originalHoldings, updatedHoldings, saving) async {
         state = (state as Initial).copyWith(saving: true);
@@ -137,6 +139,9 @@ class UpdateFinancialsManager extends StateNotifier<UpdateFinancialsState> {
         final List<AddUpdateItemInstruction> instructs = [];
         double assetValue = 0.0;
         double liabValue = 0.0;
+
+        int numOfAdds = 0;
+        int numOfUpdates = 0;
 
         for (var item in updatedHoldings.financialItems) {
           item.type.when(
@@ -147,8 +152,20 @@ class UpdateFinancialsManager extends StateNotifier<UpdateFinancialsState> {
           final instr = _getInstructionIfRequired(originalHoldings, item);
           if (instr != null) {
             instructs.add(instr);
+            instr.when(
+              add: (_) => numOfAdds++,
+              update: (_, __, ___) => numOfUpdates++,
+            );
           }
         }
+        _analytics.trackEvent(
+          'update_financials_save_tapped',
+          data: {
+            'num_adds': numOfAdds,
+            'num_updates': numOfUpdates,
+            'location': location,
+          },
+        );
         final baseCurrency = _userManager.usersBaseCurrency;
         final newEntry = NetWorthEntry(
           id: _uuidGen.generate(),

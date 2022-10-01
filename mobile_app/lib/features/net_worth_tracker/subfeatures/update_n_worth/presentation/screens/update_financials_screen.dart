@@ -1,9 +1,11 @@
+import 'package:clink_mobile_app/core/analytics_crashlytics/analytics_reporter.dart';
 import 'package:clink_mobile_app/core/common/presentation/circular_progress_bar.dart';
 import 'package:clink_mobile_app/core/common/presentation/dynamic_sized_box.dart';
 import 'package:clink_mobile_app/core/common/presentation/errors/something_went_wrong_column.dart';
 import 'package:clink_mobile_app/core/common/presentation/standard_app_bar.dart';
 import 'package:clink_mobile_app/core/common/presentation/theme/colors.dart';
 import 'package:clink_mobile_app/core/common/presentation/utils/cta_info.dart';
+import 'package:clink_mobile_app/core/feature_registration/service_locator.dart';
 import 'package:clink_mobile_app/core/translations/translation_provider.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/fi_type.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/financial_item.dart';
@@ -20,7 +22,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class UpdateFinancialsScreen extends ConsumerWidget {
   static const viewPath = '${NetWorthTrackerNavHandler.startingPath}/update';
 
-  const UpdateFinancialsScreen({
+  final AnalyticsReporter _analyticsReporter = sl.get<AnalyticsReporter>();
+
+  UpdateFinancialsScreen({
     Key? key,
   }) : super(key: key);
 
@@ -33,7 +37,10 @@ class UpdateFinancialsScreen extends ConsumerWidget {
         title: 'update_financials'.tr,
         actions: [
           TextButton(
-            onPressed: ref.read(updateFinsManProv.notifier).saveAllUpdates,
+            onPressed: () =>
+                ref.read(updateFinsManProv.notifier).saveAllUpdates(
+                      location: 'top_right',
+                    ),
             child: Text('save'.tr),
           )
         ],
@@ -84,7 +91,10 @@ class UpdateFinancialsScreen extends ConsumerWidget {
         saving
             ? const CircularProgressBar()
             : ElevatedButton(
-                onPressed: ref.read(updateFinsManProv.notifier).saveAllUpdates,
+                onPressed: () =>
+                    ref.read(updateFinsManProv.notifier).saveAllUpdates(
+                          location: 'bottom',
+                        ),
                 child: Text('save'.tr),
               ),
         _buildDynamicHSizedBox,
@@ -153,6 +163,10 @@ class UpdateFinancialsScreen extends ConsumerWidget {
       context,
       AddUpdateHoldingScreen.viewPath,
       arguments: AddUpdateHoldingScreenArgs(type: type, itemToBeUpdated: item),
+    );
+    _analyticsReporter.trackEvent(
+      item == null ? 'add_new_tapped' : 'update_existing_tapped',
+      data: {'type': type.toString()},
     );
   }
 

@@ -5,7 +5,7 @@ class StandardAppBar extends AppBar {
     super.key,
     required BuildContext context,
     bool largeTitle = false,
-    bool hideLeading = true,
+    bool hideLeading = false,
     String? title,
     List<Widget>? actions,
   }) : super(

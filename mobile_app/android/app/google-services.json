@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "756554441378",
+    "project_id": "clink-600aa",
+    "storage_bucket": "clink-600aa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:756554441378:android:7b51fa07dfff410f3c2dfb",
+        "android_client_info": {
+          "package_name": "com.austintechnologies.clink.clink_mobile_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "756554441378-ne7sidjmi7723q7jmonkg2jha4o42aoe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtEc4F-BBCIr0GrUCOTARdQ-OrqvMFdhI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "756554441378-ne7sidjmi7723q7jmonkg2jha4o42aoe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
