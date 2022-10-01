@@ -29,8 +29,7 @@ void main() {
 
     when(() => netWorthData.historicalNWorthData)
         .thenReturn(historicalNWorthData);
-    when(() => netWorthData.holdings)
-        .thenReturn(assetsLiabilitiesHoldings);
+    when(() => netWorthData.holdings).thenReturn(assetsLiabilitiesHoldings);
 
     nWorthManager = NWorthManager(
       netWorthRepo: netWorthRepo,
@@ -56,7 +55,8 @@ void main() {
       );
     });
 
-    test('should update state with error if failed and call analytics_crashlytics',
+    test(
+        'should update state with error if failed and call crashlytics',
         () async {
       // Arrange
       when(() => netWorthRepo.fetchNWorthData()).thenAnswer(

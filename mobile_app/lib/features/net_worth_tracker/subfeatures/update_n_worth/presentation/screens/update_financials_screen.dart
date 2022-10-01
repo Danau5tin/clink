@@ -91,9 +91,10 @@ class UpdateFinancialsScreen extends ConsumerWidget {
         saving
             ? const CircularProgressBar()
             : ElevatedButton(
-                onPressed: () => ref.read(updateFinsManProv.notifier).saveAllUpdates(
-                  location: 'bottom',
-                ),
+                onPressed: () =>
+                    ref.read(updateFinsManProv.notifier).saveAllUpdates(
+                          location: 'bottom',
+                        ),
                 child: Text('save'.tr),
               ),
         _buildDynamicHSizedBox,
