@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 const List<ChartTimePeriod> _availablePeriods = [
+  ChartTimePeriod.today(),
   ChartTimePeriod.oneWeek(),
   ChartTimePeriod.oneMonth(),
   ChartTimePeriod.threeMonths(),

@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ChartTimePeriod {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() today,
     required TResult Function() oneWeek,
     required TResult Function() oneMonth,
     required TResult Function() threeMonths,
@@ -27,6 +28,7 @@ mixin _$ChartTimePeriod {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? today,
     TResult Function()? oneWeek,
     TResult Function()? oneMonth,
     TResult Function()? threeMonths,
@@ -36,6 +38,7 @@ mixin _$ChartTimePeriod {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? today,
     TResult Function()? oneWeek,
     TResult Function()? oneMonth,
     TResult Function()? threeMonths,
@@ -46,6 +49,7 @@ mixin _$ChartTimePeriod {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(Today value) today,
     required TResult Function(OneWeek value) oneWeek,
     required TResult Function(OneMonth value) oneMonth,
     required TResult Function(ThreeMonths value) threeMonths,
@@ -55,6 +59,7 @@ mixin _$ChartTimePeriod {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(Today value)? today,
     TResult Function(OneWeek value)? oneWeek,
     TResult Function(OneMonth value)? oneMonth,
     TResult Function(ThreeMonths value)? threeMonths,
@@ -64,6 +69,7 @@ mixin _$ChartTimePeriod {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(Today value)? today,
     TResult Function(OneWeek value)? oneWeek,
     TResult Function(OneMonth value)? oneMonth,
     TResult Function(ThreeMonths value)? threeMonths,
@@ -89,6 +95,128 @@ class _$ChartTimePeriodCopyWithImpl<$Res>
   final ChartTimePeriod _value;
   // ignore: unused_field
   final $Res Function(ChartTimePeriod) _then;
+}
+
+/// @nodoc
+abstract class _$$TodayCopyWith<$Res> {
+  factory _$$TodayCopyWith(_$Today value, $Res Function(_$Today) then) =
+      __$$TodayCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$TodayCopyWithImpl<$Res> extends _$ChartTimePeriodCopyWithImpl<$Res>
+    implements _$$TodayCopyWith<$Res> {
+  __$$TodayCopyWithImpl(_$Today _value, $Res Function(_$Today) _then)
+      : super(_value, (v) => _then(v as _$Today));
+
+  @override
+  _$Today get _value => super._value as _$Today;
+}
+
+/// @nodoc
+
+class _$Today extends Today {
+  const _$Today() : super._();
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$Today);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() today,
+    required TResult Function() oneWeek,
+    required TResult Function() oneMonth,
+    required TResult Function() threeMonths,
+    required TResult Function() sixMonths,
+    required TResult Function() oneYear,
+  }) {
+    return today();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? today,
+    TResult Function()? oneWeek,
+    TResult Function()? oneMonth,
+    TResult Function()? threeMonths,
+    TResult Function()? sixMonths,
+    TResult Function()? oneYear,
+  }) {
+    return today?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? today,
+    TResult Function()? oneWeek,
+    TResult Function()? oneMonth,
+    TResult Function()? threeMonths,
+    TResult Function()? sixMonths,
+    TResult Function()? oneYear,
+    required TResult orElse(),
+  }) {
+    if (today != null) {
+      return today();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Today value) today,
+    required TResult Function(OneWeek value) oneWeek,
+    required TResult Function(OneMonth value) oneMonth,
+    required TResult Function(ThreeMonths value) threeMonths,
+    required TResult Function(SixMonths value) sixMonths,
+    required TResult Function(OneYear value) oneYear,
+  }) {
+    return today(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(Today value)? today,
+    TResult Function(OneWeek value)? oneWeek,
+    TResult Function(OneMonth value)? oneMonth,
+    TResult Function(ThreeMonths value)? threeMonths,
+    TResult Function(SixMonths value)? sixMonths,
+    TResult Function(OneYear value)? oneYear,
+  }) {
+    return today?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Today value)? today,
+    TResult Function(OneWeek value)? oneWeek,
+    TResult Function(OneMonth value)? oneMonth,
+    TResult Function(ThreeMonths value)? threeMonths,
+    TResult Function(SixMonths value)? sixMonths,
+    TResult Function(OneYear value)? oneYear,
+    required TResult orElse(),
+  }) {
+    if (today != null) {
+      return today(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class Today extends ChartTimePeriod {
+  const factory Today() = _$Today;
+  const Today._() : super._();
 }
 
 /// @nodoc
@@ -124,6 +252,7 @@ class _$OneWeek extends OneWeek {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() today,
     required TResult Function() oneWeek,
     required TResult Function() oneMonth,
     required TResult Function() threeMonths,
@@ -136,6 +265,7 @@ class _$OneWeek extends OneWeek {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? today,
     TResult Function()? oneWeek,
     TResult Function()? oneMonth,
     TResult Function()? threeMonths,
@@ -148,6 +278,7 @@ class _$OneWeek extends OneWeek {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? today,
     TResult Function()? oneWeek,
     TResult Function()? oneMonth,
     TResult Function()? threeMonths,
@@ -164,6 +295,7 @@ class _$OneWeek extends OneWeek {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(Today value) today,
     required TResult Function(OneWeek value) oneWeek,
     required TResult Function(OneMonth value) oneMonth,
     required TResult Function(ThreeMonths value) threeMonths,
@@ -176,6 +308,7 @@ class _$OneWeek extends OneWeek {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(Today value)? today,
     TResult Function(OneWeek value)? oneWeek,
     TResult Function(OneMonth value)? oneMonth,
     TResult Function(ThreeMonths value)? threeMonths,
@@ -188,6 +321,7 @@ class _$OneWeek extends OneWeek {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(Today value)? today,
     TResult Function(OneWeek value)? oneWeek,
     TResult Function(OneMonth value)? oneMonth,
     TResult Function(ThreeMonths value)? threeMonths,
@@ -241,6 +375,7 @@ class _$OneMonth extends OneMonth {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() today,
     required TResult Function() oneWeek,
     required TResult Function() oneMonth,
     required TResult Function() threeMonths,
@@ -253,6 +388,7 @@ class _$OneMonth extends OneMonth {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? today,
     TResult Function()? oneWeek,
     TResult Function()? oneMonth,
     TResult Function()? threeMonths,
@@ -265,6 +401,7 @@ class _$OneMonth extends OneMonth {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? today,
     TResult Function()? oneWeek,
     TResult Function()? oneMonth,
     TResult Function()? threeMonths,
@@ -281,6 +418,7 @@ class _$OneMonth extends OneMonth {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(Today value) today,
     required TResult Function(OneWeek value) oneWeek,
     required TResult Function(OneMonth value) oneMonth,
     required TResult Function(ThreeMonths value) threeMonths,
@@ -293,6 +431,7 @@ class _$OneMonth extends OneMonth {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(Today value)? today,
     TResult Function(OneWeek value)? oneWeek,
     TResult Function(OneMonth value)? oneMonth,
     TResult Function(ThreeMonths value)? threeMonths,
@@ -305,6 +444,7 @@ class _$OneMonth extends OneMonth {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(Today value)? today,
     TResult Function(OneWeek value)? oneWeek,
     TResult Function(OneMonth value)? oneMonth,
     TResult Function(ThreeMonths value)? threeMonths,
@@ -360,6 +500,7 @@ class _$ThreeMonths extends ThreeMonths {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() today,
     required TResult Function() oneWeek,
     required TResult Function() oneMonth,
     required TResult Function() threeMonths,
@@ -372,6 +513,7 @@ class _$ThreeMonths extends ThreeMonths {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? today,
     TResult Function()? oneWeek,
     TResult Function()? oneMonth,
     TResult Function()? threeMonths,
@@ -384,6 +526,7 @@ class _$ThreeMonths extends ThreeMonths {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? today,
     TResult Function()? oneWeek,
     TResult Function()? oneMonth,
     TResult Function()? threeMonths,
@@ -400,6 +543,7 @@ class _$ThreeMonths extends ThreeMonths {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(Today value) today,
     required TResult Function(OneWeek value) oneWeek,
     required TResult Function(OneMonth value) oneMonth,
     required TResult Function(ThreeMonths value) threeMonths,
@@ -412,6 +556,7 @@ class _$ThreeMonths extends ThreeMonths {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(Today value)? today,
     TResult Function(OneWeek value)? oneWeek,
     TResult Function(OneMonth value)? oneMonth,
     TResult Function(ThreeMonths value)? threeMonths,
@@ -424,6 +569,7 @@ class _$ThreeMonths extends ThreeMonths {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(Today value)? today,
     TResult Function(OneWeek value)? oneWeek,
     TResult Function(OneMonth value)? oneMonth,
     TResult Function(ThreeMonths value)? threeMonths,
@@ -479,6 +625,7 @@ class _$SixMonths extends SixMonths {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() today,
     required TResult Function() oneWeek,
     required TResult Function() oneMonth,
     required TResult Function() threeMonths,
@@ -491,6 +638,7 @@ class _$SixMonths extends SixMonths {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? today,
     TResult Function()? oneWeek,
     TResult Function()? oneMonth,
     TResult Function()? threeMonths,
@@ -503,6 +651,7 @@ class _$SixMonths extends SixMonths {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? today,
     TResult Function()? oneWeek,
     TResult Function()? oneMonth,
     TResult Function()? threeMonths,
@@ -519,6 +668,7 @@ class _$SixMonths extends SixMonths {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(Today value) today,
     required TResult Function(OneWeek value) oneWeek,
     required TResult Function(OneMonth value) oneMonth,
     required TResult Function(ThreeMonths value) threeMonths,
@@ -531,6 +681,7 @@ class _$SixMonths extends SixMonths {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(Today value)? today,
     TResult Function(OneWeek value)? oneWeek,
     TResult Function(OneMonth value)? oneMonth,
     TResult Function(ThreeMonths value)? threeMonths,
@@ -543,6 +694,7 @@ class _$SixMonths extends SixMonths {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(Today value)? today,
     TResult Function(OneWeek value)? oneWeek,
     TResult Function(OneMonth value)? oneMonth,
     TResult Function(ThreeMonths value)? threeMonths,
@@ -595,6 +747,7 @@ class _$OneYear extends OneYear {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() today,
     required TResult Function() oneWeek,
     required TResult Function() oneMonth,
     required TResult Function() threeMonths,
@@ -607,6 +760,7 @@ class _$OneYear extends OneYear {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? today,
     TResult Function()? oneWeek,
     TResult Function()? oneMonth,
     TResult Function()? threeMonths,
@@ -619,6 +773,7 @@ class _$OneYear extends OneYear {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? today,
     TResult Function()? oneWeek,
     TResult Function()? oneMonth,
     TResult Function()? threeMonths,
@@ -635,6 +790,7 @@ class _$OneYear extends OneYear {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(Today value) today,
     required TResult Function(OneWeek value) oneWeek,
     required TResult Function(OneMonth value) oneMonth,
     required TResult Function(ThreeMonths value) threeMonths,
@@ -647,6 +803,7 @@ class _$OneYear extends OneYear {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(Today value)? today,
     TResult Function(OneWeek value)? oneWeek,
     TResult Function(OneMonth value)? oneMonth,
     TResult Function(ThreeMonths value)? threeMonths,
@@ -659,6 +816,7 @@ class _$OneYear extends OneYear {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(Today value)? today,
     TResult Function(OneWeek value)? oneWeek,
     TResult Function(OneMonth value)? oneMonth,
     TResult Function(ThreeMonths value)? threeMonths,

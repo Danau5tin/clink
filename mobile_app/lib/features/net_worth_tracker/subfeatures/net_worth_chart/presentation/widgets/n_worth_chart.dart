@@ -18,7 +18,8 @@ class NWorthChart extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final startDate = ref.watch(nWorthChartManProv).relevantDate;
+    final timePeriod = ref.watch(nWorthChartManProv);
+    final startDate = timePeriod.relevantDate;
     final entries =
         historicalNWorth.allEntriesWithEmptiesIfNeededFrom(startDate);
 
@@ -26,7 +27,10 @@ class NWorthChart extends ConsumerWidget {
       plotAreaBorderWidth: 0,
       primaryXAxis: DateTimeAxis(
         isVisible: false,
-        minimum: startDate,
+        minimum: timePeriod.maybeWhen(
+          today: () => null,
+          orElse: () => startDate,
+        ),
         maximum: entries.last.dateTime,
       ),
       primaryYAxis: NumericAxis(isVisible: false),

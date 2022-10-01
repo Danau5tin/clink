@@ -7,6 +7,8 @@ part 'chart_time_period.freezed.dart';
 class ChartTimePeriod with _$ChartTimePeriod {
   const ChartTimePeriod._();
 
+  const factory ChartTimePeriod.today() = Today;
+
   const factory ChartTimePeriod.oneWeek() = OneWeek;
 
   const factory ChartTimePeriod.oneMonth() = OneMonth;
@@ -20,6 +22,7 @@ class ChartTimePeriod with _$ChartTimePeriod {
   DateTime get relevantDate {
     final now = DateTime.now();
     return when(
+      today: () => DateTime(now.year, now.month, now.day),
       oneWeek: () => now.subtract(const Duration(days: 7)),
       oneMonth: () => now.subtract(const Duration(days: 30)),
       threeMonths: () => now.subtract(const Duration(days: 90)),
@@ -31,6 +34,7 @@ class ChartTimePeriod with _$ChartTimePeriod {
   @override
   String toString() {
     return when(
+      today: () => '1${'day'.tr[0]}',
       oneWeek: () => '1${'week'.tr[0]}',
       oneMonth: () => '1${'month'.tr[0]}',
       threeMonths: () => '3${'month'.tr[0]}',

@@ -1,3 +1,4 @@
+import 'package:clink_mobile_app/core/analytics_crashlytics/analytics_reporter.dart';
 import 'package:clink_mobile_app/core/common/presentation/dynamic_sized_box.dart';
 import 'package:clink_mobile_app/core/common/presentation/keypad/keypad.dart';
 import 'package:clink_mobile_app/core/common/presentation/keypad/utils/keypad_entry_handler.dart';
@@ -5,6 +6,7 @@ import 'package:clink_mobile_app/core/common/presentation/light_rounded_containe
 import 'package:clink_mobile_app/core/common/presentation/standard_app_bar.dart';
 import 'package:clink_mobile_app/core/common/presentation/theme/colors.dart';
 import 'package:clink_mobile_app/core/common/presentation/tip_text.dart';
+import 'package:clink_mobile_app/core/feature_registration/service_locator.dart';
 import 'package:clink_mobile_app/core/translations/translation_provider.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/fi_type.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/financial_item.dart';
@@ -18,9 +20,11 @@ class AddUpdateHoldingScreen extends ConsumerStatefulWidget {
   static const viewPath =
       '${NetWorthTrackerNavHandler.startingPath}/addUpdateHolding';
 
+  final AnalyticsReporter _analyticsReporter = sl.get<AnalyticsReporter>();
+
   final AddUpdateHoldingScreenArgs args;
 
-  const AddUpdateHoldingScreen({
+   AddUpdateHoldingScreen({
     required this.args,
     Key? key,
   }) : super(key: key);
@@ -148,12 +152,14 @@ class _AddUpdateHoldingScreenState
     }
     if (_itemToBeUpdated == null) {
       ref.read(updateFinsManProv.notifier).addNewItem(name, value, _type);
+      widget._analyticsReporter.trackEvent('add_new_confirmed');
     } else {
       ref.read(updateFinsManProv.notifier).updateItem(
             _itemToBeUpdated!,
             name,
             value,
           );
+      widget._analyticsReporter.trackEvent('update_existing_confirmed');
     }
     Navigator.pop(context);
   }

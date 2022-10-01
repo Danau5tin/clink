@@ -50,7 +50,7 @@ class HistoricalNWorthData {
     return AmountPercentageInfo(
       amount: Amount(
         currencyCode: currentNWorth.totalNWorth.currencyCode,
-        value: valueChange,
+        value: isFirst? currentNWorth.totalNWorth.value :valueChange,
       ),
       percentageChange: percChange.isInfinite ? 0.0 : percChange,
     );

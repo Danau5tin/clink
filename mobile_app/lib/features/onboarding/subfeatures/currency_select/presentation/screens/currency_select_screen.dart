@@ -1,8 +1,10 @@
+import 'package:clink_mobile_app/core/analytics_crashlytics/analytics_reporter.dart';
 import 'package:clink_mobile_app/core/common/domain/misc/user_info_manager.dart';
 import 'package:clink_mobile_app/core/common/presentation/dynamic_sized_box.dart';
 import 'package:clink_mobile_app/core/common/presentation/light_rounded_container.dart';
 import 'package:clink_mobile_app/core/common/presentation/standard_app_bar.dart';
 import 'package:clink_mobile_app/core/common/presentation/tip_text.dart';
+import 'package:clink_mobile_app/core/feature_registration/service_locator.dart';
 import 'package:clink_mobile_app/core/translations/translation_provider.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/fi_type.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/subfeatures/add_update_holding/presentation/screens/add_update_holding_screen.dart';
@@ -30,6 +32,8 @@ class _CurrencySelectScreenState extends State<CurrencySelectScreen> {
   late String _selectedCurrency;
 
   late List<String> _allCurrencies;
+
+  final AnalyticsReporter _analyticsReporter = sl.get<AnalyticsReporter>();
 
   @override
   void initState() {
@@ -87,9 +91,12 @@ class _CurrencySelectScreenState extends State<CurrencySelectScreen> {
           currencyCode: _allCurrencies[index],
           selected: _selectedCurrency == _allCurrencies[index],
           addTopPadding: index == 0,
-          onTap: (currencyCode) => setState(
-            () => _selectedCurrency = _allCurrencies[index],
-          ),
+          onTap: (currencyCode) {
+            setState(
+              () => _selectedCurrency = _allCurrencies[index],
+            );
+            _analyticsReporter.trackEvent('currency_tapped');
+          },
         ),
       ),
     );
@@ -97,6 +104,7 @@ class _CurrencySelectScreenState extends State<CurrencySelectScreen> {
 
   void _onContinueTap(WidgetRef ref, BuildContext context) {
     ref.read(userManProv.notifier).createNewUser(_selectedCurrency);
+    _analyticsReporter.trackEvent('currency_tapped');
     Navigator.pushNamed(
       context,
       AddUpdateHoldingScreen.viewPath,
@@ -114,6 +122,13 @@ class _CurrencySelectScreenState extends State<CurrencySelectScreen> {
                 amount,
               );
           Navigator.popUntil(context, (route) => route.isFirst);
+          _analyticsReporter.trackEvent(
+            'first_account_added',
+            data: {
+              'name': name,
+              'balance': amount,
+            },
+          );
         },
       ),
     );

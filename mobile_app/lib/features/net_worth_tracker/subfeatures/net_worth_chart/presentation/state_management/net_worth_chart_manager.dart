@@ -7,7 +7,7 @@ final nWorthChartManProv =
 );
 
 class NetWorthChartManager extends StateNotifier<ChartTimePeriod> {
-  NetWorthChartManager() : super(const ChartTimePeriod.oneWeek());
+  NetWorthChartManager() : super(const ChartTimePeriod.today());
 
   void changeTimePeriod(ChartTimePeriod newPeriod) {
     state = newPeriod;

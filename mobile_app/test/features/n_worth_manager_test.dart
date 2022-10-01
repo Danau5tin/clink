@@ -1,4 +1,4 @@
-import 'package:clink_mobile_app/core/crashlytics/crashlytics_reporter.dart';
+import 'package:clink_mobile_app/core/analytics_crashlytics/crashlytics_reporter.dart';
 import 'package:clink_mobile_app/core/network/data_state/data_state.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/holdings.dart';
 import 'package:clink_mobile_app/features/net_worth_tracker/domain/entities/historical_net_worth.dart';
@@ -56,7 +56,7 @@ void main() {
       );
     });
 
-    test('should update state with error if failed and call crashlytics',
+    test('should update state with error if failed and call analytics_crashlytics',
         () async {
       // Arrange
       when(() => netWorthRepo.fetchNWorthData()).thenAnswer(

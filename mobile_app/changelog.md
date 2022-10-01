@@ -1,9 +1,10 @@
-v1.1
+v1.1 (?/10/2022)
  - Feedback feature linked with Firebase
  - UX improvements (keyboard not resizing keypad when tapped)
  - Net Worth Chart now able to handle multiple time frames (1M, 3M, 1Y etc..)
+ - Analytics integrated (Mixpanel)
 
-v1.0
+v1.0 (29/09/2022)
  - Net worth chart
  - Onboarding (Carousel, Currency select, New account)
  - Update financials Overview Screen

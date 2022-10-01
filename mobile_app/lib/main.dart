@@ -1,3 +1,4 @@
+import 'package:clink_mobile_app/core/analytics_crashlytics/analytics_reporter.dart';
 import 'package:clink_mobile_app/core/common/data/repositories/sql_db/sql_database.dart';
 import 'package:clink_mobile_app/core/common/domain/repositories/key_value_local_storage.dart';
 import 'package:clink_mobile_app/core/common/presentation/circular_progress_bar.dart';
@@ -38,10 +39,13 @@ void main() async {
   );
 
   await envInit;
+  final analyticsInit = sl.get<AnalyticsReporter>().init();
+
   await dbInit;
   await kValStoreInit;
   await localInit;
   await firebaseInit;
+  await analyticsInit;
 
   final container = ProviderContainer();
   final alreadyOnboarded =
