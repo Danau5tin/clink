@@ -33,6 +33,7 @@ class UserManager extends StateNotifier<User?> {
     final baseCurrency = kValLocalStorage.getString(_baseCurrKey);
     if (userId != null && baseCurrency != null) {
       state = User(id: userId, baseCurrencyCode: baseCurrency);
+      _identifyUser(userId);
     } else {
       crashlyticsReporter
           .reportMessage('trying to init user but values are id=$userId '
@@ -43,10 +44,14 @@ class UserManager extends StateNotifier<User?> {
   Future<void> createNewUser(String baseCurrency) async {
     final user = User(id: uuidGen.generate(), baseCurrencyCode: baseCurrency);
     state = user;
-    analyticsReporter.identifyUser(id: user.id);
-    crashlyticsReporter.identifyUser(userId: user.id);
+    _identifyUser(user.id);
     await kValLocalStorage.saveString(_userIdKey, user.id);
     await kValLocalStorage.saveString(_baseCurrKey, user.baseCurrencyCode);
+  }
+
+  void _identifyUser(String userId) {
+    analyticsReporter.identifyUser(id: userId);
+    crashlyticsReporter.identifyUser(userId: userId);
   }
 
   User? get user => state;
