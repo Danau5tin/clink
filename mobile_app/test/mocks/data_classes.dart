@@ -7,5 +7,5 @@ class MockNetWorthData extends Mock implements NetWorthData {}
 
 class MockHistoricalNWorthData extends Mock implements HistoricalNWorthData {}
 
-class MockAssetsLiabilitiesHoldings extends Mock
+class MockHoldings extends Mock
     implements Holdings {}

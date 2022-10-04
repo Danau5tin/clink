@@ -69,13 +69,15 @@ void main() {
       entry = const KeypadEntry.backspace();
     });
 
-    test('should return remove decimal if backspace is tapped', () async {
+    test('should return remove decimal and digit if backspace is tapped'
+        ' when only decimal present',
+        () async {
       // Arrange
       handler = KeypadEntryHandler(startingVal: '10.');
       // Act
       handler.processNewInput(entry);
       // Assert
-      expect(handler.debugState, '10');
+      expect(handler.debugState, '1');
     });
 
     test('should return 0 if only existing digit is backspaced', () async {
