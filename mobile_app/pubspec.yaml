@@ -1,7 +1,7 @@
 name: clink_mobile_app
 description: Cross platform mobile app
 publish_to: 'none'
-version: 1.1.0+1
+version: 1.1.0+2
 
 environment:
   sdk: '>=2.17.1 <3.0.0'
