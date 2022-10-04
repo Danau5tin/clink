@@ -59,6 +59,21 @@ class KeypadEntryHandler extends StateNotifier<String> {
     if (state.length <= 1 || dbleOfOriginalInp == 0.0) {
       return '0';
     }
+    if (state.contains('.')) {
+      final split = state.split('.');
+      if (split.length > 1 && split[1] != '') {
+        return state.substring(
+          0,
+          split[1] == '00'
+              ? state.length - 4
+              : split[1] == '0'
+                  ? state.length - 3
+                  : state.length - 1,
+        );
+      } else {
+        return split[0].substring(0, split[0].length - 1);
+      }
+    }
     return state.substring(0, state.length - 1);
   }
 }

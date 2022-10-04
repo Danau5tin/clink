@@ -25,7 +25,7 @@ void main() {
     crashlyticsReporter = MockCrashlyticsReporter();
     netWorthData = MockNetWorthData();
     historicalNWorthData = MockHistoricalNWorthData();
-    assetsLiabilitiesHoldings = MockAssetsLiabilitiesHoldings();
+    assetsLiabilitiesHoldings = MockHoldings();
 
     when(() => netWorthData.historicalNWorthData)
         .thenReturn(historicalNWorthData);

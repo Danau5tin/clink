@@ -28,14 +28,15 @@ class HistoricalNWorthData {
       );
     }
 
-    bool isFirst = false;
     late NetWorthEntry comparableEntry;
     if (startDate.isBefore(entries.first.dateTime)) {
-      comparableEntry = _entries.first;
-      isFirst = true;
+      return AmountPercentageInfo(
+        amount: currentNWorth.totalNWorth,
+        percentageChange: 100,
+      );
     } else {
       for (var entry in _entries) {
-        if (!entry.dateTime.isBefore(startDate)) {
+        if (!entry.dateTime.isBefore(startDate) || entry == _entries.last) {
           comparableEntry = entry;
           break;
         }
@@ -44,13 +45,11 @@ class HistoricalNWorthData {
 
     final valueChange =
         currentNWorth.totalNWorth.value - comparableEntry.totalNWorth.value;
-    final percChange = isFirst
-        ? 100.0
-        : (valueChange / comparableEntry.totalNWorth.value) * 100;
+    final percChange = (valueChange / comparableEntry.totalNWorth.value) * 100;
     return AmountPercentageInfo(
       amount: Amount(
         currencyCode: currentNWorth.totalNWorth.currencyCode,
-        value: isFirst? currentNWorth.totalNWorth.value :valueChange,
+        value: valueChange,
       ),
       percentageChange: percChange.isInfinite ? 0.0 : percChange,
     );
